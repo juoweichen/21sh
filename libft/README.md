@@ -5,4 +5,6 @@ include:
 original libft & 
 get_next_line & 
 ft_printf & 
-dictionary
+dictionary &
+doubly list &
+

@@ -10,41 +10,45 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_select
-D_NAME = dbgr
+NAME = 42sh		# project bin file
+D_NAME = dbgr	# debugger bin file
 
+# libft section
 LIB_DIR = ./libft/
 LIB_FILE= libft.a
 LIB = $(addprefix $(LIB_DIR), $(LIB_FILE))
 LIB_LINK = -L$(LIB_DIR) -lft
 
+# compile flag
+OUTER_LINK = -ltermcap
 HEADER = -I /includes
+W_FLAG = -Wall -Werror -Wextra
 
-C_FLAG = -Wall -Werror -Wextra
-
+# src section
 SRC_DIR = srcs
 SRC = 	main.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC))
 
+# obj seciton
 SRC_OBJ = $(SRC:.c=.o)
-
 OBJ_DIR = objects
 
 .PHONY: all clean fclean re qre
 
 all: $(NAME)
 
+# compile project bin
 $(NAME): $(LIB)
-	@gcc -c $(SRCS) $(HEADER) $(C_FLAG)
-	@gcc $(SRC_OBJ) $(LIB_LINK) -ltermcap -o $(NAME)
+	@gcc -c $(SRCS) $(HEADER) $(W_FLAG)
+	@gcc $(SRC_OBJ) $(LIB_LINK) $(OUTER_LINK) -o $(NAME)
 	@mkdir $(OBJ_DIR)
 	@mv *.o $(OBJ_DIR)
 	@echo "\033[32mFile \"$(NAME)\" Created\033[0m"
-
+# compile debugger bin
 $(D_NAME): $(LIB)
 	@gcc -g $(SRCS) $(HEADER) $(LIB_LINK) -o $(D_NAME);
 	@echo "\033[32mFile \"$(D_NAME)\" Created\033[0m"
-
+# compile libft
 $(LIB):
 	@make -C $(LIB_DIR) all
 
@@ -62,15 +66,15 @@ fclean: clean
 	@echo "\033[31mFile \"$(NAME)\" Removed\033[0m"
 
 re: fclean all
-
+# quick-re, won't re-compile libft or other lib
 qre:
 	@rm -rf $(OBJ_DIR)
 	@rm -rf *.o
 	@rm -rf $(NAME)
 	@rm -rf *.a
 	@rm -rf $(D_NAME) $(D_NAME).dSYM
-	@gcc -c $(SRCS) $(HEADER) $(C_FLAG)
-	@gcc $(SRC_OBJ) $(LIB_LINK) -ltermcap -o $(NAME)
+	@gcc -c $(SRCS) $(HEADER) $(W_FLAG)
+	@gcc $(SRC_OBJ) $(LIB_LINK) $(OUTER_LINK) -o $(NAME)
 	@mkdir $(OBJ_DIR)
 	@mv *.o $(OBJ_DIR)
 	@echo "\033[32mQUICK RE\033[0m"
