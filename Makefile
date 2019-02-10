@@ -10,8 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 42sh		# project bin file
-D_NAME = dbgr	# debugger bin file
+# project bin file
+NAME = 42sh
+
+# debugger bin file
+D_NAME = dbgr
 
 # libft section
 LIB_DIR = ./libft/

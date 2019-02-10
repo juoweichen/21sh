@@ -33,5 +33,7 @@
 # include "ft_str.h"
 # include "get_next_line.h"
 # include "ft_dlst.h"
+# include "stack.h"
+# include "queue.h"
 
 #endif

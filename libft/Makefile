@@ -28,6 +28,8 @@ SRCS += $(wildcard $(SRC_DIR)/ft_put/*.c)
 SRCS += $(wildcard $(SRC_DIR)/ft_str/*.c)
 SRCS += $(wildcard $(SRC_DIR)/get_next_line/*.c)
 SRCS += $(wildcard $(SRC_DIR)/ft_dlst/*.c)
+SRCS += $(wildcard $(SRC_DIR)/stack/*.c)
+SRCS += $(wildcard $(SRC_DIR)/queue/*.c)
 SRCS_OBJ = $(SRCS:.c=.o)
 
 OBJS = $(notdir $(SRCS_OBJ))
