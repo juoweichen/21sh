@@ -14,7 +14,7 @@ NAME = 42sh		# project bin file
 D_NAME = dbgr	# debugger bin file
 
 # libft section
-LIB_DIR = ./libft/
+LIB_DIR = ./srcs/libft/
 LIB_FILE= libft.a
 LIB = $(addprefix $(LIB_DIR), $(LIB_FILE))
 LIB_LINK = -L$(LIB_DIR) -lft
@@ -26,7 +26,7 @@ W_FLAG = -Wall -Werror -Wextra
 
 # src section
 SRC_DIR = srcs
-SRC = 	main.c
+SRC = 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC))
 
 # obj seciton

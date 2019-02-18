@@ -70,7 +70,8 @@ t_token				*get_operator_token(char *input)
 	shift = 0;
 	i = 0;
 	shift = get_shift(*input);
-	if ((input[i] == '<' && input[i + 1] == '<') || (input[i] == '>' && input[i + 1] == '>'))
+	if ((input[i] == '<' && input[i + 1] == '<') || (input[i] == '>' && input[i + 1] == '>')
+		|| (input[i] == '|' && input[i + 1] == '|') || (input[i] == '&' && input[i + 1] == '&'))
 		return (new_token(ft_strndup(input, i + 2), (shift << DBL_TOK_OFFSET)));
 	return (new_token(ft_strndup(input, i + 1), shift));
 }
