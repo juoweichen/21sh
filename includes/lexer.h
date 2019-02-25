@@ -26,6 +26,10 @@
 
 char **history;
 
+/*
+**	';' and '&' are seperators
+*/
+
 # define SEMI_COLON		(1 << 0)
 # define COMMAND_SUB	(1 << 1)
 # define PIPE			(1 << 2)
@@ -42,8 +46,10 @@ char **history;
 # define CLOSED_DQUOTE	(1 << 13)
 # define CLOSED_SQUOTE	(1 << 14)
 # define CLOSED_BQUOTE	(1 << 15)
-# define NUMBER_TOKEN	(1 << 16)
-# define STRING_TOKEN	(1 << 17)
+# define SL_ARROW_AND	(1 << 16)
+# define SR_ARROW_AND	(1 << 17)
+# define NUMBER_TOKEN	(1 << 18)
+# define STRING_TOKEN	(1 << 19)
 
 # define OPERATOR_MASK	0b11110001111111
 

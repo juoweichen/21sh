@@ -73,6 +73,10 @@ t_token				*get_operator_token(char *input)
 	if ((input[i] == '<' && input[i + 1] == '<') || (input[i] == '>' && input[i + 1] == '>')
 		|| (input[i] == '|' && input[i + 1] == '|') || (input[i] == '&' && input[i + 1] == '&'))
 		return (new_token(ft_strndup(input, i + 2), (shift << DBL_TOK_OFFSET)));
+	else if (input[i] == '>' && input[i + 1] == '&')
+		return (new_token(ft_strndup(input, i + 2), SR_ARROW_AND));
+	else if (input[i] == '<' && input[i + 1] == '&')
+		return (new_token(ft_strndup(input, i + 2), SL_ARROW_AND));
 	return (new_token(ft_strndup(input, i + 1), shift));
 }
 
