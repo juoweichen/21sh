@@ -15,8 +15,6 @@
 
 # include <stdarg.h>
 
-# define MAX(A, B)			(A < B ? B : A)
-
 # define COLOR_SIGN			'^'
 
 # define M_RED 				"\033[0;31m"

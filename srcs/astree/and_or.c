@@ -10,45 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lexer.h"
-#include "../includes/astree.h"
-#include "../includes/print_btree.h"
+#include "../../includes/lexer.h"
+#include "../../includes/astree.h"
 
-int build_astree(t_token *token, t_astnode **astree)
+t_astnode *and_or(t_token **curtoken)
 {
-	if (token == NULL)
-	{
-		ft_printf("Empty token error\n");
-		return (-1);
-	}
-	//for now the most top node is this
-	if ((*astree = complete_command(&token)) == NULL)
-		return (-1);
-	return (0);
-}
-
-int main(void)
-{
-	t_token *token;
-	t_astnode *astree;
-
-	token = tokenize("echo LegendaryJuo! | echo sayHello! ; ls -la >> testtest");
-
-	t_token *ptr = token;
-
-	while (ptr)
-	{
-		printf("%s ", ptr->data);
-		ptr = ptr->next;
-	}
-	printf("\n");
-
-	if (build_astree(token, &astree) == -1)
-	{
-		perror("unable to build astree\n");
-		exit(1);
-	}
-	printBinaryTree(astree);
-	travesal_astree_print_command(astree);
-	return (0);
+	return (pipeline(curtoken));
 }

@@ -21,6 +21,8 @@
 # include <fcntl.h>
 
 # define ABS(v) ((v) < 0 ? -(v) : (v))
+# define MAX(A, B) (A < B ? B : A)
+# define MIN(A, B) (A > B ? B : A)
 
 # include "dict.h"
 # include "ft_int.h"
