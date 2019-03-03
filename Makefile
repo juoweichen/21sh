@@ -29,8 +29,9 @@ W_FLAG = -Wall -Werror -Wextra
 
 # src section
 SRC_DIR = srcs
-SRCS =	$(wildcard $(SRC_DIR)/astree/*.c)
-SRCS += $(wildcard $(SRC_DIR)/tokenizer/*.c)
+SRCS = $(wildcard $(SRC_DIR)/tokenizer/*.c)
+SRCS +=	$(wildcard $(SRC_DIR)/astree/*.c)
+SRCS +=	$(wildcard $(SRC_DIR)/exec/*.c)
 SRCS += $(wildcard $(SRC_DIR)/*.c)
 
 .PHONY: all clean fclean re qre

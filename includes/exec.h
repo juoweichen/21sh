@@ -10,50 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lexer.h"
-#include "../includes/astree.h"
-#include "../includes/print_btree.h"
-#include "../includes/exec.h"
+#ifndef EXEC_H
+# define EXEC_H
 
-int build_astree(t_token *token, t_astnode **astree)
+#include "../libft/includes/libft.h"
+#include "astree.h"
+
+typedef struct	s_component
 {
-	if (token == NULL)
-	{
-		ft_printf("Empty token error\n");
-		return (-1);
-	}
-	//for now the most top node is this
-	if ((*astree = complete_command(&token)) == NULL)
-		return (-1);
-	return (0);
-}
+	int			argc;
+	char		**argv;
+}				t_comp;			
 
-int main(void)
-{
-	t_token *token;
-	t_astnode *astree;
+void execute_astree(t_astnode *astree);
 
-	token = tokenize("ls -l -a");
-
-	t_token *ptr = token;
-
-	while (ptr)
-	{
-		ft_printf("%s ", ptr->data);
-		ptr = ptr->next;
-	}
-	printf("\n");
-
-	if (build_astree(token, &astree) == -1)
-	{
-		perror("unable to build astree\n");
-		exit(1);
-	}
-	printBinaryTree(astree);
-	travesal_astree_print_command(astree);
-
-	//execute AST
-	execute_astree(astree);
-
-	return (0);
-}
+#endif

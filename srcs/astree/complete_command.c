@@ -27,12 +27,11 @@ t_astnode *complete_command_1(t_token **curtoken)
 	//test if fit this type
 	if ((l_child_node = list(curtoken)) == NULL)
 		return (NULL);
-	if (!is_separator_op(curtoken, &operator))  //will store operator
+	if (is_separator_op(curtoken, &operator) != 1)  //will store operator
 	{
 		del_astnode(&l_child_node);
 		return (NULL);
 	}
-
 	//type correct, build node and return
 	node = build_node(NODE_COMPLETE_COMMAND);
 	node->left = l_child_node;

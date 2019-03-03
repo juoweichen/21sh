@@ -28,7 +28,7 @@ t_astnode *list_1(t_token **curtoken)
 	//test if fit this type
 	if ((l_child_node = and_or(curtoken)) == NULL)
 		return (NULL);
-	if (!is_separator_op(curtoken, &operator))  //will store operator
+	if (is_separator_op(curtoken, &operator) != 1)  //will store operator
 	{
 		del_astnode(&l_child_node); 
 		return (NULL);

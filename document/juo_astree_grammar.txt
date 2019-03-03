@@ -11,7 +11,7 @@ complete_command : list separator_op
 list             : and_or separator_op list
                  | and_or
                  ;
-and_or           :                         pipeline
+and_or           : pipeline
                  | //and_or AND_IF linebreak pipeline
                  | //and_or OR_IF  linebreak pipeline
                  ;
