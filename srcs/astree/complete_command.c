@@ -12,6 +12,7 @@
 
 #include "../../includes/lexer.h"
 #include "../../includes/astree.h"
+#include "../../includes/print_btree.h"
 
 t_astnode *complete_command_2(t_token **curtoken)
 {
@@ -35,7 +36,7 @@ t_astnode *complete_command_1(t_token **curtoken)
 	//type correct, build node and return
 	node = build_node(NODE_COMPLETE_COMMAND);
 	node->left = l_child_node;
-	node->data = operator;
+	node->data = ft_strdup(operator);
 	return (node);
 }
 
@@ -46,19 +47,19 @@ t_astnode *complete_command(t_token **curtoken)
 
 	if (*curtoken == NULL)
 		return (NULL);
+		
 	//store init token so it can restore before other options
 	init_token = *curtoken;
 
-	//is <command> '|' <pipe_sequence> type?
+	//is <list> <separator_op> type?
 	if ((node = complete_command_1(curtoken)) != NULL)
 		return (node);
-	
+
 	//restore curtoken to init_token
 	*curtoken = init_token;
 
-	//is <command> type?
+	//is <list> type?
 	if ((node = complete_command_2(curtoken)) != NULL)
 		return (node);
-	
 	return (NULL);
 }

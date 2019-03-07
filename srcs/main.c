@@ -33,16 +33,16 @@ int main(void)
 	t_token *token;
 	t_astnode *astree;
 
-	token = tokenize("ls -l -a");
+	token = tokenize("ls -la | cat -e | more");
 
-	t_token *ptr = token;
+	// t_token *ptr = token;
 
-	while (ptr)
-	{
-		ft_printf("%s ", ptr->data);
-		ptr = ptr->next;
-	}
-	printf("\n");
+	// while (ptr)
+	// {
+	// 	ft_printf("%s ", ptr->data);
+	// 	ptr = ptr->next;
+	// }
+	// printf("\n");
 
 	if (build_astree(token, &astree) == -1)
 	{
@@ -51,6 +51,8 @@ int main(void)
 	}
 	printBinaryTree(astree);
 	travesal_astree_print_command(astree);
+
+	printf("\n");
 
 	//execute AST
 	execute_astree(astree);

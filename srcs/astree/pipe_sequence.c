@@ -43,7 +43,7 @@ t_astnode *pipe_sequence_1(t_token **curtoken)
 	//type correct, build node and return
 	node = build_node(NODE_PIPE_SEQUENCE);
 	node->left = l_child_node;
-	node->data = operator;
+	node->data = ft_strdup(operator);
 	node->right = r_child_node;
 	return (node);
 }

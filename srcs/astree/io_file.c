@@ -30,7 +30,7 @@ t_astnode *io_file_all(t_token **curtoken, char *type)
 
 	//build this node
 	node = build_node(NODE_IO_FILE);
-	node->data = operator;
+	node->data = ft_strdup(operator);
 	node->right = r_child_node;
 	return (node);
 }

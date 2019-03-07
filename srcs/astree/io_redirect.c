@@ -36,7 +36,7 @@ t_astnode *io_redirect_3(t_token **curtoken)
 
 	//build this node
 	node = build_node(NODE_IO_REDIRECT);
-	node->data = io_number;
+	node->data = ft_strdup(io_number);
 	node->right = r_child_node;
 	return (node);
 }
@@ -64,7 +64,7 @@ t_astnode *io_redirect_1(t_token **curtoken)
 
 	//build this node
 	node = build_node(NODE_IO_REDIRECT);
-	node->data = io_number;
+	node->data = ft_strdup(io_number);
 	node->right = r_child_node;
 	return (node);
 }
