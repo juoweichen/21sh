@@ -51,8 +51,7 @@ void execute_pipe_sequence(t_astnode *astree, int lastread, int lastwrite)
 	}
 	else	//parent process
 	{
-		if (astree->type == NODE_PIPE_SEQUENCE)
-			execute_pipe_sequence(astree->right, fd[0], fd[1]);
+		execute_pipe_sequence(astree->right, fd[0], fd[1]);
 	}
 }
 
@@ -83,7 +82,7 @@ void execute_complete_command(t_astnode *astree)
 		return ;
 	if (astree->type == NODE_PIPE_SEQUENCE)
 		execute_pipe_sequence(astree, -1, -1);
-	if (astree->type == NODE_LIST)
+	else if (astree->type == NODE_LIST)
 		execute_list(astree);
 	else
 		execute_simple_command(astree, -1, -1);

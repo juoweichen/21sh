@@ -13,8 +13,10 @@
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-void handle_redirect(t_exec_sc *exec_sc, int fd)
+void handle_redirect(t_exec_sc *exec_sc)
 {
+	int fd;
+	
 	//redirect stdout to file if specified
 	if (ft_strcmp(exec_sc->redirect_op, ">") == 0)
 	{
@@ -59,7 +61,7 @@ void run(t_exec_sc *exec_sc)
 		// if (check_built_in(exec_sc) == 1)
 		// 	exit(0);
 
-		//handle_redirect(exec_sc, fd);
+		handle_redirect(exec_sc);
 
 		//read stdin from pipe if present
 		if (exec_sc->piperead != -1)
@@ -139,16 +141,9 @@ void execute_simple_command(t_astnode *astree, int piperead, int pipewrite)
 
 	if (astree == NULL)
 		return ;
-
 	ft_bzero(&exec_sc, sizeof(t_exec_sc));
 
 	init_run(astree, &exec_sc, piperead, pipewrite);
-
-	//test
-	int i = 0;
-	while (i < exec_sc.argc)
-		printf("%s-> ", exec_sc.argv[i++]);
-
 	run(&exec_sc);
 	//delete section
 	ft_mstrdel_rows(&exec_sc.argv, exec_sc.argc);
