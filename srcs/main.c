@@ -33,7 +33,7 @@ int main(void)
 	t_token *token;
 	t_astnode *astree;
 
-	token = tokenize("mkdir test ; cd test");
+	token = tokenize("ls -la ; pwd ; mkdir ddd");
 
 	// t_token *ptr = token;
 

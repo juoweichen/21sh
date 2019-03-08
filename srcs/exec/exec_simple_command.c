@@ -12,6 +12,7 @@
 
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
+#include "../../includes/print_btree.h"
 
 void handle_redirect(t_exec_sc *exec_sc)
 {
@@ -55,13 +56,19 @@ void run(t_exec_sc *exec_sc)
 {
 	pid_t pid;
 
-	if ((pid = fork()) == 0)
+	if ((pid = fork()) < 0)
 	{
+		perror("fork");
+		exit(1);
+	}
+	if (pid == 0)
+	{
+		//printf("%s\n", exec_sc->argv[0]);
 		//child process
 		// if (check_built_in(exec_sc) == 1)
 		// 	exit(0);
-
-		handle_redirect(exec_sc);
+		if (exec_sc->redirect_op != NULL)
+			handle_redirect(exec_sc);
 
 		//read stdin from pipe if present
 		if (exec_sc->piperead != -1)
@@ -82,7 +89,7 @@ void run(t_exec_sc *exec_sc)
 	else
 	{
 		//parent process
-		waitpid(pid, NULL, 0);
+		wait(NULL);
 	}
 }
 
@@ -139,11 +146,24 @@ void execute_simple_command(t_astnode *astree, int piperead, int pipewrite)
 {
 	t_exec_sc exec_sc;
 
+	//test
+	//printBinaryTree(astree);
+
 	if (astree == NULL)
 		return ;
 	ft_bzero(&exec_sc, sizeof(t_exec_sc));
 
 	init_run(astree, &exec_sc, piperead, pipewrite);
+
+	printf("%s: r = %d, w = %d\n", exec_sc.argv[0], exec_sc.piperead, exec_sc.pipewrite);
+	// printf("name = %s, op = %s\n", exec_sc.redirect_filename, exec_sc.redirect_op);
+/*
+	//test
+	int i = 0;
+	while (i < exec_sc.argc)
+		printf("%s-> ", exec_sc.argv[i++]);
+	printf("\n");
+*/
 	run(&exec_sc);
 	//delete section
 	ft_mstrdel_rows(&exec_sc.argv, exec_sc.argc);
