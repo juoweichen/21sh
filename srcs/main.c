@@ -33,7 +33,7 @@ int main(void)
 	t_token *token;
 	t_astnode *astree;
 
-	token = tokenize("ls -la ; pwd ; mkdir ddd");
+	token = tokenize("ls -la | cat -e | more");
 
 	// t_token *ptr = token;
 
@@ -49,9 +49,9 @@ int main(void)
 		perror("unable to build astree\n");
 		exit(1);
 	}
+	
 	printBinaryTree(astree);
 	travesal_astree_print_command(astree);
-
 	printf("\n");
 
 	//execute AST

@@ -20,7 +20,7 @@ void	echo_builtin(char **arg)
 
 	i = 0;
 	n_flag = 0;
-	if (arg[i] && ft_strequ(arg[i], "-n"))
+	if (arg[i] && ft_strequ(arg[i], "-n") == 1)
 	{
 		n_flag = 1;
 		i++;
@@ -39,7 +39,7 @@ void	echo_builtin(char **arg)
 
 int check_built_in(t_exec_sc *exec_sc)
 {
-	if (ft_strequ(exec_sc->argv[0], "echo"))
+	if (ft_strequ(exec_sc->argv[0], "echo") == 1)
 		echo_builtin(exec_sc->argv);
 	else
 		return (0);

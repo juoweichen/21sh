@@ -19,7 +19,7 @@ void handle_redirect(t_exec_sc *exec_sc)
 	int fd;
 	
 	//redirect stdout to file if specified
-	if (ft_strcmp(exec_sc->redirect_op, ">") == 0)
+	if (ft_strequ(exec_sc->redirect_op, ">") == 1)
 	{
 		if ((fd = open(exec_sc->redirect_filename, O_WRONLY | O_CREAT | O_APPEND,
 						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
@@ -30,7 +30,7 @@ void handle_redirect(t_exec_sc *exec_sc)
 		dup2(fd, STDOUT_FILENO);
 	}
 	//redirect stdin from file if specified
-	else if (ft_strcmp(exec_sc->redirect_op, "<") == 0)
+	else if (ft_strequ(exec_sc->redirect_op, "<") == 1)
 	{
 		if ((fd = open(exec_sc->redirect_filename, O_RDONLY)) == -1)
 		{
@@ -40,7 +40,7 @@ void handle_redirect(t_exec_sc *exec_sc)
 		dup2(fd, STDIN_FILENO);
 	}
 	//redirect stdout to file if specified, overwrite
-	else if (ft_strcmp(exec_sc->redirect_op, ">>") == 0)
+	else if (ft_strequ(exec_sc->redirect_op, ">>") == 1)
 	{
 		if ((fd = open(exec_sc->redirect_filename, O_WRONLY | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
