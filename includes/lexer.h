@@ -13,6 +13,9 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+# include <unistd.h>
+# include "libft.h"
+
 /*
 **	AND_IF	OR_IF	DSEMI
 **	&&		||		;;
@@ -27,8 +30,14 @@
 char **history;
 
 /*
-**	';' and '&' are seperators
+**	Dont actually need command sub, that will be evaluated later
+**
+**	Should break up the tokens into sections such as redirection tokens, quote tokens, seperator tokens
+**	and general tokens
 */
+
+# define TRUE 1
+# define FALSE 0
 
 # define SEMI_COLON		(1 << 0)
 # define COMMAND_SUB	(1 << 1)
@@ -53,7 +62,7 @@ char **history;
 
 # define OPERATOR_MASK	0b11110001111111
 
-# define OP_AND_QT_TOKS	";$|&<>\"\'`"
+# define OP_AND_QT_TOKS		";$|&<>\"\'`"
 # define DBL_TOK_OFFSET	7
 
 typedef struct			s_token

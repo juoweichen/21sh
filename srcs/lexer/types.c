@@ -104,6 +104,17 @@ t_token				*get_operator_token(char *input)
 **		5b. token type is shift
 */
 
+static int			has_matching_quote(char *str, char match)
+{
+	int				i;
+
+	i = -1;
+	while (str[++i] !=  '\0')
+		if (str[i] == match)
+			return (1);
+	return (0);
+}
+
 t_token				*get_quote_token(char *input)
 {
 	char			matching_quote;
@@ -111,11 +122,20 @@ t_token				*get_quote_token(char *input)
 	int				i;
 
 	matching_quote = *input;
-	shift = get_shift(*input);
+	shift = get_shift(matching_quote);
 	i = 0;
-	while (input[++i] != '\0')
-		if (input[i] == matching_quote)
-			return (new_token(ft_strndup(input, i + 1), (shift << DBL_TOK_OFFSET)));
+	if (has_matching_quote(input + 1, *input))
+	{
+		while (input[++i] != '\0')
+			if (input[i] == matching_quote)
+				return (new_token(ft_strndup(input, i + 1), (shift << DBL_TOK_OFFSET)));
+	}
+	else
+	{
+		while (input[++i] != '\0')
+			if (is_quote(input[i]))
+				return (new_token(ft_strndup(input, i), shift));
+	}
 	return (new_token(ft_strdup(input), shift));
 }
 

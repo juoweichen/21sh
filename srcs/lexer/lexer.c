@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell21.h"
+#include "lexer.h"
 
 /*
 **	Get token data		[✓]
@@ -81,7 +81,6 @@ t_token				*tokenize(char *input)
 		{
 			token_list = get_token(input + i);
 			cur = token_list;
-
 		}
 		else
 			cur->next = get_token(input + i);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell21.h"
+#include "lexer.h"
 
 t_token				*new_token(char *data, int type)
 {
