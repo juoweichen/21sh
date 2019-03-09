@@ -15,6 +15,7 @@
 
 #include "../libft/includes/libft.h"
 #include "astree.h"
+#include <dirent.h>
 
 typedef struct	s_exec_simple_command
 {
@@ -32,5 +33,6 @@ void 			execute_astree(t_astnode *astree);
 void 			execute_simple_command(t_astnode *astree,
 	int piperead, int pipewrite);
 int				check_built_in(t_exec_sc *exec_sc);
+int				ft_execvp(char *cmd_name, char **cmd_line);
 
 #endif

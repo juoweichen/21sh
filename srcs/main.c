@@ -33,8 +33,10 @@ int main(void)
 	t_token *token;
 	t_astnode *astree;
 
-	token = tokenize("cat sample | grep -v a | sort -r | cat -e > hahahahha");
-	// token = tokenize("ls -la | cat -e | more");
+	// token = tokenize("asdada");
+	// token = tokenize("ls -la");
+	// token = tokenize("cat sample | grep -v a | sort -r | cat -e > hahahahha");
+	token = tokenize("ls -la | cat -e | more");
 	// token = tokenize("mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi");
 
 	// t_token *ptr = token;
@@ -52,9 +54,9 @@ int main(void)
 		exit(1);
 	}
 	
-	printBinaryTree(astree);
-	travesal_astree_print_command(astree);
-	printf("\n");
+	// printBinaryTree(astree);
+	// travesal_astree_print_command(astree);
+	// printf("\n");
 
 	//execute AST
 	execute_astree(astree);

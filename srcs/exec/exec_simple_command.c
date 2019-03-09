@@ -12,7 +12,6 @@
 
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
-#include "../../includes/print_btree.h"
 
 void handle_redirect(t_exec_sc *exec_sc)
 {
@@ -55,6 +54,7 @@ void handle_redirect(t_exec_sc *exec_sc)
 void run(t_exec_sc *exec_sc)
 {
 	pid_t pid;
+	int stdoutfd = dup(STDOUT_FILENO);
 
 	if ((pid = fork()) < 0)
 	{
@@ -65,8 +65,10 @@ void run(t_exec_sc *exec_sc)
 	{
 		//printf("%s\n", exec_sc->argv[0]);
 		//child process
-		// if (check_built_in(exec_sc) == 1)
-		// 	exit(0);
+		
+		if (check_built_in(exec_sc) == 1)
+			exit(0);
+		
 		if (exec_sc->redirect_op != NULL)
 			handle_redirect(exec_sc);
 
@@ -79,8 +81,11 @@ void run(t_exec_sc *exec_sc)
 			dup2(exec_sc->pipewrite, STDOUT_FILENO);
 		
 		//TODO: change to execve
-		if (execvp(exec_sc->argv[0], exec_sc->argv) == -1)
+		if (ft_execvp(exec_sc->argv[0], exec_sc->argv) < 0)
 		{
+			// restore the stdout for displaying error message
+            dup2(stdoutfd, STDOUT_FILENO);
+			
 			printf("Command not found: \'%s\'\n", exec_sc->argv[0]);
 			exit(1);
 		}
@@ -155,7 +160,7 @@ void execute_simple_command(t_astnode *astree, int piperead, int pipewrite)
 
 	init_run(astree, &exec_sc, piperead, pipewrite);
 
-	printf("%s: r = %d, w = %d\n", exec_sc.argv[0], exec_sc.piperead, exec_sc.pipewrite);
+	// printf("%s: r = %d, w = %d\n", exec_sc.argv[0], exec_sc.piperead, exec_sc.pipewrite);
 	// printf("name = %s, op = %s\n", exec_sc.redirect_filename, exec_sc.redirect_op);
 /*
 	//test
