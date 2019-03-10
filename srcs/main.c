@@ -34,10 +34,13 @@ int main(void)
 	t_astnode *astree;
 
 	// token = tokenize("asdada");
-	// token = tokenize("ls -la");
+	// token = tokenize("ls");
 	// token = tokenize("cat sample | grep -v a | sort -r | cat -e > hahahahha");
-	token = tokenize("ls -la | cat -e | more");
+	// token = tokenize("ls -la | cat -e | more");
 	// token = tokenize("mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi");
+	// token = tokenize("echo itsWork!");
+	token = tokenize("cd libft");
+	// token = tokenize("env");
 
 	// t_token *ptr = token;
 

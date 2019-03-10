@@ -13,36 +13,20 @@
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-void	echo_builtin(char **arg)
-{
-	int	n_flag;
-	int i;
-
-	i = 0;
-	n_flag = 0;
-	if (arg[i] && ft_strequ(arg[i], "-n") == 1)
-	{
-		n_flag = 1;
-		i++;
-	}
-	while (arg[i])
-	{
-		ft_putstr(arg[i++]);
-		if (arg[i] != NULL)
-			ft_putchar(' ');
-	}
-	if (n_flag == 0)
-		ft_putchar('\n');
-	else
-		ft_putstr("\033[0;30;47m%\033[0m\n");
-}
-
-int check_built_in(t_exec_sc *exec_sc)
+int check_built_in(t_exec *exec, t_exec_sc *exec_sc)
 {
 	if (ft_strequ(exec_sc->argv[0], "echo") == 1)
-		echo_builtin(exec_sc->argv);
-	// else if (ft_strequ(exec_sc->argv[0], "cd"))
-	// 	cd_builtin(m, ++cmd);
+		echo_builtin(exec, exec_sc->argv);
+	else if (ft_strequ(exec_sc->argv[0], "cd") == 1)
+		cd_builtin(exec, exec_sc->argv);
+	else if (ft_strequ(exec_sc->argv[0], "env") == 1)
+		env_builtin(exec, exec_sc->argv);
+	else if (ft_strequ(exec_sc->argv[0], "setenv"))
+		setenv_builtin(exec, exec_sc->argv);
+	else if (ft_strequ(exec_sc->argv[0], "unsetenv"))
+		unsetenv_builtin(exec, exec_sc->argv);
+	else if (ft_strequ(exec_sc->argv[0], "exit"))
+		exit_builtin(exec);
 	else
 		return (0);
 	return (1);

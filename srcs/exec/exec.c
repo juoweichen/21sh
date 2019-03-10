@@ -13,12 +13,12 @@
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-void execute_command(t_astnode *astree, int piperead, int pipewrite)
+void execute_command(t_astnode *astree, t_exec *exec, int piperead, int pipewrite)
 {
-	execute_simple_command(astree, piperead, pipewrite);
+	execute_simple_command(astree, exec, piperead, pipewrite);
 }
 
-void execute_pipe_sequence(t_astnode *astree, int prevread, int prevwrite)
+void execute_pipe_sequence(t_astnode *astree, t_exec *exec, int prevread, int prevwrite)
 {
 	int fd[2];
 	pid_t pid;
@@ -28,7 +28,7 @@ void execute_pipe_sequence(t_astnode *astree, int prevread, int prevwrite)
 	if (astree->type != NODE_PIPE_SEQUENCE)	//last or only command
 	{
 		close(prevwrite);
-		execute_command(astree, prevread, -1);
+		execute_command(astree, exec, prevread, -1);
 		close(prevread);
 		return ;
 	}
@@ -43,19 +43,19 @@ void execute_pipe_sequence(t_astnode *astree, int prevread, int prevwrite)
 	{
 		if (prevread == -1 && prevwrite == -1)	//first command
 		{
-			execute_command(astree->left, -1, fd[1]);
+			execute_command(astree->left, exec, -1, fd[1]);
 		}
 		else 	//middle
 		{
 			close(prevwrite);
-			execute_command(astree->left, prevread, fd[1]);
+			execute_command(astree->left, exec, prevread, fd[1]);
 			close(prevread);
 		}
 		exit(0);
 	}
 	else	//parent process
 	{
-		execute_pipe_sequence(astree->right, fd[0], fd[1]);
+		execute_pipe_sequence(astree->right, exec, fd[0], fd[1]);
 	}
 }
 
@@ -108,40 +108,56 @@ prevwrite = 0;
 	close(piperead);
 }
 */
-void execute_pipeline(t_astnode *astree)
+void execute_pipeline(t_astnode *astree, t_exec *exec)
 {
-	execute_pipe_sequence(astree, -1 , -1);
+	execute_pipe_sequence(astree, exec, -1, -1);
 }
 
-void execute_and_or(t_astnode *astree)
+void execute_and_or(t_astnode *astree, t_exec *exec)
 {
-	execute_pipeline(astree);
+	execute_pipeline(astree, exec);
 }
 
-void execute_list(t_astnode *astree)
+void execute_list(t_astnode *astree, t_exec *exec)
 {
 	if (ft_strequ(astree->data, ";") == 1)
 	{
-		execute_and_or(astree->left);
-		execute_list(astree->right);
+		execute_and_or(astree->left, exec);
+		execute_list(astree->right, exec);
 	}
 	else
-		execute_and_or(astree);
+		execute_and_or(astree, exec);
 }
 
-void execute_complete_command(t_astnode *astree)
+void execute_complete_command(t_astnode *astree, t_exec *exec)
 {
 	if (astree == NULL)
 		return ;
 	if (astree->type == NODE_PIPE_SEQUENCE)
-		execute_pipe_sequence(astree, -1, -1);
+		execute_pipe_sequence(astree, exec, -1, -1);
 	else if (astree->type == NODE_LIST)
-		execute_list(astree);
+		execute_list(astree, exec);
 	else
-		execute_simple_command(astree, -1, -1);
+		execute_simple_command(astree, exec, -1, -1);
 }
 
 void execute_astree(t_astnode *astree)
 {
-	execute_complete_command(astree);
+	t_exec exec;
+
+	ft_bzero(&exec, sizeof(t_exec));
+	create_env_list(&exec);
+/*
+//test
+	printf("%zu\n", exec.env_num);
+	t_list *ptr;
+	ptr = exec.env_list;
+	while (ptr)
+	{
+		printf("%s==>%s\n", ((t_env *)ptr->content)->name, ((t_env *)ptr->content)->value);
+		ptr = ptr->next;
+	}
+//test end
+*/
+	execute_complete_command(astree, &exec);
 }
