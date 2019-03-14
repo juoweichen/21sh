@@ -81,6 +81,9 @@ struct termios g_original;
 */
 void init_terminal_data (t_edit *line);
 t_edit *init_edit();
+
+//***Readline get user input***
+char *ft_readline();
 /*
 ** term_arrow.c
 */
