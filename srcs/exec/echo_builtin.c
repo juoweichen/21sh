@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 23:11:45 by juochen           #+#    #+#             */
-/*   Updated: 2018/02/28 20:39:17 by juochen          ###   ########.fr       */
+/*   Created: 2018/12/11 21:25:47 by juochen           #+#    #+#             */
+/*   Updated: 2018/12/11 21:25:49 by juochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/exec.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+void	echo_builtin(t_exec *exec, char **arg)
 {
-	int	i;
+	int	n_flag;
+	int i;
 
-	if (!s1 || !s2)
-		return (0);
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+	exec = NULL;
+	i = 1;
+	n_flag = 0;
+	if (arg[i] && ft_strequ(arg[i], "-n"))
+	{
+		n_flag = 1;
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	while (arg[i])
+	{
+		ft_putstr(arg[i++]);
+		if (arg[i] != NULL)
+			ft_putchar(' ');
+	}
+	if (n_flag == 0)
+		ft_putchar('\n');
+	else
+		ft_putstr("\033[0;30;47m%\033[0m\n");
 }

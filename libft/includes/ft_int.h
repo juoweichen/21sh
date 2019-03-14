@@ -21,10 +21,10 @@ char		*ft_itoa_base_lower(intmax_t value, intmax_t base);
 char		*ft_itoa_base_upper(intmax_t value, intmax_t base);
 void		ft_swap_int(int *x, int *y);
 void		ft_swap_double(double *x, double *y);
-void		ft_sort_double_tab(double *tab, unsigned int size);
+void		ft_sort_double_tab(double *tb, unsigned int size);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
-void		ft_sort_int_tab(int *tab, unsigned int size);
+void		ft_sort_int_tab(int *tb, unsigned int size);
 int			ft_numlen(int n);
 
 #endif

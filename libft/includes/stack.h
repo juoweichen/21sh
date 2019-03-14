@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 23:11:45 by juochen           #+#    #+#             */
-/*   Updated: 2018/02/28 20:39:17 by juochen          ###   ########.fr       */
+/*   Created: 2018/04/03 16:00:26 by juochen           #+#    #+#             */
+/*   Updated: 2018/04/17 22:51:21 by juochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#ifndef STACK_H
+# define STACK_H
 
-int		ft_strcmp(const char *s1, const char *s2)
+typedef struct		s_snode
 {
-	int	i;
+	void			*data;
+	size_t			data_size;
+	struct s_snode	*next;
+}					t_snode;
 
-	if (!s1 || !s2)
-		return (0);
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
+typedef struct		s_stack
+{
+	t_snode			*root;
+}					t_stack;
+
+/*
+**	stack.c
+*/
+t_stack				*stack_init(void);
+void				spush(t_stack *stack, void *data, size_t data_size);
+void				*spop(t_stack *stack);
+int					sis_empty(t_stack *stack);
+void				*speek(t_stack *stack);
+
+#endif
