@@ -56,8 +56,9 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 	pid_t pid;
 	int stdoutfd = dup(STDOUT_FILENO);
 
-	if (check_built_in(exec, exec_sc) == 1)
-		return ;
+	// Why do I put this before fork?
+	// if (check_built_in(exec, exec_sc) == 1)
+	// 	return ;
 	if ((pid = fork()) < 0)
 	{
 		perror("fork");
@@ -76,8 +77,11 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 		//write stdout to pipe if present
 		if (exec_sc->pipewrite != -1)
 			dup2(exec_sc->pipewrite, STDOUT_FILENO);
-		
-		//TODO: change to execve
+
+		//in order to let built-in function got pipel
+		if (check_built_in(exec, exec_sc) == 1)
+			exit(0) ;
+
 		if (ft_execvp(exec_sc->argv[0], exec_sc->argv) < 0)
 		{
 			// restore the stdout for displaying error message
