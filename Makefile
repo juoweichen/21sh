@@ -21,6 +21,7 @@ LIB_DIR = ./libft/
 LIB_FILE= libft.a
 LIB = $(addprefix $(LIB_DIR), $(LIB_FILE))
 LIB_LINK = -L$(LIB_DIR) -lft
+LIB_HEADER = -I srcs/libft/includes
 
 # compile flag
 OUTER_LINK = -ltermcap
@@ -44,11 +45,11 @@ all: $(NAME)
 
 # compile project bin
 $(NAME): $(LIB)
-	@gcc $(SRCS) $(HEADER) $(W_FLAG) $(LIB_LINK) $(OUTER_LINK) -o $(NAME)
+	@gcc $(SRCS) $(HEADER) $(LIB_HEADER) $(W_FLAG) $(LIB_LINK) $(OUTER_LINK) -o $(NAME)
 	@echo "\033[32mFile \"$(NAME)\" Created\033[0m"
 # compile debugger bin
 $(D_NAME): $(LIB)
-	@gcc -g $(SRCS) $(HEADER) $(W_FLAG) $(LIB_LINK) $(OUTER_LINK) -o $(D_NAME);
+	@gcc -g $(SRCS) $(HEADER) $(LIB_HEADER) $(W_FLAG) $(LIB_LINK) $(OUTER_LINK) -o $(D_NAME);
 	@echo "\033[32mFile \"$(D_NAME)\" Created\033[0m"
 # compile libft
 $(LIB):

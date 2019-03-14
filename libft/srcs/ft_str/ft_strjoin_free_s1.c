@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_quotes.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin_free_s1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csinglet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 19:38:03 by csinglet          #+#    #+#             */
-/*   Updated: 2019/03/09 19:38:04 by csinglet         ###   ########.fr       */
+/*   Created: 2018/09/25 21:11:26 by csinglet          #+#    #+#             */
+/*   Updated: 2018/09/25 21:11:26 by csinglet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "../../includes/libft.h"
 
-void			remove_quotes(char *str)
+char	*ft_strjoin_free_s1(char *s1, const char *s2)
 {
-	int			i;
+	char	*new_str;
+	int		len;
+	int		i;
+	int		j;
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		str[i] = str[i + 1];
-		i++;
-	}
-	str[i - 2] = '\0';
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	new_str = ft_strnew(len);
+	i = -1;
+	while (s1[++i] != '\0')
+		new_str[i] = s1[i];
+	j = -1;
+	while (s2[++j] != '\0')
+		new_str[i + j] = s2[j];
+	free(s1);
+	s1 = NULL;
+	return (new_str);
 }

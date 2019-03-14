@@ -40,6 +40,9 @@ typedef struct			s_astnode
 	struct s_astnode	*right;	
 }						t_astnode;
 
+// entry point
+int 		build_astree(t_token *token, t_astnode **astree);
+
 t_astnode 	*pipe_sequence(t_token **curtoken);
 t_astnode 	*command(t_token **curtoken);
 t_astnode 	*simple_command(t_token **curtoken);

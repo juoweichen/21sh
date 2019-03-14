@@ -87,5 +87,11 @@ int			*ft_words_pos(const char *str, char c, int wcount);
 */
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strjoin_btw(char const *s1, char const *s2, char btw);
+/*
+**	join two strings and free one or both strings
+*/
+char		*ft_strjoin_free(char *s1, char *s2);
+char		*ft_strjoin_free_s1(char *s1, const char *s2);
+char		*ft_strjoin_free_s2(const char *s1, char *s2);
 
 #endif

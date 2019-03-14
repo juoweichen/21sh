@@ -14,5 +14,19 @@
 
 int main(void)
 {
-	ft_readline();
+	char *line;
+	t_token *token;
+	t_astnode *astree;
+
+	while (1)
+	{
+		line = ft_readline();
+
+		token = tokenize(line);
+
+		build_astree(token, &astree);
+
+		execute_astree(astree);
+		free(line);
+	}
 }

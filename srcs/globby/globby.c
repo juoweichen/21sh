@@ -108,7 +108,7 @@ void				get_glob_matches(t_queue *queue, char *path, char *pattern)
 			|| ft_strcmp(current_item->d_name, "..") == 0)
 			continue ;
 		if (is_glob_match(current_item->d_name, pattern) == 1)
-			enqueue(queue, ft_strdup(current_item->d_name));
+			qpush(queue, ft_strdup(current_item->d_name), 0);
 	}
 	closedir(d_stream);
 }
@@ -148,8 +148,8 @@ void				the_real_globbing(t_queue *globs, char *path)
 				files = queue_init();
 				get_glob_matches(files, temp, glob_pattern);
 				temp_path = ft_strchr(temp_path + 1, '/');
-				while (is_queue_empty(files) == 0)
-					the_real_globbing(globs, ft_strjoin_free_s1(ft_strjoin_free_s2(temp, dequeue(files)), temp_path));
+				while (qis_empty(files) == 0)
+					the_real_globbing(globs, ft_strjoin_free_s1(ft_strjoin_free_s2(temp, qpop(files)), temp_path));
 			}
 		}
 		else

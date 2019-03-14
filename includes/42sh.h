@@ -21,6 +21,8 @@
 #include "print_btree.h"
 #include "signal.h"
 #include "string.h"
+#include "line.h"
+
 
 typedef struct s_tok
 {

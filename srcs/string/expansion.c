@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "quoting.h"
-
 /*
 **	looking for $(*) in str
 **	assuming *str == '$'
 **	returns the length of the argument between parenthesis
 */
 
-#include "shell21.h"
+#include "../../includes/42sh.h"
 
 int				has_valid_command_sub(char *str)
 {
