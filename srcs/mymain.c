@@ -38,9 +38,12 @@ int main(void)
 	// token = tokenize("cat sample | grep -v a | sort -r | cat -e > hahahahha");
 	// token = tokenize("ls -la | cat -e | more");
 	// token = tokenize("mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi");
-	// token = tokenize("echo itsWork!");
-	token = tokenize("cd libft");
+	token = tokenize("echo itsWork!");
+	// token = tokenize("cd libft");
 	// token = tokenize("env");
+	// token = tokenize("ls -la > testtest");
+	// token = tokenize("echo hahahaha > XDDD");
+	
 
 	// t_token *ptr = token;
 
