@@ -37,6 +37,7 @@ SRCS +=	$(wildcard $(SRC_DIR)/lexer/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/line/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/signal/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/string/*.c)
+SRCS +=	$(wildcard $(SRC_DIR)/print_btree/*.c)
 SRCS += $(wildcard $(SRC_DIR)/*.c)
 
 .PHONY: all clean fclean re qre

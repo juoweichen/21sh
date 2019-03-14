@@ -3,8 +3,8 @@
 #include <unistd.h> //fork, write, sleep...
 #include <stdlib.h> //malloc, free, exit...
 
-#include "../includes/print_btree.h"
-#include "../includes/astree.h"
+#include "../../includes/print_btree.h"
+#include "../../includes/astree.h"
 
 // Function used for the test
 // Don't go further :)
