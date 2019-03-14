@@ -1,4 +1,4 @@
-#include "../line_incs/line.h"
+#include "../../includes/line.h"
 
 void arrow_up(t_edit *edit)
 {

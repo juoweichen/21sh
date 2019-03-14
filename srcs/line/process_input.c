@@ -1,4 +1,4 @@
-#include "../line_incs/line.h"
+#include "../../includes/line.h"
 
 t_ctrl g_kctrl[] =
 {

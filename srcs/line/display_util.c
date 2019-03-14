@@ -1,4 +1,4 @@
-#include "../line_incs/line.h"
+#include "../../includes/line.h"
 
 void enable_raw_mode()
 {

@@ -1,4 +1,4 @@
-#include "../line_incs/line.h"
+#include "../../includes/line.h"
 
 char *newline_handler(t_edit *edit)
 {

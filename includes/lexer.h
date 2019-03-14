@@ -14,7 +14,7 @@
 # define LEXER_H
 
 # include <unistd.h>
-# include "libft.h"
+#include "../libft/includes/libft.h"
 
 /*
 **	AND_IF	OR_IF	DSEMI

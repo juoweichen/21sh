@@ -13,8 +13,6 @@
 #ifndef GLOBBY_C
 # define GLOBBY_C
 
-# include "shell21.h"
-
 // void			get_glob_matches(t_queue *globs, char *path, char *glob);
 int				is_dir(char *dir);
 int				is_globbable(char *str);

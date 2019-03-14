@@ -1,4 +1,4 @@
-#include "../line_incs/line.h"
+#include "../../includes/line.h"
 
 /*
 ** Cut forwards to the end of the line(Ctrl - k)

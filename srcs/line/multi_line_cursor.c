@@ -1,4 +1,4 @@
-#include "../line_incs/line.h"
+#include "../../includes/line.h"
 
 static void up_update_edit(t_edit *edit)
 {

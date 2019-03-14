@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "globby.h"
+#include "../../includes/globby.h"
 
 /*
 **	Globbing is wildcard usage. For example cat srcs/lexer/\*.c

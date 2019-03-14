@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_select.h"
+#include "../../includes/signal.h"
 
 /*
 **	SIGINT   - 02 - interrupt program

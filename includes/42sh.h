@@ -10,7 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SH_H
+# define SH_H
+
 #include "../libft/includes/libft.h"
+#include "astree.h"
+#include "exec.h"
+#include "globby.h"
+#include "lexer.h"
+#include "print_btree.h"
+#include "signal.h"
+#include "string.h"
 
 typedef struct s_tok
 {
@@ -36,3 +46,5 @@ enum TokenType{
 	
 	TOKEN	= -1,
 };
+
+#endif

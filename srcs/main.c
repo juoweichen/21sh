@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csinglet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 19:39:23 by csinglet          #+#    #+#             */
-/*   Updated: 2019/03/09 19:39:25 by csinglet         ###   ########.fr       */
+/*   Created: 2019/02/18 15:09:17 by csinglet          #+#    #+#             */
+/*   Updated: 2019/02/18 15:09:17 by csinglet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#include "../includes/42sh.h"
 
-#include "../libft/includes/libft.h"
-
-#endif
+int main(void)
+{
+	ft_readline();
+}

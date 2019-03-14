@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../includes/lexer.h"
 
 /*
 **	The below operations return TRUE or FALSE depending on if the given

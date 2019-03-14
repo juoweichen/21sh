@@ -1,5 +1,5 @@
 #ifndef LINE_H
-#define LINE_H
+# define LINE_H
 #include "unistd.h"
 #include "termios.h"
 #include "term.h"
