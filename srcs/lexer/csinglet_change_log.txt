@@ -1,0 +1,115 @@
+Febuary 13, 2019
+csinglet
+
+get_token()
+- Takes in string, input
+- Returns a data structure pointer of t_token type
+
+* If the first character in input is:
+	1. An operator defined in lexer.h
+		1a. return token from get_operator_token()
+	2. A single, double, or back quote
+		2a. return token from get_quote_token()
+	3. None of the above
+		3a. return token from get_generic_token()
+
+NOTE:
+	The function calling get_token() must skip all whitespace in input
+	beforehand. If whitespace is not skipped NULL will be returned
+
+
+tokenize()
+	- Takes in string, input
+	- Returns a queue data structure queued with data structure of
+	  t_token type
+
+* While input has content to be evaluated
+	1. Skips all whitespace
+	2. Gets the next token in input
+	3. Stores the token into a queue
+	4. Skips the length of the token
+- returns the queue of tokens
+
+
+get_shift()
+	- Takes in a single char
+	- Returns a short on success and -1 on failure
+
+Finds the bit shift needed to flag the correct type. Types are defined in
+lexer.h
+The location of an operator or quote in the string OP_AND_QT_TOKS
+corresponds to the correct bit shift associated with the given operator
+or quote
+
+NOTE:
+	get_shift() will never be called unless the character c is of operator
+	or quote token type
+
+
+get_operator_token()
+	- Takes in string, input
+	- Returns a data structure pointer of t_token type
+
+1. shift is set to the bit shift associated with the operator character
+   at input[0]
+* In the situation that the operator character at input[0] is '<' or '>'
+	* If the following character at input[1] matches the '<' or '>'
+	  character at input[0] the operator consists of two characters
+		2. return a new token
+			2a. token data is a string consisting of input[0 - 1]
+			2b. token data is shift left shifted by the offset for 2
+				character token types
+3. return a new token
+	3a. token data is a string consisting of input[0] only
+	3b. token type is shift
+
+NOTE:
+	get_operator_token() should only called when input[0] is equal to an
+	operator character
+
+
+get_quote_token()
+	- Takes in a string, input
+	- Returns a data structure pointer to t_token type
+
+1. matching_quote is set to the first character of input which will always
+   be a double quote, single quote, or back quote
+2. shift is set to the bit shift associated with the operator character
+   at input[0]
+3. i is set to 0 so that ++i will start at the second character in input,
+   skipping the first quote located at input[0]
+* While input[i] is a valid character
+	* If input[i] is euqal to matching_quote
+		4. Return a new token
+			4a. token data is the contents of input from the first given
+				quote up until the matching closing quote
+			4b. token data is shift left shifted by the offset for 2
+				character token types
+5. Return a new token
+	5a. token data is the entirety of input because no matching closing
+		quote was found
+	5b. token type is shift
+
+
+get_generic_token()
+	- Takes in a string, input
+	- Returns a data structure pointer to t_token type
+
+1. The index, i is set to 1 or 0 depending on if input starts with a '+'
+   or '-' character (numbers that start with '+' or '-' are still valid).
+2. valid_num is set to true or false depending on if the only character
+   in input was '+' or '-' (a single '+' or '-' is a valid string)
+* While input[i] is a valid character
+	* If the value of input[i] is that of operator or quote type, or the
+	  any whitespace is found
+		3. Break the while loop
+	* If any value of input[i] is not of numerical value
+		4. valid_num is set to false. Valid base 10 number values do not
+		   contain anything besides numerical values
+* If the evaluation of input is in fact all numerical values
+	5. Return a new token
+		5a. token data is the contents of input from start up until i
+		5b. token type is of NUMBER_TOKEN
+6. Return a new node
+	6a. token data is the contents of input from start up until i
+	6b. token type is of STRING_TOKEN
