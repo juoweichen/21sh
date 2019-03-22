@@ -30,12 +30,12 @@ t_astnode *list_1(t_token **curtoken)
 		return (NULL);
 	if (is_separator_op(curtoken, &operator) != 1)  //will store operator
 	{
-		del_astnode(&l_child_node); 
+		free_astree(&l_child_node); 
 		return (NULL);
 	}
 	if ((r_child_node = list(curtoken)) == NULL)
 	{
-		del_astnode(&l_child_node);
+		free_astree(&l_child_node);
 		return (NULL);
 	}
 

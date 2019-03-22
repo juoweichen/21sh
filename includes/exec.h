@@ -51,6 +51,7 @@ int				ft_execvp(char *cmd_name, char **cmd_line);
 */
 t_env			*get_env(t_exec *exec, char *name);
 void			create_env_list(t_exec *exec);
+void			free_env_list(t_list **env_list);
 /*
 **	builtin
 */

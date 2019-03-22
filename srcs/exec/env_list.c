@@ -47,3 +47,19 @@ void	create_env_list(t_exec *exec)
 		exec->env_num++;
 	}
 }
+
+void free_env_list(t_list **env_list)
+{
+	t_list *next;
+
+	if (*env_list == NULL)
+		return ;
+	while (*env_list)
+	{
+		next = (*env_list)->next;
+		ft_strdel(&((t_env *)((*env_list)->content))->name);
+		ft_strdel(&((t_env *)((*env_list)->content))->value);
+		ft_memdel((void **)env_list);
+		(*env_list) = next;
+	}
+}

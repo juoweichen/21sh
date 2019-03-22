@@ -71,7 +71,6 @@ int 		is_word_node(t_token **curtoken);
 void		travesal_astree_print_command(t_astnode *astree);
 int 		is_number_node(t_token **curtoken);
 int			is_separator_op(t_token **curtoken, char **op);
-void		del_astnode(t_astnode **node);
-
+void		free_astree(t_astnode **node);
 
 #endif

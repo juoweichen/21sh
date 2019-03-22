@@ -18,38 +18,44 @@ int main(void)
 	t_token *token;
 	t_astnode *astree;
 
+	// line = ft_readline();
+	line = "ls -la";
+
 	//test
-	t_token *ptr;
+	printf("line: %s\n", line);
 	//test end
 
-	while (1)
+	// sleep(10);
+
+	token = tokenize(line);
+
+	//test
+	t_token *ptr;
+	ptr = token;
+	while (ptr)
 	{
-		line = ft_readline();
-
-		//test
-		printf("line: %s\n", line);
-		//test end
-
-		token = tokenize(line);
-
-		//test
-		ptr = token;
-		while (ptr)
-		{
-			printf("%s -> ", ptr->data);
-			ptr = ptr->next;
-		}
-		printf("\n");
-		//test end
-
-		build_astree(token, &astree);
-
-		//test
-		printBinaryTree(astree);
-		//test end
-
-		execute_astree(astree);
-
-		free(line);
+		printf("%s -> ", ptr->data);
+		ptr = ptr->next;
 	}
+	printf("\n");
+	//test end
+
+	// sleep(10);
+
+	build_astree(token, &astree);
+
+	//test
+	printBinaryTree(astree);
+	//test end
+
+	// free_token_list(token);
+	// free_astree(&astree);
+	// sleep(10);
+
+	execute_astree(astree);
+
+	// free(line);
+	free_token_list(token);
+	free_astree(&astree);
+	sleep(10);
 }

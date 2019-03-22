@@ -160,4 +160,5 @@ void execute_astree(t_astnode *astree)
 //test end
 */
 	execute_complete_command(astree, &exec);
+	free_env_list(&exec.env_list);
 }

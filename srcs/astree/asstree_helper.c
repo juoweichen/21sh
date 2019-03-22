@@ -87,7 +87,7 @@ int		is_separator_op(t_token **curtoken, char **op)
 	return (0);
 }
 
-void	del_one_astnode(t_astnode **node)
+void	free_astnode(t_astnode **node)
 {
 	if (*node == NULL)
 		return ;
@@ -96,11 +96,11 @@ void	del_one_astnode(t_astnode **node)
 	ft_memdel((void **)node);
 }
 
-void	del_astnode(t_astnode **nodes)
+void	free_astree(t_astnode **nodes)
 {
 	if (*nodes == NULL)
 		return ;
-	del_astnode(&(*nodes)->left);
-	del_astnode(&(*nodes)->right);
-	del_one_astnode(nodes);
+	free_astree(&(*nodes)->left);
+	free_astree(&(*nodes)->right);
+	free_astnode(nodes);
 }

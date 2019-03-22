@@ -31,12 +31,12 @@ t_astnode *pipe_sequence_1(t_token **curtoken)
 		return (NULL);
 	if (!is_right_operator(curtoken, "|", &operator))
 	{
-		del_astnode(&l_child_node);
+		free_astree(&l_child_node);
 		return (NULL);
 	}
 	if ((r_child_node = pipe_sequence(curtoken)) == NULL)
 	{
-		del_astnode(&l_child_node);
+		free_astree(&l_child_node);
 		return (NULL);
 	}
 

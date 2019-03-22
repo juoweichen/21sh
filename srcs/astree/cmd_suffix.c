@@ -32,7 +32,7 @@ t_astnode *cmd_suffix_3(t_token **curtoken)
 		return (NULL);
 	if ((r_child_node = cmd_suffix(curtoken)) == NULL)
 	{
-		del_astnode(&l_child_node);
+		free_astree(&l_child_node);
 		return (NULL);
 	}
 
@@ -62,7 +62,7 @@ t_astnode *cmd_suffix_1(t_token **curtoken)
 		return (NULL);
 	if ((r_child_node = cmd_suffix(curtoken)) == NULL)
 	{
-		del_astnode(&l_child_node);
+		free_astree(&l_child_node);
 		return (NULL);
 	}
 
