@@ -41,7 +41,7 @@ int		is_right_operator(t_token **curtoken, char *type, char **ops)
 	if (ft_strcmp((*curtoken)->data, type) == 0)
 	{
 		*curtoken = (*curtoken)->next;
-		*ops = ft_strdup(type);
+		*ops = type;
 		return (1);
 	}
 	return (0);
@@ -91,8 +91,7 @@ void	free_astnode(t_astnode **node)
 {
 	if (*node == NULL)
 		return ;
-	if ((*node)->data != NULL)
-		ft_strdel(&(*node)->data);
+	ft_strdel(&(*node)->data);
 	ft_memdel((void **)node);
 }
 

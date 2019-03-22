@@ -56,9 +56,6 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 	pid_t pid;
 	int stdoutfd = dup(STDOUT_FILENO);
 
-	// Why do I put this before fork?
-	// if (check_built_in(exec, exec_sc) == 1)
-	// 	return ;
 	if ((pid = fork()) < 0)
 	{
 		perror("fork");
@@ -152,28 +149,14 @@ void execute_simple_command(t_astnode *astree, t_exec *exec, int piperead, int p
 {
 	t_exec_sc exec_sc;
 
-	//test
-	//printBinaryTree(astree);
-
 	if (astree == NULL)
 		return ;
 	ft_bzero(&exec_sc, sizeof(t_exec_sc));
-
+	
 	init_run(astree, &exec_sc, piperead, pipewrite);
-
-	//printf("%s: r = %d, w = %d\n", exec_sc.argv[0], exec_sc.piperead, exec_sc.pipewrite);
-	// printf("name = %s, op = %s\n", exec_sc.redirect_filename, exec_sc.redirect_op);
-/*
-	//test
-	int i = 0;
-	while (i < exec_sc.argc)
-		printf("%s-> ", exec_sc.argv[i++]);
-	printf("\n");
-*/
 	run(exec, &exec_sc);
-	//delete section
+
 	ft_mstrdel_rows(&exec_sc.argv, exec_sc.argc);
-	//TODO: should protect
 	ft_strdel(&exec_sc.redirect_op);
 	ft_strdel(&exec_sc.redirect_filename);
 }

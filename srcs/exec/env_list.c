@@ -59,7 +59,8 @@ void free_env_list(t_list **env_list)
 		next = (*env_list)->next;
 		ft_strdel(&((t_env *)((*env_list)->content))->name);
 		ft_strdel(&((t_env *)((*env_list)->content))->value);
-		ft_memdel((void **)env_list);
+		ft_memdel((void **)&(*env_list)->content);
+		ft_memdel((void **)&(*env_list));
 		(*env_list) = next;
 	}
 }
