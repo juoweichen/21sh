@@ -1,33 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   screen.c                                           :+:      :+:    :+:   */
+/*   free_edit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsathiad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/20 01:48:00 by rsathiad          #+#    #+#             */
-/*   Updated: 2019/03/20 01:49:46 by rsathiad         ###   ########.fr       */
+/*   Created: 2019/03/22 18:53:24 by rsathiad          #+#    #+#             */
+/*   Updated: 2019/03/22 18:56:16 by rsathiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/line.h"
 
-void	get_window_size(t_edit *edit)
+void	free_edit(t_edit *edit)
 {
-	edit->screencol = tgetnum("co");
-	edit->screenrow = tgetnum("li");
+	int		i;
+	char	**array;
+
+	i = 0;
+	disable_raw_mode();
+	free_edit_array(edit->array);
+	free(edit->clipboard);
+	array = edit->history;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	free(edit);
 }
 
-void	perror_exit(char *str)
+void	free_edit_array(t_buffer **array)
 {
-	ft_printf("%s\n", str);
-	exit(1);
-}
+	int i;
 
-void	put_prompt_line(unsigned int row)
-{
-	if (row == 0)
-		tputs("42sh>", 0, term_putc);
-	else
-		tputs(">>>>>", 0, term_putc);
+	i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]->line);
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return ;
 }
