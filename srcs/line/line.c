@@ -23,7 +23,7 @@ char	*ft_readline(void)
 	enable_raw_mode();
 	ret = line_edit_body(edit);
 	disable_raw_mode();
-	free_edit(edit);
+	// free_edit(edit);
 	return (ret);
 }
 

@@ -21,7 +21,9 @@ int main(void)
 	while (1)
 	{
 		line = ft_readline();
+		printf("\n");
 		token = tokenize(line);
+
 		build_astree(token, &astree);
 		execute_astree(astree);
 

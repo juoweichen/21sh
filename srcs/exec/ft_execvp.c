@@ -71,7 +71,7 @@ int ft_execvp(char *cmd_name, char **cmd_line)
 	while (environ[++i] != NULL)
 	{
 		if (ft_strncmp(environ[i], "PATH=", 5) == 0)
-			path_arr = ft_strsplit(ft_strdup(environ[i] + 5), ':');
+			path_arr = ft_strsplit(environ[i] + 5, ':');
 	}
 	//if couldn't found from path
 	if (path_arr == NULL)

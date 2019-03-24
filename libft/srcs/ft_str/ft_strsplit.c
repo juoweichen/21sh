@@ -23,7 +23,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (!s)
 		return (NULL);
 	wcount = ft_words_count(s, c);
-	words = (char **)malloc(sizeof(char *) * wcount + 1);
+	words = (char **)malloc(sizeof(char *) * (wcount + 1));
 	if (!words)
 		return (NULL);
 	pos = ft_words_pos(s, c, wcount);

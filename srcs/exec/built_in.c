@@ -31,21 +31,3 @@ int check_built_in(t_exec *exec, t_exec_sc *exec_sc)
 		return (0);
 	return (1);
 }
-
-/*
-	if (ft_strequ(cmd[0], "echo"))
-		echo_builtin(m, ++cmd);
-	else if (ft_strequ(cmd[0], "cd"))
-		cd_builtin(m, ++cmd);
-	else if (ft_strequ(cmd[0], "env"))
-		env_builtin(m, ++cmd);
-	else if (ft_strequ(cmd[0], "setenv"))
-		setenv_builtin(m, ++cmd);
-	else if (ft_strequ(cmd[0], "unsetenv"))
-		unsetenv_builtin(m, ++cmd);
-	else if (ft_strequ(cmd[0], "exit"))
-		exit_builtin(m);
-	else
-		return (0);
-	return (1);
-*/
