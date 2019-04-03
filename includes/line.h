@@ -20,6 +20,9 @@
 # include "curses.h"
 # include "../libft/includes/libft.h"
 
+# define PROMPT "42sh>"
+# define QUOTE_PROMPT ">>>>>"
+
 # define K_UP 4283163
 # define K_DOWN 4348699
 # define K_LEFT 4479771
@@ -37,6 +40,7 @@
 # define CTRL_I 6
 # define CTRL_W 23
 # define CTRL_L 12
+# define CTRL_D 0	// <== not sure if I can put 0
 # define ALT_F 37574
 # define ALT_G 43458
 # define ALT_K 39627
@@ -74,6 +78,7 @@ typedef struct		s_edit
 	char			*return_str;
 	char			*clipboard;
 	t_buffer		**array;
+	int				is_eof;
 }					t_edit;
 
 typedef	struct		s_tracker
@@ -189,4 +194,8 @@ void				history_up(t_edit *edit);
 void				history_down(t_edit *edit);
 void				free_edit(t_edit *edit);
 void				free_edit_array(t_buffer **array);
+/*
+**	send_eof.c 
+*/
+void				send_eof(t_edit *edit);
 #endif

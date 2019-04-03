@@ -27,7 +27,7 @@ void	perror_exit(char *str)
 void	put_prompt_line(unsigned int row)
 {
 	if (row == 0)
-		tputs("42sh>", 0, term_putc);
+		tputs(PROMPT, 0, term_putc);
 	else
-		tputs(">>>>>", 0, term_putc);
+		tputs(QUOTE_PROMPT, 0, term_putc);
 }

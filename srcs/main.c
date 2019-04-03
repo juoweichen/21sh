@@ -18,9 +18,13 @@ int main(void)
 	t_token *token;
 	t_astnode *astree;
 
-	while (1)
+	g_power = 1;
+	while (g_power)
 	{
-		line = ft_readline();
+		signals_init();
+
+		if ((line = ft_readline()) == NULL)			
+			exit(0);
 		printf("\n");
 		token = tokenize(line);
 

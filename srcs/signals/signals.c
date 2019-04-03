@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/signal.h"
+#include "../../includes/signals.h"
 
 /*
 **	SIGINT   - 02 - interrupt program
@@ -35,33 +35,30 @@ void			signals_init(void)
 	signal(SIGWINCH, handle_signals);
 }
 
-static void		rescale_args(void)
-{
-	tgetent(NULL, ti.term_name);
-	print_args();
-}
-
 static void		suspend_program(void)
 {
-	restore_default_config();
+	disable_raw_mode();
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 }
 
 static void		restore_program(void)
 {
-	load_custom_config();
+	enable_raw_mode();
 	signals_init();
-	rescale_args();
 }
 
 void			handle_signals(int sig)
 {
-	if (sig == SIGINT || sig == SIGQUIT || sig == SIGABRT ||
-			sig == SIGKILL || sig == SIGSTOP)
-		safe_exit();
-	else if (sig == SIGWINCH)
-		rescale_args();
+	if (sig == SIGINT)
+	{
+		ft_putchar('\n');
+		ft_putstr(PROMPT);
+		signals_init();
+	}
+	else if (sig == SIGQUIT || sig == SIGABRT || sig == SIGKILL || sig == SIGSTOP)
+		// Handle some stop
+		;
 	else if (sig == SIGCONT)
 		restore_program();
 	else if (sig == SIGTSTP)

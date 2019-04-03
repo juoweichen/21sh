@@ -33,9 +33,9 @@ void		add_to_array(t_edit *edit)
 
 	index = 0;
 	edit->linemax++;
-	new = (t_buffer**)malloc(sizeof(t_buffer *) * (edit->linemax + 1));
+	new = (t_buffer**)ft_memalloc(sizeof(t_buffer *) * (edit->linemax + 1));
 	while (index < edit->linemax)
-		new[index++] = (t_buffer*)malloc(sizeof(t_buffer));
+		new[index++] = (t_buffer*)ft_memalloc(sizeof(t_buffer));
 	new[index] = NULL;
 	index = 0;
 	while ((new[index] != NULL) && (edit->array[index] != NULL))

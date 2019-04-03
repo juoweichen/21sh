@@ -17,6 +17,8 @@
 #include "astree.h"
 #include <dirent.h>
 
+int g_power;
+
 typedef	struct	s_env
 {
 	char		*name;

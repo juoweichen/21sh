@@ -32,9 +32,10 @@ t_ctrl	g_actrl[] =
 	{CTRL_E, move_cursor_to_next_word},
 	{CTRL_W, move_cursor_to_previous_word},
 	{CTRL_K, cut_to_prompt},
-	{CTRL_L, cut_to_endline},
+	{CTRL_L, cut_to_endline},	//BUG: relundant char
 	{CTRL_G, paste_clipboard},
 	{CTRL_U, copy_next_word},
+	{CTRL_D, send_eof},	// not work
 	{1, copy_line},
 };
 

@@ -13,6 +13,11 @@
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
+#include "line.h"
+#include "../libft/includes/libft.h"
+#include <signal.h>
+#include <sys/ioctl.h>
+
 void			signals_init(void);
 void			handle_signals(int sigh);
 

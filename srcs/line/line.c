@@ -23,7 +23,7 @@ char	*ft_readline(void)
 	enable_raw_mode();
 	ret = line_edit_body(edit);
 	disable_raw_mode();
-	// free_edit(edit);
+	free_edit(edit);
 	return (ret);
 }
 
@@ -31,9 +31,9 @@ t_edit	*init_edit(void)
 {
 	t_edit *new;
 
-	new = malloc(sizeof(t_edit));
-	new->array = (t_buffer**)malloc((sizeof(t_buffer*)) * 2);
-	new->array[0] = malloc(sizeof(t_buffer));
+	new = ft_memalloc(sizeof(t_edit));
+	new->array = (t_buffer**)ft_memalloc((sizeof(t_buffer*)) * 2);
+	new->array[0] = ft_memalloc(sizeof(t_buffer));
 	new->cur_col = 0;
 	new->linemax = 1;
 	new->quote = 0;
@@ -48,6 +48,7 @@ t_edit	*init_edit(void)
 	new->array[1] = NULL;
 	new->hcount = 0;
 	new->hmax = 0;
+	new->is_eof = 1;
 	return (new);
 }
 
@@ -75,7 +76,7 @@ char	*line_edit_body(t_edit *edit)
 	int		len;
 
 	num = 0;
-	while (1)
+	while (edit->is_eof)
 	{
 		num = 0;
 		print_display(edit);
@@ -84,11 +85,8 @@ char	*line_edit_body(t_edit *edit)
 		if ((int)num == '\n')
 			return (newline_handler(edit));
 	}
+	return (NULL);
 }
-
-/*
-** moves cursor to prompt
-*/
 
 void	move_cursor_to_prompt(t_edit *edit)
 {

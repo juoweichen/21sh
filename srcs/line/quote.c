@@ -78,14 +78,14 @@ int			quotes_are_closed(char *s)
 {
 	int			i;
 	t_tracker	quote;
-
+	
 	quote.dbl = 0;
 	quote.sgl = 0;
 	quote.bck = 0;
 	i = 0;
 	while (s[i] != '\0')
 		check_each_char_in_the_str(s, &i, quote);
-	if (s[i - 1] == '\\')
+	if (i > 0 && s[i - 1] == '\\')
 		return (5);
 	if (quote.sgl == 1)
 		return (1);

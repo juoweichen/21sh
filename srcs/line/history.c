@@ -48,7 +48,7 @@ void	import_history(t_edit *edit)
 		dirptr = opendir("./misc");
 	}
 	file_desc = open("./misc/history.txt", O_RDWR | O_CREAT, S_IRWXU);
-	edit->history = malloc((sizeof(char *) * 500));
+	edit->history = (char **)ft_memalloc((sizeof(char *) * 500));
 	read_file_to_array(edit, file_desc);
 	closedir(dirptr);
 	return ;
@@ -73,6 +73,8 @@ void	history_up(t_edit *edit)
 	char *str;
 
 	str = edit->array[edit->killzone]->line;
+	if (edit->hcount <= 0)
+		return ;
 	edit->hcount--;
 	ft_bzero(str, 1024);
 	str = ft_strcpy(str, edit->history[edit->hcount]);
@@ -86,6 +88,8 @@ void	history_down(t_edit *edit)
 	char *str;
 
 	str = edit->array[edit->killzone]->line;
+	if (edit->hcount >= edit->hmax)
+		return ;
 	edit->hcount++;
 	ft_bzero(str, 1024);
 	str = ft_strcpy(str, edit->history[edit->hcount]);

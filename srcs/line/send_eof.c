@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   42sh.h                                             :+:      :+:    :+:   */
+/*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rsathiad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 13:23:56 by juochen           #+#    #+#             */
-/*   Updated: 2019/02/09 13:23:57 by juochen          ###   ########.fr       */
+/*   Created: 2019/03/20 01:17:12 by rsathiad          #+#    #+#             */
+/*   Updated: 2019/03/20 01:22:01 by rsathiad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#include "../../includes/line.h"
 
-#include "../libft/includes/libft.h"
-#include "astree.h"
-#include "exec.h"
-#include "globby.h"
-#include "lexer.h"
-#include "print_btree.h"
-#include "signals.h"
-#include "string.h"
-#include "line.h"
+/*
+** send end of file (Ctrl - d)
+*/
 
-#endif
+void	send_eof(t_edit *edit)
+{
+	edit->is_eof = 0;
+}
