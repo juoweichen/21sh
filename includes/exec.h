@@ -40,7 +40,8 @@ typedef struct	s_exec_simple_command
 	int 		pipewrite;
 	
 	char		*redirect_op;
-	char		*redirect_filename;
+	char		*redirect_des;
+	char		*redirect_src;
 }				t_exec_sc;
 
 void 			execute_astree(t_astnode *astree);
@@ -63,5 +64,18 @@ void			env_builtin(t_exec *exec, char **arg);
 void			setenv_builtin(t_exec *exec, char **arg);
 void			unsetenv_builtin(t_exec *exec, char **arg);
 void			exit_builtin(t_exec *exec);
+/*
+**	redirect
+*/
+void			redirect_lessand(t_exec_sc *exec_sc);
+void			redirect_greatand(t_exec_sc *exec_sc);
+void			redirect_dgreat(t_exec_sc *exec_sc);
+void			redirect_less(t_exec_sc *exec_sc);
+void			redirect_great(t_exec_sc *exec_sc);
+/*
+**	init_run_helper
+*/
+void 			init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc);
+void 			init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc);
 
 #endif

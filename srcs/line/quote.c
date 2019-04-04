@@ -26,52 +26,50 @@ int			move_to_close(char *str, int *index, char quote)
 		return (0);
 }
 
-t_tracker	double_quote_handler(char *str, int *index, t_tracker quote)
+void		double_quote_handler(char *str, int *index, t_tracker *quote)
 {
 	int i;
 
 	i = *index + 1;
-	quote.dbl ^= 1;
+	quote->dbl ^= 1;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '`')
 		{
-			quote.bck ^= 1;
+			quote->bck ^= 1;
 			if (move_to_close(str, &i, '`') == 0)
-				quote.bck ^= 1;
+				quote->bck ^= 1;
 		}
 		else if (str[i] == '\"' && str[i] != '\0')
-			quote.dbl ^= 1;
+			quote->dbl ^= 1;
 		if (str[i] != '\0')
 			i++;
 	}
 	*index = i;
-	return (quote);
 }
 
-t_tracker	check_each_char_in_the_str(char *s, int *index, t_tracker quote)
+void		check_each_char_in_the_str(char *s, int *index, t_tracker *quote)
 {
 	int i;
 
 	i = *index;
 	if (s[i] == '\'' && s[i] != '\0')
 	{
-		quote.sgl ^= 1;
+		quote->sgl ^= 1;
 		if (move_to_close(s, &(i), '\'') == 0)
-			quote.sgl ^= 1;
+			quote->sgl ^= 1;
 	}
 	else if (s[i] == '\"' && s[i] != '\0')
-		quote = double_quote_handler(s, &i, quote);
+		double_quote_handler(s, &i, quote);
 	else if (s[i] == '`' && s[i] != '\0')
 	{
-		quote.bck ^= 1;
+		quote->bck ^= 1;
 		if (move_to_close(s, &i, '`') == 0)
-			quote.bck ^= 1;
+			quote->bck ^= 1;
 	}
 	if (s[i] != '\0')
 		i++;
 	*index = i;
-	return (quote);
 }
 
 int			quotes_are_closed(char *s)
@@ -79,12 +77,10 @@ int			quotes_are_closed(char *s)
 	int			i;
 	t_tracker	quote;
 	
-	quote.dbl = 0;
-	quote.sgl = 0;
-	quote.bck = 0;
+	ft_bzero(&quote, sizeof(t_tracker));
 	i = 0;
 	while (s[i] != '\0')
-		check_each_char_in_the_str(s, &i, quote);
+		check_each_char_in_the_str(s, &i, &quote);
 	if (i > 0 && s[i - 1] == '\\')
 		return (5);
 	if (quote.sgl == 1)

@@ -29,6 +29,9 @@ int main(void)
 		token = tokenize(line);
 
 		build_astree(token, &astree);
+
+		// printBinaryTree(astree);
+
 		execute_astree(astree);
 
 		free(line);

@@ -15,40 +15,18 @@
 
 void handle_redirect(t_exec_sc *exec_sc)
 {
-	int fd;
-	
-	//redirect stdout to file if specified
+	if (exec_sc->redirect_op == NULL || exec_sc->redirect_des == NULL)
+		return ;
 	if (ft_strequ(exec_sc->redirect_op, ">") == 1)
-	{
-		if ((fd = open(exec_sc->redirect_filename, O_WRONLY | O_CREAT | O_APPEND,
-						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-		{
-			perror("redirect_out");
-			exit(1);
-		}
-		dup2(fd, STDOUT_FILENO);
-	}
-	//redirect stdin from file if specified
+		redirect_great(exec_sc);
 	else if (ft_strequ(exec_sc->redirect_op, "<") == 1)
-	{
-		if ((fd = open(exec_sc->redirect_filename, O_RDONLY)) == -1)
-		{
-			perror("redirect_in");
-			exit(1);
-		}
-		dup2(fd, STDIN_FILENO);
-	}
-	//redirect stdout to file if specified, overwrite
+		redirect_less(exec_sc);
 	else if (ft_strequ(exec_sc->redirect_op, ">>") == 1)
-	{
-		if ((fd = open(exec_sc->redirect_filename, O_WRONLY | O_CREAT | O_TRUNC,
-						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-		{
-			perror("overwrite redirect_out");
-			exit(1);
-		}
-		dup2(fd, STDOUT_FILENO);
-	}
+		redirect_dgreat(exec_sc);
+	else if (ft_strequ(exec_sc->redirect_op, ">&") == 1)
+		redirect_greatand(exec_sc);
+	else if (ft_strequ(exec_sc->redirect_op, "<&") == 1)
+		redirect_lessand(exec_sc);
 }
 
 void run(t_exec *exec, t_exec_sc *exec_sc)
@@ -59,7 +37,6 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 	//cd can not work in child fork!
 	if (check_built_in(exec, exec_sc) == 1)
 		return ;
-	
 	if ((pid = fork()) < 0)
 	{
 		perror("fork");
@@ -67,73 +44,35 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 	}
 	if (pid == 0)
 	{
-		//child process
 		if (exec_sc->redirect_op != NULL)
 			handle_redirect(exec_sc);
-
-		//read stdin from pipe if present
 		if (exec_sc->piperead != -1)
 			dup2(exec_sc->piperead, STDIN_FILENO);
-
-		//write stdout to pipe if present
 		if (exec_sc->pipewrite != -1)
 			dup2(exec_sc->pipewrite, STDOUT_FILENO);
-
 		// //in order to let built-in function got pipel
 		// if (check_built_in(exec, exec_sc) == 1)
 		// 	exit(0) ;
-
 		if (ft_execvp(exec_sc->argv[0], exec_sc->argv) < 0)
 		{
 			// restore the stdout for displaying error message
             dup2(stdoutfd, STDOUT_FILENO);
-			
 			printf("Command not found: \'%s\'\n", exec_sc->argv[0]);
 			exit(1);
 		}
 		exit(0);
 	}
 	else
-	{
-		//parent process
 		wait(NULL);
-	}
 }
 
 void init_run(t_astnode *astree, t_exec_sc *exec_sc, int piperead, int pipewrite)
 {
-	t_astnode *astptr;
-	int i;
-
 	if (astree->type == NODE_SIMPLE_COMMAND)
 	{
-		//count argc
-		astptr = astree;
-		while (astptr)
-		{
-			if (astptr->type == NODE_IO_FILE)
-			{
-				exec_sc->redirect_op = ft_strdup(astptr->data);
-				exec_sc->redirect_filename = ft_strdup(astptr->right->data);
-				break ;
-			}
-			exec_sc->argc += 1;
-			astptr = astptr->right;
-		}
+		init_run_count_argv(astree, exec_sc);
 		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) * sizeof(char *));
-		//store to argv
-		astptr = astree;
-		i = 0;
-		while (i < exec_sc->argc)
-		{
-			if (astptr->left != NULL)
-				exec_sc->argv[i] = ft_strdup(astptr->left->data);
-			else
-				exec_sc->argv[i] = ft_strdup(astptr->data);
-			astptr = astptr->right;
-			i++;
-		}
-		exec_sc->argv[i] = NULL;
+		init_run_store_argv(astree, exec_sc);
 	}
 	else
 	{
@@ -143,8 +82,6 @@ void init_run(t_astnode *astree, t_exec_sc *exec_sc, int piperead, int pipewrite
 		exec_sc->argv[0] = ft_strdup(astree->data);
 		exec_sc->argv[1] = NULL;
 	}
-
-	// store attributes
 	exec_sc->piperead = piperead;
 	exec_sc->pipewrite = pipewrite;
 }
@@ -156,11 +93,12 @@ void execute_simple_command(t_astnode *astree, t_exec *exec, int piperead, int p
 	if (astree == NULL)
 		return ;
 	ft_bzero(&exec_sc, sizeof(t_exec_sc));
-	
+
 	init_run(astree, &exec_sc, piperead, pipewrite);
 	run(exec, &exec_sc);
 
 	ft_mstrdel_rows(&exec_sc.argv, exec_sc.argc);
 	ft_strdel(&exec_sc.redirect_op);
-	ft_strdel(&exec_sc.redirect_filename);
+	ft_strdel(&exec_sc.redirect_src);
+	ft_strdel(&exec_sc.redirect_des);
 }

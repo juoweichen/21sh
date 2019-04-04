@@ -59,6 +59,7 @@ t_astnode *io_redirect_1(t_token **curtoken)
 	if (is_number_node(curtoken) == -1)
 		return (NULL);
 	io_number = ft_strdup((*curtoken)->data);
+	*curtoken = (*curtoken)->next;
 	if ((r_child_node = io_file(curtoken)) == NULL)
 		return (NULL);
 

@@ -84,20 +84,6 @@ t_astnode *cmd_suffix(t_token **curtoken)
 	//store init token so it can restore before other options
 	init_token = *curtoken;
 
-	//is <cmd_word> <cmd_suffix> type?
-	if ((node = cmd_suffix_1(curtoken)) != NULL)
-		return (node);
-	
-	//restore curtoken to init_token
-	*curtoken = init_token;
-
-	//is <command> type?
-	if ((node = cmd_suffix_2(curtoken)) != NULL)
-		return (node);
-
-	//restore curtoken to init_token
-	*curtoken = init_token;
-	
 	//is <io_redirect> <cmd_suffix> type?
 	if ((node = cmd_suffix_3(curtoken)) != NULL)
 		return (node);
@@ -107,6 +93,20 @@ t_astnode *cmd_suffix(t_token **curtoken)
 	
 	//is <io_redirect> type?
 	if ((node = cmd_suffix_4(curtoken)) != NULL)
+		return (node);
+
+	//restore curtoken to init_token
+	*curtoken = init_token;
+
+	//is <cmd_word> <cmd_suffix> type?
+	if ((node = cmd_suffix_1(curtoken)) != NULL)
+		return (node);
+		
+	//restore curtoken to init_token
+	*curtoken = init_token;
+
+	//is <cmd_word> type?
+	if ((node = cmd_suffix_2(curtoken)) != NULL)
 		return (node);
 	
 	return (NULL);
