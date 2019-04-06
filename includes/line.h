@@ -33,6 +33,7 @@
 # define CTRL_RTK 73895905418011
 # define K_DEL 2117294875
 # define K_BS 127
+# define K_TAB 9
 # define CTRL_K 11
 # define CTRL_E 5
 # define CTRL_U 21
@@ -40,7 +41,7 @@
 # define CTRL_I 6
 # define CTRL_W 23
 # define CTRL_L 12
-# define CTRL_D 0	// <== not sure if I can put 0
+# define CTRL_D 4
 # define ALT_F 37574
 # define ALT_G 43458
 # define ALT_K 39627
@@ -53,6 +54,9 @@
 # define END_B 4610843
 # define NEWLINE 10
 # define PROMPT_LEN 5
+
+# define ACTRL_NUM 9
+# define KCTRL_NUM 11
 
 typedef	struct		s_buffr
 {
@@ -198,4 +202,9 @@ void				free_edit_array(t_buffer **array);
 **	send_eof.c 
 */
 void				send_eof(t_edit *edit);
+/*
+**	auto_complete.c
+*/
+void				auto_complete(t_edit *edit);
+
 #endif

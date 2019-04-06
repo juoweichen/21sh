@@ -35,7 +35,8 @@ t_ctrl	g_actrl[] =
 	{CTRL_L, cut_to_endline},	//BUG: relundant char
 	{CTRL_G, paste_clipboard},
 	{CTRL_U, copy_next_word},
-	{CTRL_D, send_eof},	// not work
+	{CTRL_D, send_eof},
+	{K_TAB, auto_complete},
 	{1, copy_line},
 };
 
@@ -48,7 +49,7 @@ void	process_input(long num, int len, t_edit *edit)
 	{
 		if (num <= 31)
 		{
-			while (++i < 7)
+			while (++i < ACTRL_NUM)
 				if (num == g_actrl[i].value)
 					g_actrl[i].f(edit);
 		}
@@ -59,7 +60,7 @@ void	process_input(long num, int len, t_edit *edit)
 	}
 	else if (len == 3 || len == 6)
 	{
-		while (++i < 10)
+		while (++i < KCTRL_NUM)
 			if (num == g_kctrl[i].value)
 				g_kctrl[i].f(edit);
 	}
