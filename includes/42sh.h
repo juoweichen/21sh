@@ -23,4 +23,9 @@
 #include "string.h"
 #include "line.h"
 
+typedef	struct	s_sh
+{
+	t_dict		*env_dict;
+}				t_sh;
+
 #endif

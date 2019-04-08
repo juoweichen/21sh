@@ -13,38 +13,23 @@
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-void execute_command(t_astnode *astree, t_exec *exec, int piperead, int pipewrite)
+void execute_command(t_astnode *astree, t_exec *exec,
+	int piperead, int pipewrite)
 {
 	execute_simple_command(astree, exec, piperead, pipewrite);
 }
 
-void execute_pipe_sequence(t_astnode *astree, t_exec *exec, int prevread, int prevwrite)
+void execute_pipe_sequence_pipe_and_fork(t_astnode *astree, t_exec *exec, 
+	int prevread, int prevwrite)
 {
 	int fd[2];
-	pid_t pid;
-
-	if (astree == NULL)
-		return ;
-	if (astree->type != NODE_PIPE_SEQUENCE)	//last or only command
-	{
-		close(prevwrite);
-		execute_command(astree, exec, prevread, -1);
-		close(prevread);
-		return ;
-	}
-	if (prevwrite != -1)
-		close(prevwrite);
-	if (pipe(fd) < 0 || (pid = fork()) < 0)
-	{
-		perror("pipe_sequence failed");
+	
+	if (pipe(fd) < 0)
 		exit(1);
-	}
-	if (pid == 0) //child process	
+	if (fork() == 0) //child process	
 	{
 		if (prevread == -1 && prevwrite == -1)	//first command
-		{
 			execute_command(astree->left, exec, -1, fd[1]);
-		}
 		else 	//middle
 		{
 			close(prevwrite);
@@ -58,6 +43,23 @@ void execute_pipe_sequence(t_astnode *astree, t_exec *exec, int prevread, int pr
 		execute_pipe_sequence(astree->right, exec, fd[0], fd[1]);
 		wait(NULL);
 	}
+}
+
+void execute_pipe_sequence(t_astnode *astree, t_exec *exec, 
+	int prevread, int prevwrite)
+{
+	if (astree == NULL)
+		return ;
+	if (astree->type != NODE_PIPE_SEQUENCE)	//last or only command
+	{
+		close(prevwrite);
+		execute_command(astree, exec, prevread, -1);
+		close(prevread);
+		return ;
+	}
+	if (prevwrite != -1)
+		close(prevwrite);
+	execute_pipe_sequence_pipe_and_fork(astree, exec, prevread, prevwrite);
 }
 
 void execute_pipeline(t_astnode *astree, t_exec *exec)
@@ -102,3 +104,47 @@ void execute_astree(t_astnode *astree)
 	execute_complete_command(astree, &exec);
 	free_env_list(&exec.env_list);
 }
+
+/*
+void execute_pipe_sequence(t_astnode *astree, t_exec *exec, int prevread, int prevwrite)
+{
+	int fd[2];
+	pid_t pid;
+
+	if (astree == NULL)
+		return ;
+	if (astree->type != NODE_PIPE_SEQUENCE)	//last or only command
+	{
+		close(prevwrite);
+		execute_command(astree, exec, prevread, -1);
+		close(prevread);
+		return ;
+	}
+	if (prevwrite != -1)
+		close(prevwrite);
+	if (pipe(fd) < 0 || (pid = fork()) < 0)
+	{
+		perror("pipe_sequence failed");
+		exit(1);
+	}
+	if (pid == 0) //child process	
+	{
+		if (prevread == -1 && prevwrite == -1)	//first command
+		{
+			execute_command(astree->left, exec, -1, fd[1]);
+		}
+		else 	//middle
+		{
+			close(prevwrite);
+			execute_command(astree->left, exec, prevread, fd[1]);
+			close(prevread);
+		}
+		exit(0);
+	}
+	else	//parent process
+	{
+		execute_pipe_sequence(astree->right, exec, fd[0], fd[1]);
+		wait(NULL);
+	}
+}
+*/

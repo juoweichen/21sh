@@ -18,6 +18,7 @@
 void	auto_complete(t_edit *edit)
 {
 	edit = NULL;
+	
 	//if input a command (if not adding any prefix, treat as command)
 		//search command form env
 			//search function

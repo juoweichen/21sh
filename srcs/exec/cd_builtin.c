@@ -51,7 +51,6 @@ void	cd_builtin(t_exec *exec, char **arg)
 	}
 	else
 		return ;
-	printf("%s\n", next_dir);
 	chdir(next_dir) != -1 ?
 		update_pwd(exec, next_dir) : ft_printf("cd: no such directory\n");
 	ft_strdel(&next_dir);

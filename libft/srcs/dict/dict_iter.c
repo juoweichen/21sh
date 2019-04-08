@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dictionary.c                                       :+:      :+:    :+:   */
+/*   dict.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,33 +12,34 @@
 
 #include "../../includes/libft.h"
 
-unsigned	dict_hash(char *s)
+void	dict_iter_add(t_dict *dict, char *key)
 {
-	unsigned hashval;
-
-	hashval = 0;
-	while (*s != '\0')
-		hashval = *(s++) + HASHNUMBER * hashval;
-	return (hashval % HASHSIZE);
+	if (dict->iter == NULL)
+		dict->iter = ft_lstnew((void *)key, ft_strlen(key));
+	else
+		ft_lstaddend(&dict->iter, ft_lstnew((void *)key, ft_strlen(key)));
+	dict->size += 1;
 }
 
-t_dict_tab	*dict_find(t_dict *dict, char *s)
+void	dict_iter_remove(t_dict *dict, char *key)
 {
-	t_dict_tab	*np;
+	t_list	*preptr;
+	t_list	*curptr;
 
-	np = dict->tb[dict_hash(s)];
-	while (np != NULL)
+	if (dict->iter == NULL)
+		return ;
+	preptr = NULL;
+	curptr = dict->iter;
+	while (curptr)
 	{
-		if (ft_strcmp(s, np->key) == 0)
-			return (np);
-		np = np->next;
+		if (ft_strequ(key, (char *)curptr->content) == 1)
+		{
+			preptr->next = curptr->next;
+			ft_lstdelone(&curptr, ft_lstdel_content);
+			dict->size -= 1;
+			return ;
+		}
+		preptr = curptr;
+		curptr = curptr->next;
 	}
-	return (NULL);
-}
-
-void		dict_free_elem(t_dict_tab **elem)
-{
-	ft_memdel((void **)&(*elem)->value);
-	ft_strdel(&(*elem)->key);
-	ft_memdel((void **)&(*elem));
 }

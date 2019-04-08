@@ -50,7 +50,7 @@ void 			execute_simple_command(t_astnode *astree, t_exec *exec,
 int				check_built_in(t_exec *exec, t_exec_sc *exec_sc);
 int				ft_execvp(char *cmd_name, char **cmd_line);
 /*
-**	env_list
+**	env_list.c
 */
 t_env			*get_env(t_exec *exec, char *name);
 void			create_env_list(t_exec *exec);
@@ -65,7 +65,7 @@ void			setenv_builtin(t_exec *exec, char **arg);
 void			unsetenv_builtin(t_exec *exec, char **arg);
 void			exit_builtin(t_exec *exec);
 /*
-**	redirect
+**	redirect.c
 */
 void			redirect_lessand(t_exec_sc *exec_sc);
 void			redirect_greatand(t_exec_sc *exec_sc);
@@ -73,9 +73,16 @@ void			redirect_dgreat(t_exec_sc *exec_sc);
 void			redirect_less(t_exec_sc *exec_sc);
 void			redirect_great(t_exec_sc *exec_sc);
 /*
-**	init_run_helper
+**	init_run_helper.c
 */
 void 			init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc);
 void 			init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc);
+/*
+**	exec.c
+*/
+void			execute_pipe_sequence(t_astnode *astree, t_exec *exec, 
+	int prevread, int prevwrite);
+void 			execute_pipe_sequence_pipe_and_fork(t_astnode *astree,
+	t_exec *exec, int prevread, int prevwrite);
 
 #endif

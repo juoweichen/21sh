@@ -12,30 +12,36 @@
 
 #include "../../includes/libft.h"
 
-t_dict		**dict_create(void)
+t_dict		*dict_init(void)
 {
-	static t_dict	**hashtab;
+	t_dict				*dict;
 
-	if ((hashtab = (t_dict **)ft_memalloc(sizeof(t_dict *) * HASHSIZE)) == NULL)
+	if ((dict = (t_dict *)ft_memalloc(sizeof(t_dict))) == NULL)
 		return (NULL);
-	return (hashtab);
+	if ((dict->tb = (t_dict_tab **)ft_memalloc(sizeof(t_dict_tab *)
+		* HASHSIZE)) == NULL)
+		return (NULL);
+	dict->iter = NULL;
+	dict->size = 0;
+	return (dict);
 }
 
-int			dict_add(t_dict **dict, char *key, void *value, size_t value_size)
+int			dict_add(t_dict *dict, char *key, void *value, size_t value_size)
 {
-	t_dict		*np;
+	t_dict_tab	*np;
 	unsigned	hashval;
 
 	if (dict == NULL)
 		return (0);
 	if (!(np = dict_find(dict, key)))
 	{
-		np = (t_dict *)ft_memalloc(sizeof(t_dict));
+		np = (t_dict_tab *)ft_memalloc(sizeof(t_dict_tab));
 		if (np == NULL || (np->key = ft_strdup(key)) == NULL)
 			return (0);
 		hashval = dict_hash(key);
-		np->next = dict[hashval];
-		dict[hashval] = np;
+		np->next = dict->tb[hashval];
+		dict->tb[hashval] = np;
+		dict_iter_add(dict, key);
 	}
 	else
 		free((void *)np->value);
@@ -45,13 +51,13 @@ int			dict_add(t_dict **dict, char *key, void *value, size_t value_size)
 	return (1);
 }
 
-void		*dict_get(t_dict **dict, char *s)
+void		*dict_get(t_dict *dict, char *s)
 {
-	t_dict *np;
+	t_dict_tab *np;
 
 	if (dict == NULL)
 		return (NULL);
-	np = dict[dict_hash(s)];
+	np = dict->tb[dict_hash(s)];
 	while (np != NULL)
 	{
 		if (ft_strcmp(s, np->key) == 0)
@@ -61,24 +67,25 @@ void		*dict_get(t_dict **dict, char *s)
 	return (NULL);
 }
 
-int			dict_remove(t_dict **dict, char *s)
+int			dict_remove(t_dict *dict, char *s)
 {
-	t_dict *cur;
-	t_dict *pre;
+	t_dict_tab *cur;
+	t_dict_tab *pre;
 
 	if (dict == NULL)
 		return (0);
 	pre = NULL;
-	cur = dict[dict_hash(s)];
+	cur = dict->tb[dict_hash(s)];
 	while (cur != NULL)
 	{
 		if (ft_strcmp(s, cur->key) == 0)
 		{
 			if (pre == NULL)
-				dict[dict_hash(s)] = cur->next;
+				dict->tb[dict_hash(s)] = cur->next;
 			else
 				pre->next = cur->next;
 			dict_free_elem(&cur);
+			dict_iter_remove(dict, s);
 			return (1);
 		}
 		pre = cur;
@@ -87,27 +94,28 @@ int			dict_remove(t_dict **dict, char *s)
 	return (0);
 }
 
-void		dict_destory(t_dict ***dict)
+void		dict_destory(t_dict **dict)
 {
-	int		i;
-	t_dict	*cur;
-	t_dict	*next;
+	int			i;
+	t_dict_tab	*cur;
+	t_dict_tab	*next;
 
 	if (*dict == NULL)
 		return ;
 	i = 0;
 	while (i < HASHSIZE)
 	{
-		cur = (*dict)[i];
+		cur = (*dict)->tb[i];
 		while (cur)
 		{
 			next = cur->next;
 			dict_free_elem(&cur);
 			cur = next;
 		}
-		(*dict)[i] = NULL;
+		(*dict)->tb[i] = NULL;
 		i++;
 	}
-	free(*dict);
-	*dict = NULL;
+	ft_lstdel(&(*dict)->iter, ft_lstdel_content);
+	ft_memdel((void **)&(*dict)->tb);
+	ft_memdel((void **)&dict);
 }

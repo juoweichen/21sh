@@ -1,0 +1,24 @@
+ls
+pwd
+pwd
+ls
+exit
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+ls
+rm -r test
+ls
+ls
+exit
+ls
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+ls
+exit
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi
+ls
+cd ..
+ks
+ls
+=exit
+exit
+exit

@@ -31,18 +31,12 @@ void handle_redirect(t_exec_sc *exec_sc)
 
 void run(t_exec *exec, t_exec_sc *exec_sc)
 {
-	pid_t pid;
 	int stdoutfd = dup(STDOUT_FILENO);
 
 	//cd can not work in child fork!
 	if (check_built_in(exec, exec_sc) == 1)
 		return ;
-	if ((pid = fork()) < 0)
-	{
-		perror("fork");
-		exit(1);
-	}
-	if (pid == 0)
+	if (fork() == 0)
 	{
 		if (exec_sc->redirect_op != NULL)
 			handle_redirect(exec_sc);
@@ -74,9 +68,8 @@ void init_run(t_astnode *astree, t_exec_sc *exec_sc, int piperead, int pipewrite
 		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) * sizeof(char *));
 		init_run_store_argv(astree, exec_sc);
 	}
-	else
+	else	//only cmd_name
 	{
-		//only cmd_name
 		exec_sc->argc = 1;
 		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) * sizeof(char *));
 		exec_sc->argv[0] = ft_strdup(astree->data);
