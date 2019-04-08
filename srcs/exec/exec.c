@@ -56,6 +56,7 @@ void execute_pipe_sequence(t_astnode *astree, t_exec *exec, int prevread, int pr
 	else	//parent process
 	{
 		execute_pipe_sequence(astree->right, exec, fd[0], fd[1]);
+		wait(NULL);
 	}
 }
 
