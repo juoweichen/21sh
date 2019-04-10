@@ -19,6 +19,7 @@
 # include "stdio.h"
 # include "curses.h"
 # include "../libft/includes/libft.h"
+# include "../includes/env.h"
 
 # define PROMPT "42sh>"
 # define QUOTE_PROMPT ">>>>>"
@@ -83,6 +84,8 @@ typedef struct		s_edit
 	char			*clipboard;
 	t_buffer		**array;
 	int				is_eof;
+	t_dict			*env_dict;
+	t_dict			*com_dict;
 }					t_edit;
 
 typedef	struct		s_tracker
@@ -103,7 +106,7 @@ struct termios		g_original;
 /*
 ** line.c
 */
-char				*ft_readline(void);
+char				*ft_readline(t_sh *sh);
 void				init_terminal_data (t_edit *line);
 t_edit				*init_edit();
 /*

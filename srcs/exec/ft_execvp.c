@@ -83,6 +83,7 @@ int ft_execvp(char *cmd_name, char **cmd_line)
 	i = 0;
 	while (path_arr[i])
 	{
+		//TODO: change this to hash
 		if ((dirptr = opendir(path_arr[i])) == NULL)
 			return (-1);
 		while ((entry = readdir(dirptr)))

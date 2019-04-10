@@ -10,17 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_H
-# define SH_H
+#ifndef ENV_H
+# define ENV_H
 
-#include "astree.h"
-#include "exec.h"
-#include "globby.h"
-#include "lexer.h"
-#include "print_btree.h"
-#include "signals.h"
-#include "string.h"
-#include "line.h"
-#include "env.h"
+#include <dirent.h>
+#include "../libft/includes/libft.h"
+
+typedef	struct	s_sh
+{
+	t_dict		*env_dict;
+	t_dict		*com_dict;
+}				t_sh;
+
+typedef struct	s_com
+{
+	char		*name;
+	char		*path;
+}				t_com;
+
+void 			env_init(t_sh *sh);
+void			command_init(t_sh	*sh);
+void 			quick_sort(t_dlist *dlist);
 
 #endif

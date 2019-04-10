@@ -12,12 +12,12 @@
 
 #include "../../includes/line.h"
 
-char	*ft_readline(void)
+char	*ft_readline(t_sh *sh)
 {
 	t_edit		*edit;
 	char		*ret;
 
-	edit = init_edit();
+	edit = init_edit(sh);
 	init_terminal_data(edit);
 	import_history(edit);
 	enable_raw_mode();
@@ -27,7 +27,7 @@ char	*ft_readline(void)
 	return (ret);
 }
 
-t_edit	*init_edit(void)
+t_edit	*init_edit(t_sh *sh)
 {
 	t_edit *new;
 
@@ -49,6 +49,8 @@ t_edit	*init_edit(void)
 	new->hcount = 0;
 	new->hmax = 0;
 	new->is_eof = 1;
+	new->env_dict = sh->env_dict;
+	new->com_dict = sh->com_dict;
 	return (new);
 }
 
