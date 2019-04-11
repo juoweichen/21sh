@@ -27,7 +27,8 @@ void	read_file_to_array(t_edit *edit, int fd)
 	int		ret;
 
 	i = 0;
-	while ((ret = get_next_line(fd, edit->history + i)) == 1 && i < 499)
+	while ((ret = get_next_line(fd, edit->history + i)) == 1 &&
+		i < HISTORY_BUFFER - 1)
 		i++;
 	edit->hcount = i;
 	edit->hmax = i + 1;
@@ -48,7 +49,7 @@ void	import_history(t_edit *edit)
 		dirptr = opendir("./misc");
 	}
 	file_desc = open("./misc/history.txt", O_RDWR | O_CREAT, S_IRWXU);
-	edit->history = (char **)ft_memalloc((sizeof(char *) * 500));
+	edit->history = (char **)ft_memalloc((sizeof(char *) * HISTORY_BUFFER));
 	read_file_to_array(edit, file_desc);
 	closedir(dirptr);
 	return ;

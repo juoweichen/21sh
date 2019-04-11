@@ -93,12 +93,4 @@ void	command_init(t_sh	*sh)
 	
 	//free dlist
 	free_com_dlist(&com_dlist);
-
-	// // //test
-	// t_list *it = sh->com_dict->iter;
-	// while (it)
-	// {
-	// 	printf("%s => %s\n", it->content, dict_get(sh->com_dict, it->content));
-	// 	it = it->next;
-	// }
 }

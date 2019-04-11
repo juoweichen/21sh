@@ -58,6 +58,7 @@
 
 # define ACTRL_NUM 9
 # define KCTRL_NUM 11
+# define HISTORY_BUFFER 500
 
 typedef	struct		s_buffr
 {

@@ -31,8 +31,6 @@ void handle_redirect(t_exec_sc *exec_sc)
 
 void run(t_exec *exec, t_exec_sc *exec_sc)
 {
-	int stdoutfd = dup(STDOUT_FILENO);
-
 	//cd can not work in child fork!
 	if (check_built_in(exec, exec_sc) == 1)
 		return ;
@@ -47,31 +45,29 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 		// //in order to let built-in function got pipel
 		// if (check_built_in(exec, exec_sc) == 1)
 		// 	exit(0) ;
-		if (ft_execvp(exec_sc->argv[0], exec_sc->argv) < 0)
-		{
-			// restore the stdout for displaying error message
-            dup2(stdoutfd, STDOUT_FILENO);
-			printf("Command not found: \'%s\'\n", exec_sc->argv[0]);
+		if (run_command(exec, exec_sc->argv[0], exec_sc->argv) < 0)
 			exit(1);
-		}
 		exit(0);
 	}
 	else
 		wait(NULL);
 }
 
-void init_run(t_astnode *astree, t_exec_sc *exec_sc, int piperead, int pipewrite)
+void init_run(t_astnode *astree, t_exec_sc *exec_sc,
+	int piperead, int pipewrite)
 {
 	if (astree->type == NODE_SIMPLE_COMMAND)
 	{
 		init_run_count_argv(astree, exec_sc);
-		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) * sizeof(char *));
+		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) *
+			sizeof(char *));
 		init_run_store_argv(astree, exec_sc);
 	}
 	else	//only cmd_name
 	{
 		exec_sc->argc = 1;
-		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) * sizeof(char *));
+		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) *
+			sizeof(char *));
 		exec_sc->argv[0] = ft_strdup(astree->data);
 		exec_sc->argv[1] = NULL;
 	}
@@ -79,7 +75,8 @@ void init_run(t_astnode *astree, t_exec_sc *exec_sc, int piperead, int pipewrite
 	exec_sc->pipewrite = pipewrite;
 }
 
-void execute_simple_command(t_astnode *astree, t_exec *exec, int piperead, int pipewrite)
+void execute_simple_command(t_astnode *astree, t_exec *exec,
+	int piperead, int pipewrite)
 {
 	t_exec_sc exec_sc;
 

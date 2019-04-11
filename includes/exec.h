@@ -13,9 +13,10 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-#include "../libft/includes/libft.h"
-#include "astree.h"
-#include <dirent.h>
+# include "../libft/includes/libft.h"
+# include "astree.h"
+# include <dirent.h>
+# include "../includes/env.h"
 
 int g_power;
 
@@ -29,6 +30,9 @@ typedef struct	s_exec
 {
 	t_list		*env_list;
 	size_t		env_num;
+
+	t_dict		*env_dict;
+	t_dict		*com_dict;
 }				t_exec;
 
 typedef struct	s_exec_simple_command
@@ -44,11 +48,11 @@ typedef struct	s_exec_simple_command
 	char		*redirect_src;
 }				t_exec_sc;
 
-void 			execute_astree(t_astnode *astree);
+void 			execute_astree(t_astnode *astree, t_sh *sh);
 void 			execute_simple_command(t_astnode *astree, t_exec *exec, 
 	int piperead, int pipewrite);
 int				check_built_in(t_exec *exec, t_exec_sc *exec_sc);
-int				ft_execvp(char *cmd_name, char **cmd_line);
+int				run_command(t_exec *exec, char *cmd_name, char **cmd_line);
 /*
 **	env_list.c
 */
@@ -64,6 +68,7 @@ void			env_builtin(t_exec *exec, char **arg);
 void			setenv_builtin(t_exec *exec, char **arg);
 void			unsetenv_builtin(t_exec *exec, char **arg);
 void			exit_builtin(t_exec *exec);
+void			hash_builtin(t_exec *exec);
 /*
 **	redirect.c
 */

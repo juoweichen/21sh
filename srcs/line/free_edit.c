@@ -22,7 +22,7 @@ void	free_edit(t_edit *edit)
 	free_edit_array(edit->array);
 	free(edit->clipboard);
 	array = edit->history;
-	while (array[i] != NULL)
+	while (i < HISTORY_BUFFER)
 	{
 		free(array[i]);
 		i++;
