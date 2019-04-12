@@ -27,7 +27,7 @@ void	cut_to_endline(t_edit *edit)
 	free(edit->clipboard);
 	edit->clipboard = ft_strdup(s + buf);
 	len = ft_strlen(edit->clipboard);
-	ft_bzero(s + buf + 1, len);
+	ft_bzero(s + buf, len);
 	edit->array[edit->killzone]->printlen -= len;
 }
 

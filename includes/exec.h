@@ -28,9 +28,6 @@ typedef	struct	s_env
 
 typedef struct	s_exec
 {
-	t_list		*env_list;
-	size_t		env_num;
-
 	t_dict		*env_dict;
 	t_dict		*com_dict;
 }				t_exec;
@@ -51,24 +48,23 @@ typedef struct	s_exec_simple_command
 void 			execute_astree(t_astnode *astree, t_sh *sh);
 void 			execute_simple_command(t_astnode *astree, t_exec *exec, 
 	int piperead, int pipewrite);
-int				check_built_in(t_exec *exec, t_exec_sc *exec_sc);
 int				run_command(t_exec *exec, char *cmd_name, char **cmd_line);
 /*
-**	env_list.c
+**	builtin.c
 */
-t_env			*get_env(t_exec *exec, char *name);
-void			create_env_list(t_exec *exec);
-void			free_env_list(t_list **env_list);
+int				check_built_in(t_exec *exec, t_exec_sc *exec_sc);
+int				is_builtin(char *com_name);
 /*
-**	builtin
+**	builtin list
 */
 void			echo_builtin(t_exec *exec, char **arg);
 void			cd_builtin(t_exec *exec, char **arg);
 void			env_builtin(t_exec *exec, char **arg);
 void			setenv_builtin(t_exec *exec, char **arg);
 void			unsetenv_builtin(t_exec *exec, char **arg);
-void			exit_builtin(t_exec *exec);
-void			hash_builtin(t_exec *exec);
+void			exit_builtin(t_exec *exec, char **arg);
+void			hash_builtin(t_exec *exec, char **arg);
+void			type_builtin(t_exec *exec, char **arg);
 /*
 **	redirect.c
 */

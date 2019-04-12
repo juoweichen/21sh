@@ -19,10 +19,13 @@ int		main(void)
 	t_astnode	*astree;
 	t_sh		sh;
 
+	//init
 	ft_bzero((void *)&sh, sizeof(t_sh));
 	env_init(&sh);
 	command_init(&sh);
 	g_power = 1;
+
+	//body	
 	while (g_power)
 	{
 		signals_init();
@@ -32,13 +35,10 @@ int		main(void)
 		printf("\n");
 		
 		token = tokenize(line);
-
 		build_astree(token, &astree);
+		execute_astree(astree, &sh);
 
-		// printBinaryTree(astree);
-
-		execute_astree(astree, &sh);	//TODO: Change env built-in
-
+		//free
 		free(line);
 		free_token_list(token);
 		free_astree(&astree);

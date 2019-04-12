@@ -12,10 +12,11 @@
 
 #include "../../includes/exec.h"
 
-void	hash_builtin(t_exec *exec)
+void	hash_builtin(t_exec *exec, char **arg)
 {
 	t_list *iter;
 
+	arg = NULL;
 	iter = exec->com_dict->iter;
 	while (iter)
 	{

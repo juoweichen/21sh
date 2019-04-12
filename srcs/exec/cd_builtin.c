@@ -14,40 +14,33 @@
 
 void	update_pwd(t_exec *exec, char *next_dir)
 {
-	t_env	*pwd;
-	t_env	*oldpwd;
-	char	*tmp;
+	char	*pwd;
+	char	*oldpwd;
 
-	if ((pwd = get_env(exec, "PWD")) == NULL ||
-		(oldpwd = get_env(exec, "OLDPWD")) == NULL ||
+	if ((pwd = dict_get(exec->com_dict, "PWD")) == NULL ||
+		(oldpwd = dict_get(exec->com_dict, "OLDPWD")) == NULL ||
 		next_dir == NULL)
 		return ;
-	tmp = ft_strdup(next_dir);
-	ft_strdel(&oldpwd->value);
-	oldpwd->value = ft_strdup(pwd->value);
-	ft_strdel(&pwd->value);
-	pwd->value = tmp;
+	dict_add(exec->com_dict, "OLDPWD", pwd, ft_strlen(pwd));
+	dict_add(exec->com_dict, "PWD", next_dir, ft_strlen(next_dir));
 }
 
 void	cd_builtin(t_exec *exec, char **arg)
 {
 	char	*next_dir;
-	char	*cwd;
-	t_env	*env;
+	char	*com_path;
 
-	cwd = NULL;
-	if (arg[1] == NULL && (env = get_env(exec, "HOME")) != NULL)
-		next_dir = ft_strdup(env->value);
+	if (arg[1] == NULL && (com_path = dict_get(exec->com_dict, "HOME")) != NULL)
+		next_dir = ft_strdup(com_path);
 	else if (arg[2] == NULL)
 	{
-		cwd = getcwd(cwd, 0);
-		if (ft_strequ(arg[1], "-") && (env = get_env(exec, "OLDPWD")) != NULL)
-			next_dir = ft_strdup(env->value);
+		if (ft_strequ(arg[1], "-") &&
+			(com_path = dict_get(exec->com_dict, "OLDPWD")) != NULL)
+			next_dir = ft_strdup(com_path);
 		else if (arg[1][0] == '/')
 			next_dir = ft_strdup(arg[1]);
 		else
-			next_dir = ft_strjoin_btw(cwd, arg[1], '/');
-		ft_strdel(&cwd);
+			next_dir = ft_strjoin_btw(getcwd(NULL, 0), arg[1], '/');
 	}
 	else
 		return ;

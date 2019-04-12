@@ -51,23 +51,23 @@ int			dict_add(t_dict *dict, char *key, void *value, size_t value_size)
 	return (1);
 }
 
-void		*dict_get(t_dict *dict, char *s)
+void		*dict_get(t_dict *dict, char *key)
 {
 	t_dict_tab *np;
 
 	if (dict == NULL)
 		return (NULL);
-	np = dict->tb[dict_hash(s)];
+	np = dict->tb[dict_hash(key)];
 	while (np != NULL)
 	{
-		if (ft_strcmp(s, np->key) == 0)
+		if (ft_strcmp(key, np->key) == 0)
 			return (np->value);
 		np = np->next;
 	}
 	return (NULL);
 }
 
-int			dict_remove(t_dict *dict, char *s)
+int			dict_remove(t_dict *dict, char *key)
 {
 	t_dict_tab *cur;
 	t_dict_tab *pre;
@@ -75,17 +75,17 @@ int			dict_remove(t_dict *dict, char *s)
 	if (dict == NULL)
 		return (0);
 	pre = NULL;
-	cur = dict->tb[dict_hash(s)];
+	cur = dict->tb[dict_hash(key)];
 	while (cur != NULL)
 	{
-		if (ft_strcmp(s, cur->key) == 0)
+		if (ft_strcmp(key, cur->key) == 0)
 		{
 			if (pre == NULL)
-				dict->tb[dict_hash(s)] = cur->next;
+				dict->tb[dict_hash(key)] = cur->next;
 			else
 				pre->next = cur->next;
 			dict_free_elem(&cur);
-			dict_iter_remove(dict, s);
+			dict_iter_remove(dict, key);
 			return (1);
 		}
 		pre = cur;

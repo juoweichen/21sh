@@ -14,18 +14,14 @@
 
 void	env_builtin(t_exec *exec, char **arg)
 {
-	t_list *cur;
+	t_list *ptr;
 
-	if (arg[0] != NULL)
+	arg = NULL;
+	ptr = exec->env_dict->iter;
+	while (ptr)
 	{
-		cur = exec->env_list;
-		while (cur)
-		{
-			printf("%s=%s\n", ((t_env *)cur->content)->name,
-				((t_env *)cur->content)->value);
-			cur = cur->next;
-		}
+		ft_printf("%s=%s\n", ptr->content,
+			dict_get(exec->env_dict, ptr->content));
+		ptr = ptr->next;
 	}
-	else
-		ft_putendl("No arguments");
 }
