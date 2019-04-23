@@ -30,6 +30,7 @@ typedef struct	s_exec
 {
 	t_dict		*env_dict;
 	t_dict		*com_dict;
+	t_dict		*iv_dict;
 }				t_exec;
 
 typedef struct	s_exec_simple_command
@@ -60,11 +61,12 @@ int				is_builtin(char *com_name);
 void			echo_builtin(t_exec *exec, char **arg);
 void			cd_builtin(t_exec *exec, char **arg);
 void			env_builtin(t_exec *exec, char **arg);
-void			setenv_builtin(t_exec *exec, char **arg);
-void			unsetenv_builtin(t_exec *exec, char **arg);
+void			set_builtin(t_exec *exec, char **arg);
+void			unset_builtin(t_exec *exec, char **arg);
 void			exit_builtin(t_exec *exec, char **arg);
 void			hash_builtin(t_exec *exec, char **arg);
 void			type_builtin(t_exec *exec, char **arg);
+void			export_builtin(t_exec *exec, char **arg);
 /*
 **	redirect.c
 */

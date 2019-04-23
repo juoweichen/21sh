@@ -25,7 +25,7 @@ void 		swap_content(t_dlist *dl1, t_dlist *dl2)
 	dl2->content_size = tmp_size;
 }
 
-t_dlist		*partition(t_dlist *head, t_dlist *last)
+t_dlist		*partition_double(t_dlist *head, t_dlist *last)
 {
 	t_dlist *i;
 	t_dlist *j;
@@ -55,13 +55,13 @@ void		sort(t_dlist *head, t_dlist *last)
 
 	if (last != NULL && last != head &&last->next != head)
 	{
-		pivot = partition(head, last);
+		pivot = partition_double(head, last);
 		sort(head, pivot->prev);
 		sort(pivot->next, last);
 	}
 }
 
-void 		quick_sort(t_dlist *dlist)
+void 		quick_sort_str_dlist(t_dlist *dlist)
 {
 	t_dlist	*lastnode;
 

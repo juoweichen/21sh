@@ -77,7 +77,7 @@ void	command_init(t_sh	*sh)
 	ft_mstrdel_norows(&path_split);
 
 	//sort it
-	quick_sort(com_dlist);
+	quick_sort_str_dlist(com_dlist);
 
 	//store it to com_dict
 	sh->com_dict = dict_init();

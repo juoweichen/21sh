@@ -100,9 +100,8 @@ void execute_astree(t_astnode *astree, t_sh *sh)
 	t_exec exec;
 
 	ft_bzero(&exec, sizeof(t_exec));
-	// create_env_list(&exec);
 	exec.env_dict = sh->env_dict;
 	exec.com_dict = sh->com_dict;
+	exec.iv_dict = sh->iv_dict;
 	execute_complete_command(astree, &exec);
-	// free_env_list(&exec.env_list);
 }

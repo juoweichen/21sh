@@ -101,3 +101,39 @@ env
 unsetenv 123
 env
 exit
+
+hash
+hash
+env
+hash
+hash
+env
+open 
+ls
+
+
+cd douc
+cd docum
+exit
+ls
+hash
+exit
+ls
+pwd
+hash
+ls
+set
+unset
+exit
+set
+exit
+set
+clear
+ls
+set
+exit
+env
+export
+exit
+export
+exit

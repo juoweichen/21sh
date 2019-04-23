@@ -12,13 +12,20 @@
 
 #include "../../includes/exec.h"
 
-void	unsetenv_builtin(t_exec *exec, char **arg)
+void 	print_export(t_exec *exec, int is_option_p)
 {
-	if (arg[1] && !arg[2])
+	char *arr[exec->env_dict->size];
+
+	ft_bzero(arr, sizeof(char *) * exec->env_dict->size);
+	//store 
+	is_option_p = 1;
+}
+
+void	export_builtin(t_exec *exec, char **arg)
+{
+	//if add new PATH, re-build com_dict
+	if (arg[1] == NULL)
 	{
-		if (dict_remove(exec->env_dict, arg[1]) == 0)
-			ft_printf("%s: environments not found\n", arg[1]);
+		print_export(exec, 0);
 	}
-	else
-		ft_putendl("wrong arguments");
 }

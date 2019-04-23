@@ -12,16 +12,19 @@
 
 #include "../../includes/exec.h"
 
-void	env_builtin(t_exec *exec, char **arg)
+void	set_builtin(t_exec *exec, char **arg)
 {
-	t_list *env_iter;
+	t_list	*iv_iter;
 
-	arg = NULL;
-	env_iter = exec->env_dict->iter;
-	while (env_iter)
+	//if add new PATH, re-build com_dict
+	if (arg[1] == NULL)
 	{
-		ft_printf("%s=%s\n", env_iter->content,
-			dict_get(exec->env_dict, env_iter->content));
-		env_iter = env_iter->next;
+		iv_iter = exec->iv_dict->iter;
+		while (iv_iter)
+		{
+			ft_printf("%s=%s\n", iv_iter->content,
+				dict_get(exec->iv_dict, iv_iter->content));
+			iv_iter = iv_iter->next;
+		}
 	}
 }

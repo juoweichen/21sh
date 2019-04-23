@@ -10,38 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../../includes/env.h"
 
-int		main(void)
+void 	intern_variable_init(t_sh *sh)
 {
-	char		*line;
-	t_token		*token;
-	t_astnode	*astree;
-	t_sh		sh;
+	t_list	*enviter;
+	char	*tmp;
 
-	//init
-	ft_bzero((void *)&sh, sizeof(t_sh));
-	env_init(&sh);
-	command_init(&sh);
-	intern_variable_init(&sh);
-	g_power = 1;
-
-	//body	
-	while (g_power)
+	sh->iv_dict = dict_init();
+	//Store env variable to iv_dict
+	enviter = sh->env_dict->iter;
+	while (enviter)
 	{
-		signals_init();
-
-		if ((line = ft_readline(&sh)) == NULL)			
-			exit(0);
-		printf("\n");
-		
-		token = tokenize(line);
-		build_astree(token, &astree);
-		execute_astree(astree, &sh);
-
-		//free
-		free(line);
-		free_token_list(token);
-		free_astree(&astree);
+		tmp = dict_get(sh->env_dict, enviter->content);
+		dict_add(sh->iv_dict, enviter->content, tmp, ft_strlen(tmp));
+		enviter = enviter->next;
 	}
+	quick_sort_str_list(&sh->iv_dict->iter);
 }

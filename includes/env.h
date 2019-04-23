@@ -20,6 +20,7 @@ typedef	struct	s_sh
 {
 	t_dict		*env_dict;
 	t_dict		*com_dict;
+	t_dict		*iv_dict;
 }				t_sh;
 
 typedef struct	s_com
@@ -30,6 +31,8 @@ typedef struct	s_com
 
 void 			env_init(t_sh *sh);
 void			command_init(t_sh	*sh);
-void 			quick_sort(t_dlist *dlist);
+void 			intern_variable_init(t_sh *sh);
+void 			quick_sort_str_dlist(t_dlist *dlist);
+void			quick_sort_str_list(t_list **list);
 
 #endif
