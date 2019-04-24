@@ -29,8 +29,8 @@ void	cd_builtin(t_exec *exec, char **arg)
 {
 	char	*next_dir;
 	char	*com_path;
-
-	if (arg[1] == NULL && (com_path = dict_get(exec->com_dict, "HOME")) != NULL)
+	
+	if (arg[1] == NULL && (com_path = dict_get(exec->env_dict, "HOME")) != NULL)
 		next_dir = ft_strdup(com_path);
 	else if (arg[2] == NULL)
 	{
