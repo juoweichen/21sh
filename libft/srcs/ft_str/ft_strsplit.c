@@ -6,36 +6,66 @@
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 18:44:24 by juochen           #+#    #+#             */
-/*   Updated: 2018/02/28 21:13:26 by juochen          ###   ########.fr       */
+/*   Updated: 2019/04/25 21:34:26 by kblack           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 
-char		**ft_strsplit(char const *s, char c)
+int				ft_words(char const *str, const char ch)
 {
-	char	**words;
-	int		*pos;
-	int		wcount;
-	int		i;
-	int		j;
+	const char	*string;
+	int			i;
+	int			wc;
 
-	if (!s)
-		return (NULL);
-	wcount = ft_words_count(s, c);
-	words = (char **)malloc(sizeof(char *) * (wcount + 1));
-	if (!words)
-		return (NULL);
-	pos = ft_words_pos(s, c, wcount);
-	i = -1;
-	while (++i < wcount)
+	string = str;
+	i = 0;
+	wc = 0;
+	while (string[i] != '\0')
 	{
-		words[i] = ft_strnew(pos[i * 2 + 1] - pos[i * 2]);
-		j = -1;
-		while (++j + pos[i * 2] < pos[i * 2 + 1])
-			words[i][j] = s[j + pos[i * 2]];
+		if (string[i] == ch)
+			i++;
+		if (string[i] != ch && string[i])
+		{
+			wc++;
+			while (string[i] != ch && string[i])
+				i++;
+		}
 	}
-	words[i] = NULL;
-	free(pos);
-	return (words);
+	return (wc);
+}
+
+static int		ft_wordlen(char const *str, char c)
+{
+	int				len;
+
+	len = 0;
+	while (str[len] != c && str[len] != '\0')
+		len++;
+	return (len);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char			**splits;
+	int				word_count;
+	int				i;
+	int				j;
+
+	if (s == NULL)
+		return (0);
+	word_count = ft_words(s, c);
+	if (!(splits = (char **)malloc((sizeof(char *) * (word_count + 1)))))
+		return (NULL);
+	splits[word_count] = NULL;
+	i = -1;
+	j = 0;
+	while (++i < word_count)
+	{
+		while (s[j] == c && s[j] != '\0')
+			j++;
+		splits[i] = ft_strsub(s + j, 0, ft_wordlen(s + j, c));
+		j += ft_wordlen(s + j, c);
+	}
+	return (splits);
 }

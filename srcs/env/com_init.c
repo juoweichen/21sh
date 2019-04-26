@@ -6,7 +6,7 @@
 /*   By: csinglet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:09:17 by csinglet          #+#    #+#             */
-/*   Updated: 2019/02/18 15:09:17 by csinglet         ###   ########.fr       */
+/*   Updated: 2019/04/25 21:35:31 by kblack           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void 	free_com_dlist(t_dlist **com_dlist)
 	while (*com_dlist)
 	{
 		next = (*com_dlist)->next;
-		ft_strdel(&((t_com *)((*com_dlist)->content))->name);
-		ft_strdel(&((t_com *)((*com_dlist)->content))->path);
-		ft_memdel((void **)com_dlist);
+		free((t_com *)((*com_dlist)->content));
 		(*com_dlist) = next;
 	}
 }
