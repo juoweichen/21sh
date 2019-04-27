@@ -36,7 +36,6 @@ t_ctrl	g_actrl[] =
 	{CTRL_G, paste_clipboard},
 	{CTRL_U, copy_next_word},
 	{CTRL_D, send_eof},
-	{K_TAB, auto_complete},
 	{1, copy_line},
 };
 
