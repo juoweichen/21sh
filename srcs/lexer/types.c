@@ -70,8 +70,10 @@ t_token				*get_operator_token(char *input)
 	shift = 0;
 	i = 0;
 	shift = get_shift(*input);
-	if ((input[i] == '<' && input[i + 1] == '<') || (input[i] == '>' && input[i + 1] == '>')
-		|| (input[i] == '|' && input[i + 1] == '|') || (input[i] == '&' && input[i + 1] == '&'))
+	if ((input[i] == '<' && input[i + 1] == '<') ||
+		(input[i] == '>' && input[i + 1] == '>') ||
+		(input[i] == '|' && input[i + 1] == '|') ||
+		(input[i] == '&' && input[i + 1] == '&'))
 		return (new_token(ft_strndup(input, i + 2), (shift << DBL_TOK_OFFSET)));
 	else if (input[i] == '>' && input[i + 1] == '&')
 		return (new_token(ft_strndup(input, i + 2), SR_ARROW_AND));
@@ -109,7 +111,7 @@ static int			has_matching_quote(char *str, char match)
 	int				i;
 
 	i = -1;
-	while (str[++i] !=  '\0')
+	while (str[++i] != '\0')
 		if (str[i] == match)
 			return (1);
 	return (0);
@@ -128,7 +130,8 @@ t_token				*get_quote_token(char *input)
 	{
 		while (input[++i] != '\0')
 			if (input[i] == matching_quote)
-				return (new_token(ft_strndup(input, i + 1), (shift << DBL_TOK_OFFSET)));
+				return (new_token(ft_strndup(input, i + 1),
+					(shift << DBL_TOK_OFFSET)));
 	}
 	else
 	{
@@ -173,7 +176,8 @@ t_token				*get_generic_token(char *input)
 	valid_num = (input[i] != '\0') ? TRUE : FALSE;
 	while (input[i] != '\0')
 	{
-		if (is_operator(input[i]) == TRUE || is_quote(input[i]) == TRUE || ft_isspace(input[i]) == TRUE)
+		if (is_operator(input[i]) == TRUE || is_quote(input[i]) == TRUE
+			|| ft_isspace(input[i]) == TRUE)
 			break ;
 		if (valid_num == TRUE && !ft_isdigit(input[i]))
 			valid_num = FALSE;

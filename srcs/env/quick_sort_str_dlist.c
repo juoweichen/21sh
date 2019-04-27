@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dict.h                                             :+:      :+:    :+:   */
+/*   quick_sort_str_dlist.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kblack <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 16:00:26 by juochen           #+#    #+#             */
-/*   Updated: 2018/04/17 22:51:21 by juochen          ###   ########.fr       */
+/*   Created: 2019/04/26 18:06:13 by kblack            #+#    #+#             */
+/*   Updated: 2019/04/26 18:06:15 by kblack           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/env.h"
 
-void 		swap_content(t_dlist *dl1, t_dlist *dl2)
+void		swap_content(t_dlist *dl1, t_dlist *dl2)
 {
 	void	*tmp_content;
 	size_t	tmp_size;
@@ -53,7 +53,7 @@ void		sort(t_dlist *head, t_dlist *last)
 {
 	t_dlist *pivot;
 
-	if (last != NULL && last != head &&last->next != head)
+	if (last != NULL && last != head && last->next != head)
 	{
 		pivot = partition_double(head, last);
 		sort(head, pivot->prev);
@@ -61,7 +61,7 @@ void		sort(t_dlist *head, t_dlist *last)
 	}
 }
 
-void 		quick_sort_str_dlist(t_dlist *dlist)
+void		quick_sort_str_dlist(t_dlist *dlist)
 {
 	t_dlist	*lastnode;
 

@@ -56,8 +56,8 @@ void			handle_signals(int sig)
 		ft_putstr(PROMPT);
 		signals_init();
 	}
-	else if (sig == SIGQUIT || sig == SIGABRT || sig == SIGKILL || sig == SIGSTOP)
-		// Handle some stop
+	else if (sig == SIGQUIT || sig == SIGABRT ||
+		sig == SIGKILL || sig == SIGSTOP)
 		;
 	else if (sig == SIGCONT)
 		restore_program();

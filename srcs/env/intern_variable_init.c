@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.c                                        :+:      :+:    :+:   */
+/*   intern_variable_init.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csinglet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kblack <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 15:09:17 by csinglet          #+#    #+#             */
-/*   Updated: 2019/02/18 15:09:17 by csinglet         ###   ########.fr       */
+/*   Created: 2019/04/26 18:04:27 by kblack            #+#    #+#             */
+/*   Updated: 2019/04/26 18:04:29 by kblack           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/env.h"
 
-void 	intern_variable_init(t_sh *sh)
+void		intern_variable_init(t_sh *sh)
 {
 	t_list	*enviter;
 	char	*tmp;
 
 	sh->iv_dict = dict_init();
-	//Store env variable to iv_dict
 	enviter = sh->env_dict->iter;
 	while (enviter)
 	{

@@ -96,7 +96,8 @@ char			*expand_command_sub(char *str)
 		if (str[i] == '$' && str[i + 1] == '(')
 		{
 			ft_printf("\nqwer\n");
-			temp = ft_strjoin_free(ft_strdup(str + i + 2), execute_command_sub(str + i + 2));
+			temp = ft_strjoin_free(ft_strdup(str + i + 2),
+				execute_command_sub(str + i + 2));
 			if (ret == NULL)
 				ret = temp;
 			else

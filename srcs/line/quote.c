@@ -76,7 +76,7 @@ int			quotes_are_closed(char *s)
 {
 	int			i;
 	t_tracker	quote;
-	
+
 	ft_bzero(&quote, sizeof(t_tracker));
 	i = 0;
 	while (s[i] != '\0')

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.c                                        :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csinglet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kblack <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 15:09:17 by csinglet          #+#    #+#             */
-/*   Updated: 2019/02/18 15:09:17 by csinglet         ###   ########.fr       */
+/*   Created: 2019/04/26 18:04:06 by kblack            #+#    #+#             */
+/*   Updated: 2019/04/26 18:04:09 by kblack           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/env.h"
 
-void 	env_init(t_sh *sh)
+void			env_init(t_sh *sh)
 {
 	extern char	**environ;
 	char		**env_split;

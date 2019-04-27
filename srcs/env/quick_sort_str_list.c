@@ -1,113 +1,160 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dict.h                                             :+:      :+:    :+:   */
+/*   quick_sort_str_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kblack <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 16:00:26 by juochen           #+#    #+#             */
-/*   Updated: 2018/04/17 22:51:21 by juochen          ###   ########.fr       */
+/*   Created: 2019/04/26 18:07:42 by kblack            #+#    #+#             */
+/*   Updated: 2019/04/26 18:07:44 by kblack           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/env.h"
 
-// Returns the last node of the list 
-t_list *getTail(t_list *cur) 
-{ 
-	while (cur != NULL && cur->next != NULL) 
-		cur = cur->next; 
-	return (cur); 
-} 
+/*
+**	Returns the last node of the list
+*/
 
-// partition_singles the list taking the last element as the pivot 
-t_list *partition_single(t_list *head, t_list *end, 
-					t_list **newHead, t_list **newEnd) 
-{ 
-	t_list *pivot = end; 
-	t_list *prev = NULL, *cur = head, *tail = pivot; 
+t_list		*get_tail(t_list *cur)
+{
+	while (cur != NULL && cur->next != NULL)
+		cur = cur->next;
+	return (cur);
+}
 
-	// During partition_single, both the head and end of the list might change 
-	// which is updated in the newHead and newEnd variables 
-	while (cur != pivot) 
-	{ 
-		if (ft_strcmp(cur->content, pivot->content) < 0) 
-		{ 
-			// First node that has a value less than the pivot - becomes 
-			// the new head 
-			if ((*newHead) == NULL) 
-				(*newHead) = cur; 
+/*
+**	partition_singles is the list taking the last element as the pivot
+**	-	During partition_single, both the head and end of the list might change
+**		which is updated in the new_head and new_end variables
+**		~ 	If the first node that taht has a value less than
+**			pivot then pivot becomes new head
+**		~	Else if cur is greater than pivot move cur node
+**			to tail next and set tail to cur
+**	-	If the pivot data is the smallest element in the current list,
+**		pivot becomes the head
+**	-	Update new_end to the current last node
+**	RETURN pivot node
+	t_list	*pivot[5];
+	t_list	*prev; //1
+	t_list	*tmp; //2
+	t_list	*cur; //3
+	t_list	*tail; //4
+*/
 
-			prev = cur; 
-			cur = cur->next; 
-		} 
-		else // If cur node is greater than pivot 
-		{ 
-			// Move cur node to next of tail, and change tail 
-			if (prev) 
-				prev->next = cur->next; 
-			t_list *tmp = cur->next; 
-			cur->next = NULL; 
-			tail->next = cur; 
-			tail = cur; 
-			cur = tmp; 
-		} 
-	} 
+t_list		*partition_single(t_list *head, t_list *end,
+	t_list **new_head, t_list **new_end)
+{
+	t_list	*pivot[5];
 
-	// If the pivot data is the smallest element in the current list, 
-	// pivot becomes the head 
-	if ((*newHead) == NULL) 
-		(*newHead) = pivot; 
+	pivot[0] = end;
+	pivot[3] = head;
+	pivot[4] = pivot[0];
+	pivot[1] = NULL;
+	while (pivot[3] != pivot[0])
+	{
+		if (ft_strcmp(pivot[3]->content, pivot[0]->content) < 0)
+		{
+			((*new_head) == NULL) ? (*new_head) = pivot[3] : 0;
+			pivot[1] = pivot[3];
+			pivot[3] = pivot[3]->next;
+		}
+		else
+		{
+			(pivot[1] != NULL) ? pivot[1]->next = pivot[3]->next : 0;
+			pivot[2] = pivot[3]->next;
+			pivot[3]->next = NULL;
+			pivot[4]->next = pivot[3];
+			pivot[4] = pivot[3];
+			pivot[3] = pivot[2];
+		}
+	}
+	((*new_head) == NULL) ? (*new_head) = pivot[0] : 0;
+	(*new_end) = pivot[4];
+	return (pivot[0]);
+}
 
-	// Update newEnd to the current last node 
-	(*newEnd) = tail; 
+// t_list		*partition_single(t_list *head, t_list *end,
+// 	t_list **new_head, t_list **new_end)
+// {
+// 	t_list	*pivot;
+// 	t_list	*prev;
+// 	t_list	*tmp;
+// 	t_list	*cur;
+// 	t_list	*tail;
 
-	// Return the pivot node 
-	return pivot; 
-} 
+// 	pivot = end;
+// 	cur = head;
+// 	tail = pivot;
+// 	prev = NULL;
+// 	while (cur != pivot)
+// 	{
+// 		if (ft_strcmp(cur->content, pivot->content) < 0)
+// 		{
+// 			if ((*new_head) == NULL)
+// 				(*new_head) = cur;
+// 			prev = cur;
+// 			cur = cur->next;
+// 		}
+// 		else
+// 		{
+// 			if (prev)
+// 				prev->next = cur->next;
+// 			tmp = cur->next;
+// 			cur->next = NULL;
+// 			tail->next = cur;
+// 			tail = cur;
+// 			cur = tmp;
+// 		}
+// 	}
+// 	if ((*new_head) == NULL)
+// 		(*new_head) = pivot;
+// 	(*new_end) = tail;
+// 	return (pivot);
+// }
 
+/*
+**	Here the sorting happens exclusive of the end node.
+**	partition_single()updates new_head and new_end
+**	- If the pivot is the smallest element - no need to recur for left side
+**		~ Set node before the pivot to NULL
+**		~ Recur for the list before pivot
+**		~ Change next of last node of the left half to pivot
+*/
 
-//here the sorting happens exclusive of the end node 
-t_list *quickSortRecur(t_list *head, t_list *end) 
-{ 
-	t_list *new_head = NULL;
-	t_list *new_end = NULL; 
-	
-	// base condition 
-	if (!head || head == end) 
-		return (head); 
-	// partition_single the list, newHead and newEnd will be updated 
-	// by the partition_single function 
-	t_list *pivot = partition_single(head, end, &new_head, &new_end); 
+t_list		*quick_sort_recur(t_list *head, t_list *end)
+{
+	t_list	*new_head;
+	t_list	*new_end;
+	t_list	*pivot;
+	t_list	*tmp;
 
-	// If pivot is the smallest element - no need to recur for 
-	// the left part. 
-	if (new_head != pivot) 
-	{ 
-		// Set the node before the pivot node as NULL 
-		t_list *tmp = new_head; 
-		while (tmp->next != pivot) 
-			tmp = tmp->next; 
-		tmp->next = NULL; 
+	new_head = NULL;
+	new_end = NULL;
+	if (!head || head == end)
+		return (head);
+	pivot = partition_single(head, end, &new_head, &new_end);
+	if (new_head != pivot)
+	{
+		tmp = new_head;
+		while (tmp->next != pivot)
+			tmp = tmp->next;
+		tmp->next = NULL;
+		new_head = quick_sort_recur(new_head, tmp);
+		tmp = get_tail(new_head);
+		tmp->next = pivot;
+	}
+	pivot->next = quick_sort_recur(pivot->next, new_end);
+	return (new_head);
+}
 
-		// Recur for the list before pivot 
-		new_head = quickSortRecur(new_head, tmp); 
+/*
+**	The main function for quick sort. This is a wrapper over recursive
+**	function quick_sort_recur()
+*/
 
-		// Change next of last node of the left half to pivot 
-		tmp = getTail(new_head); 
-		tmp->next = pivot; 
-	} 
-
-	// Recur for the list after the pivot element 
-	pivot->next = quickSortRecur(pivot->next, new_end); 
-
-	return (new_head); 
-} 
-
-// The main function for quick sort. This is a wrapper over recursive 
-// function quickSortRecur() 
-void quick_sort_str_list(t_list **list) 
-{ 
-	*list = quickSortRecur(*list, getTail(*list)); 
-	return; 
-} 
+void		quick_sort_str_list(t_list **list)
+{
+	*list = quick_sort_recur(*list, get_tail(*list));
+	return ;
+}

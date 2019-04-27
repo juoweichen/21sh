@@ -15,11 +15,9 @@
 /*
 ** auto_complete (TAB)
 */
-void	auto_complete(t_edit *edit)
+void		auto_complete(t_edit *edit)
 {
-	// edit->is_eof = 0;
 	newline_handler(edit);
-	// ftprintf("%s\n", edit->return_str);
 
 	size_t	curpathlen = 0;
 	char	*curpath;
@@ -44,8 +42,6 @@ void	auto_complete(t_edit *edit)
 		{
 			if (!ft_strncmp(entry->d_name, left + 1, leftlen - 1))
 			{
-				//should delete left
-				//print full file name
 			}
 		}
 		closedir(dirptr);
@@ -55,26 +51,27 @@ void	auto_complete(t_edit *edit)
 	{
 		printf("command\n");
 	}
-	
-
-	//if input a command (if not adding any prefix, treat as command)
-		//search command form env
-			//search function
-
-	//if input a dir
-		//search from dir
-			//search function
-
-
-
-	//***Search function****
-	//if only one result
-			//print line
-	//else 
-		//show options
-		//wait for user input
-			//if input another tab
-				//round to next option
-			//else if input char 
-				//add to line
 }
+
+/*
+**	if input a command (if not adding any prefix, treat as command)
+**		search command form env
+**			search function
+**
+**	if input a dir
+**		search from dir
+**			search function
+**
+**
+**
+**	***Search function****
+**	if only one result
+**			print line
+**	else
+**		show options
+**		wait for user input
+**			if input another tab
+**				round to next option
+**			else if input char
+**				add to line
+*/
