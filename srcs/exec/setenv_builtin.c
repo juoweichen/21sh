@@ -5,25 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/11 21:25:47 by juochen           #+#    #+#             */
-/*   Updated: 2018/12/11 21:25:49 by juochen          ###   ########.fr       */
+/*   Created: 2019/02/09 13:23:44 by juochen           #+#    #+#             */
+/*   Updated: 2019/02/09 13:23:46 by juochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 
-void	set_builtin(t_exec *exec, char **arg)
+void	setenv_builtin(t_exec *exec, char **arg)
 {
-	t_list	*iv_iter;
+	char	**split;
 
-	if (arg[1] == NULL)
+	if (arg[1] && ft_strchr(arg[1], '=') != NULL && !arg[2])
 	{
-		iv_iter = exec->iv_dict->iter;
-		while (iv_iter)
-		{
-			ft_printf("%s=%s\n", iv_iter->content,
-				dict_get(exec->iv_dict, iv_iter->content));
-			iv_iter = iv_iter->next;
-		}
+		split = ft_strsplit(arg[1], '=');
+		dict_add(exec->env_dict, split[0], split[1], ft_strlen(split[1]));
+		ft_mstrdel_rows(&split, 2);
 	}
+	else if ((arg[1] && ft_strchr(arg[1], '=') == NULL) &&
+		(arg[2] && ft_strchr(arg[2], '=') == NULL) && !arg[3])
+		dict_add(exec->env_dict, arg[1], arg[2], ft_strlen(arg[2]));
+	else
+		ft_putendl("wrong arguments");
 }

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/11 21:25:47 by juochen           #+#    #+#             */
-/*   Updated: 2018/12/11 21:25:49 by juochen          ###   ########.fr       */
+/*   Created: 2019/02/09 13:23:44 by juochen           #+#    #+#             */
+/*   Updated: 2019/02/09 13:23:46 by juochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 
-void	unset_builtin(t_exec *exec, char **arg)
+void	unsetenv_builtin(t_exec *exec, char **arg)
 {
 	if (arg[1] && !arg[2])
 	{

@@ -239,3 +239,19 @@ asdad
 
 sadasd
 
+ls
+pwd
+set
+setenv
+env
+setenv hhh=jjj
+env
+clear
+ls
+env
+setenv GGG=aaa
+env
+unset GGG
+unsetenv GGG
+env
+exit
