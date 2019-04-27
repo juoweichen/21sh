@@ -43,6 +43,7 @@ int		main(void)
 			exit(0);
 		printf("\n");
 		token = tokenize(line);
+		expand_enviornment_variables(token, &sh);
 		build_astree(token, &astree);
 		execute_astree(astree, &sh);
 		sh_free(line, token, astree);

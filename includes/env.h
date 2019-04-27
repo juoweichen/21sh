@@ -6,7 +6,7 @@
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 13:23:56 by juochen           #+#    #+#             */
-/*   Updated: 2019/02/09 13:23:57 by juochen          ###   ########.fr       */
+/*   Updated: 2019/04/26 22:54:34 by csinglet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define ENV_H
 
 # include <dirent.h>
+# include "lexer.h"
+# include "astree.h"
 # include "../libft/includes/libft.h"
 
 typedef	struct	s_sh
@@ -34,5 +36,6 @@ void			command_init(t_sh *sh);
 void			intern_variable_init(t_sh *sh);
 void			quick_sort_str_dlist(t_dlist *dlist);
 void			quick_sort_str_list(t_list **list);
+void			expand_enviornment_variables(t_token *token, t_sh *sh);
 
 #endif

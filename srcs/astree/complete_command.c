@@ -12,7 +12,6 @@
 
 #include "../../includes/lexer.h"
 #include "../../includes/astree.h"
-#include "../../includes/print_btree.h"
 
 t_astnode	*complete_command_2(t_token **curtoken)
 {

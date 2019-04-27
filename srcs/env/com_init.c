@@ -49,11 +49,11 @@ t_dlist				*get_com_dlist(char **path_split)
 	t_dlist			*com_dlist;
 
 	com_dlist = NULL;
-	i = 0;
-	while (path_split[i])
+	i = -1;
+	while (path_split[++i])
 	{
 		if ((dirptr = opendir(path_split[i])) == NULL)
-			return (NULL);
+			continue ;
 		while ((entry = readdir(dirptr)) != NULL)
 		{
 			if (ft_strequ(entry->d_name, "..") == 1 ||
@@ -62,7 +62,6 @@ t_dlist				*get_com_dlist(char **path_split)
 			store_to_com_dlist(path_split[i], entry->d_name, &com_dlist);
 		}
 		closedir(dirptr);
-		i++;
 	}
 	return (com_dlist);
 }
