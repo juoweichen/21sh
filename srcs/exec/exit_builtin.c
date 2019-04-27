@@ -14,7 +14,6 @@
 
 void	exit_builtin(t_exec *exec, char **arg)
 {
-	//do nothing here
 	exec = NULL;
 	arg = NULL;
 	g_power = 0;

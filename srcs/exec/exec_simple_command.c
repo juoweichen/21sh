@@ -13,7 +13,7 @@
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-void handle_redirect(t_exec_sc *exec_sc)
+void	handle_redirect(t_exec_sc *exec_sc)
 {
 	if (exec_sc->redirect_op == NULL || exec_sc->redirect_des == NULL)
 		return ;
@@ -29,9 +29,8 @@ void handle_redirect(t_exec_sc *exec_sc)
 		redirect_lessand(exec_sc);
 }
 
-void run(t_exec *exec, t_exec_sc *exec_sc)
+void	run(t_exec *exec, t_exec_sc *exec_sc)
 {
-	//cd can not work in child fork!
 	if (check_built_in(exec, exec_sc) == 1)
 		return ;
 	if (fork() == 0)
@@ -42,9 +41,6 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 			dup2(exec_sc->piperead, STDIN_FILENO);
 		if (exec_sc->pipewrite != -1)
 			dup2(exec_sc->pipewrite, STDOUT_FILENO);
-		// //in order to let built-in function got pipel
-		// if (check_built_in(exec, exec_sc) == 1)
-		// 	exit(0) ;
 		if (run_command(exec, exec_sc->argv[0], exec_sc->argv) < 0)
 			exit(1);
 		exit(0);
@@ -53,7 +49,7 @@ void run(t_exec *exec, t_exec_sc *exec_sc)
 		wait(NULL);
 }
 
-void init_run(t_astnode *astree, t_exec_sc *exec_sc,
+void	init_run(t_astnode *astree, t_exec_sc *exec_sc,
 	int piperead, int pipewrite)
 {
 	if (astree->type == NODE_SIMPLE_COMMAND)
@@ -63,7 +59,7 @@ void init_run(t_astnode *astree, t_exec_sc *exec_sc,
 			sizeof(char *));
 		init_run_store_argv(astree, exec_sc);
 	}
-	else	//only cmd_name
+	else
 	{
 		exec_sc->argc = 1;
 		exec_sc->argv = (char **)ft_memalloc((exec_sc->argc + 1) *
@@ -75,7 +71,7 @@ void init_run(t_astnode *astree, t_exec_sc *exec_sc,
 	exec_sc->pipewrite = pipewrite;
 }
 
-void execute_simple_command(t_astnode *astree, t_exec *exec,
+void	execute_simple_command(t_astnode *astree, t_exec *exec,
 	int piperead, int pipewrite)
 {
 	t_exec_sc exec_sc;
@@ -83,10 +79,8 @@ void execute_simple_command(t_astnode *astree, t_exec *exec,
 	if (astree == NULL)
 		return ;
 	ft_bzero(&exec_sc, sizeof(t_exec_sc));
-
 	init_run(astree, &exec_sc, piperead, pipewrite);
 	run(exec, &exec_sc);
-
 	ft_mstrdel_rows(&exec_sc.argv, exec_sc.argc);
 	ft_strdel(&exec_sc.redirect_op);
 	ft_strdel(&exec_sc.redirect_src);

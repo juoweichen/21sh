@@ -31,8 +31,8 @@ typedef struct		s_queue
 */
 t_queue				*queue_init(void);
 void				qpush(t_queue *queue, void *data, size_t data_size);
-void 				*qpop(t_queue *queue);
-void 				*qpeek(t_queue *queue);
-int 				qis_empty(t_queue *queue);
+void				*qpop(t_queue *queue);
+void				*qpeek(t_queue *queue);
+int					qis_empty(t_queue *queue);
 
 #endif

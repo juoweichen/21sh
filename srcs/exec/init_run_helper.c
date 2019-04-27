@@ -13,12 +13,11 @@
 #include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-void init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc)
+void	init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc)
 {
-	t_astnode *astptr;
-	int i;
+	t_astnode	*astptr;
+	int			i;
 
-	//store to argv
 	astptr = astree;
 	i = 0;
 	while (i < exec_sc->argc)
@@ -33,7 +32,7 @@ void init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc)
 	exec_sc->argv[i] = NULL;
 }
 
-void init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc)
+void	init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc)
 {
 	t_astnode *astptr;
 

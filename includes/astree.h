@@ -17,35 +17,33 @@
 #include "lexer.h"
 
 typedef enum {
-    NODE_COMMAND 				= (1 << 0),	//1
-	NODE_SIMPLE_COMMAND 		= (1 << 1),	//2
-	NODE_CMD_NAME 				= (1 << 2),	//4
-	NODE_CMD_SUFFIX 			= (1 << 3), //8
-	NODE_CMD_WORD 				= (1 << 4), //16
-	NODE_PIPE_SEQUENCE			= (1 << 5), //32
-	NODE_IO_REDIRECT			= (1 << 6), //64
-	NODE_IO_FILE				= (1 << 7), //128
-	NODE_FILENAME				= (1 << 8), //256
-	NODE_IO_HERE				= (1 << 9), //512
-	NODE_HERE_END				= (1 << 10), //1024
-	NODE_COMPLETE_COMMAND		= (1 << 11), //2048
-	NODE_LIST					= (1 << 12) //4096
-} 						t_NodeType;
+    NODE_COMMAND 			= (1 << 0),
+	NODE_SIMPLE_COMMAND 	= (1 << 1),
+	NODE_CMD_NAME 			= (1 << 2),
+	NODE_CMD_SUFFIX 		= (1 << 3),
+	NODE_CMD_WORD 			= (1 << 4),
+	NODE_PIPE_SEQUENCE		= (1 << 5),
+	NODE_IO_REDIRECT		= (1 << 6),
+	NODE_IO_FILE			= (1 << 7),
+	NODE_FILENAME			= (1 << 8),
+	NODE_IO_HERE			= (1 << 9),
+	NODE_HERE_END			= (1 << 10),
+	NODE_COMPLETE_COMMAND	= (1 << 11),
+	NODE_LIST				= (1 << 12)
+} 							t_NodeType;
 
-typedef struct			s_astnode
+typedef struct				s_astnode
 {
-	int					type;
-	char 				*data;
-	struct s_astnode	*left;
-	struct s_astnode	*right;	
-}						t_astnode;
+	int						type;
+	char 					*data;
+	struct s_astnode		*left;
+	struct s_astnode		*right;	
+}							t_astnode;
 
 // entry point
 int 		build_astree(t_token *token, t_astnode **astree);
 
-/*
-**	from exec dir
-*/
+/*	from exec dir */
 t_astnode 	*pipe_sequence(t_token **curtoken);
 t_astnode 	*command(t_token **curtoken);
 t_astnode 	*simple_command(t_token **curtoken);

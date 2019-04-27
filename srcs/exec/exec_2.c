@@ -10,46 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/astree.h"
 #include "../../includes/exec.h"
 
-int		find_fullpath(char **cmd, char **environ)
+void	execute_command(t_astnode *astree, t_exec *exec,\
+	int piperead, int pipewrite)
 {
-	int		status;
+	execute_simple_command(astree, exec, piperead, pipewrite);
+}
 
+void	execute_pipe_sequence_pipe_and_fork(t_astnode *astree, t_exec *exec,\
+	int prevread, int prevwrite)
+{
+	int fd[2];
+
+	if (pipe(fd) < 0)
+		exit(1);
 	if (fork() == 0)
 	{
-		if (execve(cmd[0], cmd, environ) < 0)
-			exit(1);
+		if (prevread == -1 && prevwrite == -1)
+			execute_command(astree->left, exec, -1, fd[1]);
+		else
+		{
+			close(prevwrite);
+			execute_command(astree->left, exec, prevread, fd[1]);
+			close(prevread);
+		}
 		exit(0);
 	}
 	else
 	{
-		wait(&status);
-		if (status == 0 || status == 2)
-			return (1);
+		execute_pipe_sequence(astree->right, exec, fd[0], fd[1]);
+		wait(NULL);
 	}
-	return (0);
 }
 
-int		run_command(t_exec *exec, char *cmd_name, char **cmd_line)
+void	execute_pipe_sequence(t_astnode *astree, t_exec *exec,\
+	int prevread, int prevwrite)
 {
-	extern char	**environ;
-	char		*full_path;
-
-	if (find_fullpath(cmd_line, environ) == 1)
-		return (1);
-	if ((full_path = dict_get(exec->com_dict, cmd_name)) != NULL)
+	if (astree == NULL)
+		return ;
+	if (astree->type != NODE_PIPE_SEQUENCE)
 	{
-		if (fork() == 0)
-		{
-			if (execve(full_path, cmd_line, environ) < 0)
-				perror("execve failed");
-			exit(0);
-		}
-		else
-			wait(NULL);
-		return (1);
+		close(prevwrite);
+		execute_command(astree, exec, prevread, -1);
+		close(prevread);
+		return ;
 	}
-	ft_printf("Command not found: \'%s\'\n", cmd_name);
-	return (-1);
+	if (prevwrite != -1)
+		close(prevwrite);
+	execute_pipe_sequence_pipe_and_fork(astree, exec, prevread, prevwrite);
 }

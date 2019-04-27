@@ -13,18 +13,14 @@
 #include "../../includes/lexer.h"
 #include "../../includes/astree.h"
 
-t_astnode *here_end(t_token **curtoken)
+t_astnode	*here_end(t_token **curtoken)
 {
 	t_astnode *this_node;
 
-	//determined if there's word
 	if (is_word_node(curtoken) == -1)
-		return(NULL);
-
-	//build this node
+		return (NULL);
 	this_node = build_node(NODE_HERE_END);
 	this_node->data = ft_strdup((*curtoken)->data);
-	//move to next token
 	*curtoken = (*curtoken)->next;
 	return (this_node);
 }

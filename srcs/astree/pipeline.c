@@ -13,7 +13,7 @@
 #include "../../includes/lexer.h"
 #include "../../includes/astree.h"
 
-t_astnode *pipeline(t_token **curtoken)
+t_astnode	*pipeline(t_token **curtoken)
 {
 	return (pipe_sequence(curtoken));
 }

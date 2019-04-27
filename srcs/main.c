@@ -12,6 +12,22 @@
 
 #include "../includes/42sh.h"
 
+void	sh_free(char *line, t_token *token, t_astnode *astree)
+{
+	free(line);
+	free_token_list(token);
+	free_astree(&astree);
+}
+
+void	sh_init(t_sh *sh)
+{
+	ft_bzero((void *)sh, sizeof(t_sh));
+	env_init(sh);
+	command_init(sh);
+	intern_variable_init(sh);
+	g_power = 1;
+}
+
 int		main(void)
 {
 	char		*line;
@@ -19,29 +35,16 @@ int		main(void)
 	t_astnode	*astree;
 	t_sh		sh;
 
-	//init
-	ft_bzero((void *)&sh, sizeof(t_sh));
-	env_init(&sh);
-	command_init(&sh);
-	intern_variable_init(&sh);
-	g_power = 1;
-
-	//body	
+	sh_init(&sh);
 	while (g_power)
 	{
 		signals_init();
-
-		if ((line = ft_readline(&sh)) == NULL)			
+		if ((line = ft_readline(&sh)) == NULL)
 			exit(0);
 		printf("\n");
-		
 		token = tokenize(line);
 		build_astree(token, &astree);
 		execute_astree(astree, &sh);
-
-		//free
-		free(line);
-		free_token_list(token);
-		free_astree(&astree);
+		sh_free(line, token, astree);
 	}
 }

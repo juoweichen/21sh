@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lst.h"
-
 #ifndef DICT_H
 # define DICT_H
+
+# include "ft_lst.h"
 
 # define HASHSIZE 1001
 # define HASHNUMBER 31
@@ -29,7 +29,7 @@ typedef struct			s_dict_tab
 **	How to use iter:
 **	1. iter is a list store key base on store sequence
 **	2. iter will be update when dict_add or dict_remove success
-**	3. when you want to iter this dict, 
+**	3. when you want to iter this dict,
 **		set a t_list pointer then assign it to iter,
 **		loop it and use dict_get to find corresponding value
 **	NOTE: check out env_builtin or hash_builtin for example

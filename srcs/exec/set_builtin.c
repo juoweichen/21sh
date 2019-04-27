@@ -16,7 +16,6 @@ void	set_builtin(t_exec *exec, char **arg)
 {
 	t_list	*iv_iter;
 
-	//if add new PATH, re-build com_dict
 	if (arg[1] == NULL)
 	{
 		iv_iter = exec->iv_dict->iter;

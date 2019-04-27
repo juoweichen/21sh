@@ -13,41 +13,54 @@
 #include "../../includes/lexer.h"
 #include "../../includes/astree.h"
 
-t_astnode	*build_node(t_NodeType type)
+int		is_number_node(t_token **curtoken)
 {
-	t_astnode *new_node;
-
-	new_node = (t_astnode *)ft_memalloc(sizeof(t_astnode));
-	new_node->data = NULL;
-	new_node->type = type;
-	new_node->right = NULL;
-	new_node->left = NULL;
-	return (new_node);
+	if (*curtoken == NULL)
+		return (-1);
+	if ((*curtoken)->type == NUMBER_TOKEN && (*curtoken)->data != NULL)
+		return (1);
+	return (-1);
 }
 
-void		travesal_astree_print_command(t_astnode *astree)
+int		is_right_operator(t_token **curtoken, char *type, char **ops)
 {
-	if (astree == NULL)
-		return ;
-	travesal_astree_print_command(astree->left);
-	if (astree->data != NULL)
-		printf("[%s] ", astree->data);
-	travesal_astree_print_command(astree->right);
+	if (*curtoken == NULL)
+		return (-1);
+	if (ft_strcmp((*curtoken)->data, type) == 0)
+	{
+		*curtoken = (*curtoken)->next;
+		*ops = type;
+		return (1);
+	}
+	return (0);
 }
 
-void		free_astnode(t_astnode **node)
+int		is_word_node(t_token **curtoken)
 {
-	if (*node == NULL)
-		return ;
-	ft_strdel(&(*node)->data);
-	ft_memdel((void **)node);
+	if (*curtoken == NULL)
+		return (-1);
+	if (((*curtoken)->type == STRING_TOKEN || (*curtoken)->type == NUMBER_TOKEN)
+		&& (*curtoken)->data != NULL)
+		return (1);
+	return (-1);
 }
 
-void		free_astree(t_astnode **nodes)
+int		is_separator_op(t_token **curtoken, char **op)
 {
-	if (*nodes == NULL)
-		return ;
-	free_astree(&(*nodes)->left);
-	free_astree(&(*nodes)->right);
-	free_astnode(nodes);
+	if (*curtoken == NULL)
+		return (-1);
+	if (ft_strcmp((*curtoken)->data, ";") == 0)
+	{
+		*op = ";";
+		*curtoken = (*curtoken)->next;
+		return (1);
+	}
+	else if (ft_strcmp((*curtoken)->data, "&") == 0)
+	{
+		*op = "&";
+		*curtoken = (*curtoken)->next;
+		return (1);
+	}
+	op = NULL;
+	return (0);
 }

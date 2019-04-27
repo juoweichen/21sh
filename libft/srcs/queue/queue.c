@@ -53,8 +53,7 @@ void		*qpop(t_queue *queue)
 	return (dequeue_data);
 }
 
-
-void		 *qpeek(t_queue *queue)
+void		*qpeek(t_queue *queue)
 {
 	if (qis_empty(queue) == 1)
 		return (NULL);
