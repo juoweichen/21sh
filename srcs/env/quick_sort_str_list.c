@@ -25,9 +25,14 @@ t_list		*get_tail(t_list *cur)
 
 /*
 **	partition_singles is the list taking the last element as the pivot
+**		t_list	*pivot[0];
+**		t_list	*prev == pivot[1]
+**		t_list	*tmp == pivot[2]
+**		t_list	*cur == pivot[3]
+**		t_list	*tail == pivot[4]
 **	-	During partition_single, both the head and end of the list might change
 **		which is updated in the new_head and new_end variables
-**		~ 	If the first node that taht has a value less than
+**		~ 	If the first node that has a value less than
 **			pivot then pivot becomes new head
 **		~	Else if cur is greater than pivot move cur node
 **			to tail next and set tail to cur
@@ -35,11 +40,6 @@ t_list		*get_tail(t_list *cur)
 **		pivot becomes the head
 **	-	Update new_end to the current last node
 **	RETURN pivot node
-	t_list	*pivot[5];
-	t_list	*prev; //1
-	t_list	*tmp; //2
-	t_list	*cur; //3
-	t_list	*tail; //4
 */
 
 t_list		*partition_single(t_list *head, t_list *end,
@@ -73,45 +73,6 @@ t_list		*partition_single(t_list *head, t_list *end,
 	(*new_end) = pivot[4];
 	return (pivot[0]);
 }
-
-// t_list		*partition_single(t_list *head, t_list *end,
-// 	t_list **new_head, t_list **new_end)
-// {
-// 	t_list	*pivot;
-// 	t_list	*prev;
-// 	t_list	*tmp;
-// 	t_list	*cur;
-// 	t_list	*tail;
-
-// 	pivot = end;
-// 	cur = head;
-// 	tail = pivot;
-// 	prev = NULL;
-// 	while (cur != pivot)
-// 	{
-// 		if (ft_strcmp(cur->content, pivot->content) < 0)
-// 		{
-// 			if ((*new_head) == NULL)
-// 				(*new_head) = cur;
-// 			prev = cur;
-// 			cur = cur->next;
-// 		}
-// 		else
-// 		{
-// 			if (prev)
-// 				prev->next = cur->next;
-// 			tmp = cur->next;
-// 			cur->next = NULL;
-// 			tail->next = cur;
-// 			tail = cur;
-// 			cur = tmp;
-// 		}
-// 	}
-// 	if ((*new_head) == NULL)
-// 		(*new_head) = pivot;
-// 	(*new_end) = tail;
-// 	return (pivot);
-// }
 
 /*
 **	Here the sorting happens exclusive of the end node.
