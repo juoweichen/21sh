@@ -13,6 +13,6 @@
 #ifndef STRING_H
 # define STRING_H
 
-#include "../libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 #endif

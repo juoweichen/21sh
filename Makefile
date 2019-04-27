@@ -37,7 +37,6 @@ SRCS +=	$(wildcard $(SRC_DIR)/lexer/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/line/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/signals/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/string/*.c)
-SRCS +=	$(wildcard $(SRC_DIR)/print_btree/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/env/*.c)
 SRCS += $(wildcard $(SRC_DIR)/*.c)
 

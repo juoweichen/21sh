@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/sh.h"
 
 void	sh_free(char *line, t_token *token, t_astnode *astree)
 {

@@ -13,8 +13,8 @@
 #ifndef ENV_H
 # define ENV_H
 
-#include <dirent.h>
-#include "../libft/includes/libft.h"
+# include <dirent.h>
+# include "../libft/includes/libft.h"
 
 typedef	struct	s_sh
 {
@@ -29,10 +29,10 @@ typedef struct	s_com
 	char		*path;
 }				t_com;
 
-void 			env_init(t_sh *sh);
-void			command_init(t_sh	*sh);
-void 			intern_variable_init(t_sh *sh);
-void 			quick_sort_str_dlist(t_dlist *dlist);
+void			env_init(t_sh *sh);
+void			command_init(t_sh *sh);
+void			intern_variable_init(t_sh *sh);
+void			quick_sort_str_dlist(t_dlist *dlist);
 void			quick_sort_str_list(t_list **list);
 
 #endif

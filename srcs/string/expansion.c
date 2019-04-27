@@ -16,7 +16,7 @@
 **	returns the length of the argument between parenthesis
 */
 
-#include "../../includes/42sh.h"
+#include "../../includes/sh.h"
 
 int				has_valid_command_sub(char *str)
 {

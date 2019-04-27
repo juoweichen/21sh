@@ -13,7 +13,7 @@
 #include "../../includes/lexer.h"
 #include "../../includes/astree.h"
 
-t_astnode	*build_node(t_NodeType type)
+t_astnode	*build_node(t_node_type type)
 {
 	t_astnode *new_node;
 

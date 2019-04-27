@@ -203,7 +203,7 @@ void				history_down(t_edit *edit);
 void				free_edit(t_edit *edit);
 void				free_edit_array(t_buffer **array);
 /*
-**	send_eof.c 
+**	send_eof.c
 */
 void				send_eof(t_edit *edit);
 /*

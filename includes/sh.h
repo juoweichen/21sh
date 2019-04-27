@@ -13,14 +13,14 @@
 #ifndef SH_H
 # define SH_H
 
-#include "astree.h"
-#include "exec.h"
-#include "globby.h"
-#include "lexer.h"
-#include "print_btree.h"
-#include "signals.h"
-#include "string.h"
-#include "line.h"
-#include "env.h"
+# include "astree.h"
+# include "exec.h"
+# include "globby.h"
+# include "lexer.h"
+# include "print_btree.h"
+# include "signals.h"
+# include "string.h"
+# include "line.h"
+# include "env.h"
 
 #endif

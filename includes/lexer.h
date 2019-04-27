@@ -14,25 +14,13 @@
 # define LEXER_H
 
 # include <unistd.h>
-#include "../libft/includes/libft.h"
-
-/*
-**	AND_IF	OR_IF	DSEMI
-**	&&		||		;;
-**	DLESS	DGREAT	LESSAND	GREATAND	LESSGREAT	DLESSDASH
-**	<<		>>		<&					>&			<<-
-**	CLOBBER
-**	>\
-**	LBRACE	RBRACE	BANG
-**	{		}		!
-*/
-
-char **history;
+# include "../libft/includes/libft.h"
 
 /*
 **	Dont actually need command sub, that will be evaluated later
 **
-**	Should break up the tokens into sections such as redirection tokens, quote tokens, seperator tokens
+**	Should break up the tokens into sections such as redirection tokens,
+**	quote tokens, seperator tokens
 **	and general tokens
 */
 

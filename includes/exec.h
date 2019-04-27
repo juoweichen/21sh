@@ -37,17 +37,15 @@ typedef struct	s_exec_simple_command
 {
 	int			argc;
 	char		**argv;
-	
-	int 		piperead;
-	int 		pipewrite;
-	
+	int			piperead;
+	int			pipewrite;
 	char		*redirect_op;
 	char		*redirect_des;
 	char		*redirect_src;
 }				t_exec_sc;
 
-void 			execute_astree(t_astnode *astree, t_sh *sh);
-void 			execute_simple_command(t_astnode *astree, t_exec *exec, 
+void			execute_astree(t_astnode *astree, t_sh *sh);
+void			execute_simple_command(t_astnode *astree, t_exec *exec,
 	int piperead, int pipewrite);
 int				run_command(t_exec *exec, char *cmd_name, char **cmd_line);
 /*
@@ -78,14 +76,14 @@ void			redirect_great(t_exec_sc *exec_sc);
 /*
 **	init_run_helper.c
 */
-void 			init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc);
-void 			init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc);
+void			init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc);
+void			init_run_store_argv(t_astnode *astree, t_exec_sc *exec_sc);
 /*
 **	exec.c
 */
-void			execute_pipe_sequence(t_astnode *astree, t_exec *exec, 
+void			execute_pipe_sequence(t_astnode *astree, t_exec *exec,
 	int prevread, int prevwrite);
-void 			execute_pipe_sequence_pipe_and_fork(t_astnode *astree,
+void			execute_pipe_sequence_pipe_and_fork(t_astnode *astree,
 	t_exec *exec, int prevread, int prevwrite);
 
 #endif

@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GLOBBY_C
-# define GLOBBY_C
+#ifndef GLOBBY_H
+# define GLOBBY_H
 
 # include "../libft/includes/libft.h"
 # include <sys/stat.h>
 # include <dirent.h>
 
-// void			get_glob_matches(t_queue *globs, char *path, char *glob);
 int				is_dir(char *dir);
 int				is_globbable(char *str);
 void			the_globbing(t_queue *globs, char *path, char *pattern);
