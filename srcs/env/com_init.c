@@ -12,9 +12,9 @@
 
 #include "../../includes/env.h"
 
-void 	free_com_dlist(t_dlist **com_dlist)
+void				free_com_dlist(t_dlist **com_dlist)
 {
-	t_dlist *next;
+	t_dlist			*next;
 
 	while (*com_dlist)
 	{
@@ -27,9 +27,10 @@ void 	free_com_dlist(t_dlist **com_dlist)
 	}
 }
 
-void 	store_to_com_dlist(char *path, char *name, t_dlist **com_dlist)
+void				store_to_com_dlist(char *path,
+	char *name, t_dlist **com_dlist)
 {
-	t_com	new_com;
+	t_com			new_com;
 
 	ft_bzero(&new_com, sizeof(t_com));
 	new_com.name = ft_strdup(name);
@@ -40,11 +41,11 @@ void 	store_to_com_dlist(char *path, char *name, t_dlist **com_dlist)
 		ft_dlstadd(com_dlist, ft_dlstnew(&new_com, sizeof(t_com)));
 }
 
-t_dlist	*get_com_dlist(char **path_split)
+t_dlist				*get_com_dlist(char **path_split)
 {
-	int 			i;
+	int				i;
 	DIR				*dirptr;
-	struct	dirent	*entry;
+	struct dirent	*entry;
 	t_dlist			*com_dlist;
 
 	com_dlist = NULL;
@@ -66,21 +67,21 @@ t_dlist	*get_com_dlist(char **path_split)
 	return (com_dlist);
 }
 
-void	command_init(t_sh	*sh)
-{
-	char		**path_split;
-	t_dlist		*com_dlist;
-	t_dlist		*ptr;
+/*
+**	Directs a command to be stored to a list, sorted,
+**	stored to com_dist, or freed
+*/
 
-	//store every command to a list
+void				command_init(t_sh *sh)
+{
+	char			**path_split;
+	t_dlist			*com_dlist;
+	t_dlist			*ptr;
+
 	path_split = ft_strsplit(dict_get(sh->env_dict, "PATH"), ':');
 	com_dlist = get_com_dlist(path_split);
 	ft_mstrdel_norows(&path_split);
-
-	//sort it
 	quick_sort_str_dlist(com_dlist);
-
-	//store it to com_dict
 	sh->com_dict = dict_init();
 	ptr = com_dlist;
 	while (ptr)
@@ -91,7 +92,5 @@ void	command_init(t_sh	*sh)
 			ft_strlen(((t_com *)ptr->content)->path));
 		ptr = ptr->next;
 	}
-	
-	//free dlist
 	free_com_dlist(&com_dlist);
 }
