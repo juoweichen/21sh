@@ -117,5 +117,5 @@ void		dict_destory(t_dict **dict)
 	}
 	ft_lstdel(&(*dict)->iter, ft_lstdel_content);
 	ft_memdel((void **)&(*dict)->tb);
-	ft_memdel((void **)&dict);
+	ft_memdel((void **)dict);
 }

@@ -19,7 +19,10 @@ void 	free_com_dlist(t_dlist **com_dlist)
 	while (*com_dlist)
 	{
 		next = (*com_dlist)->next;
+		ft_strdel(&((t_com *)((*com_dlist)->content))->name);
+		ft_strdel(&((t_com *)((*com_dlist)->content))->path);
 		free((t_com *)((*com_dlist)->content));
+		ft_memdel((void **)com_dlist);
 		(*com_dlist) = next;
 	}
 }
@@ -34,7 +37,7 @@ void 	store_to_com_dlist(char *path, char *name, t_dlist **com_dlist)
 	if (*com_dlist == NULL)
 		*com_dlist = ft_dlstnew(&new_com, sizeof(t_com));
 	else
-		ft_dlstadd(com_dlist, ft_dlstnew(&new_com, sizeof(t_com)));	
+		ft_dlstadd(com_dlist, ft_dlstnew(&new_com, sizeof(t_com)));
 }
 
 t_dlist	*get_com_dlist(char **path_split)

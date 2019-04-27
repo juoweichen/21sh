@@ -24,7 +24,7 @@ LIB_LINK = -L$(LIB_DIR) -lft
 LIB_HEADER = -I srcs/libft/includes
 
 # compile flag
-OUTER_LINK = -ltermcap -fsanitize=address
+OUTER_LINK = -ltermcap  #-fsanitize=address
 HEADER = -I /includes
 W_FLAG = -Wall -Werror -Wextra
 
@@ -75,3 +75,5 @@ qre:
 	@rm -rf $(D_NAME) $(D_NAME).dSYM
 	@gcc $(SRCS) $(HEADER) $(W_FLAG) $(LIB_LINK) $(OUTER_LINK) -o $(NAME)
 	@echo "\033[32mQUICK RE\033[0m"
+
+# valgrind --leak-check=yes --memcheck:leak-check=full --show-reachable=yes ./42sh
