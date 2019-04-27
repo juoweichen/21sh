@@ -42,6 +42,16 @@ t_list		*get_tail(t_list *cur)
 **	RETURN pivot node
 */
 
+void		swap_nodes(t_list *pivot[5])
+{
+	(pivot[1] != NULL) ? pivot[1]->next = pivot[3]->next : 0;
+	pivot[2] = pivot[3]->next;
+	pivot[3]->next = NULL;
+	pivot[4]->next = pivot[3];
+	pivot[4] = pivot[3];
+	pivot[3] = pivot[2];
+}
+
 t_list		*partition_single(t_list *head, t_list *end,
 	t_list **new_head, t_list **new_end)
 {
@@ -60,16 +70,10 @@ t_list		*partition_single(t_list *head, t_list *end,
 			pivot[3] = pivot[3]->next;
 		}
 		else
-		{
-			(pivot[1] != NULL) ? pivot[1]->next = pivot[3]->next : 0;
-			pivot[2] = pivot[3]->next;
-			pivot[3]->next = NULL;
-			pivot[4]->next = pivot[3];
-			pivot[4] = pivot[3];
-			pivot[3] = pivot[2];
-		}
+			swap_nodes(pivot);
 	}
-	((*new_head) == NULL) ? (*new_head) = pivot[0] : 0;
+	if ((*new_head) == NULL)
+		(*new_head) = pivot[0];
 	(*new_end) = pivot[4];
 	return (pivot[0]);
 }
