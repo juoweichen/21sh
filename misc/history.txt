@@ -255,3 +255,11 @@ unset GGG
 unsetenv GGG
 env
 exit
+ls
+unsetenv LESS
+env
+setenv LESS=set
+env
+unsetenv LANG PATH
+env
+exit
