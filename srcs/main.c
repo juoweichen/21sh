@@ -35,13 +35,13 @@ int		main(void)
 	t_astnode	*astree;
 	t_sh		sh;
 
+	signals_init();
 	sh_init(&sh);
 	while (g_power)
 	{
-		signals_init();
 		if ((line = ft_readline(&sh)) == NULL)
 			exit(0);
-		printf("\n");
+		ft_printf("\n");
 		token = tokenize(line);
 		expand_enviornment_variables(token, &sh);
 		build_astree(token, &astree);

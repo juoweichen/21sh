@@ -31,7 +31,7 @@ void		travesal_astree_print_command(t_astnode *astree)
 		return ;
 	travesal_astree_print_command(astree->left);
 	if (astree->data != NULL)
-		printf("[%s] ", astree->data);
+		ft_printf("[%s] ", astree->data);
 	travesal_astree_print_command(astree->right);
 }
 

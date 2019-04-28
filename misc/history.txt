@@ -263,3 +263,27 @@ env
 unsetenv LANG PATH
 env
 exit
+sd
+asd
+cat asd
+echo asdas
+cat
+cd
+cd
+ls
+cd a
+exit
+ls
+cd
+
+
+
+
+
+
+
+
+
+exit
+ls
+
