@@ -12,13 +12,6 @@
 
 #include "../includes/sh.h"
 
-void	sh_free(char *line, t_token *token, t_astnode *astree)
-{
-	free(line);
-	free_token_list(token);
-	free_astree(&astree);
-}
-
 void	sh_init(t_sh *sh)
 {
 	ft_bzero((void *)sh, sizeof(t_sh));
@@ -46,6 +39,8 @@ int		main(void)
 		expand_enviornment_variables(token, &sh);
 		build_astree(token, &astree);
 		execute_astree(astree, &sh);
-		sh_free(line, token, astree);
+		free(line);
+		free_token_list(token);
+		free_astree(&astree);
 	}
 }
