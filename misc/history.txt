@@ -1,265 +1,51 @@
-qweqwe
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-clar
-clear
+echo 123 > 123
+echo 123 > 123
+echo 123 > 123
+ls -la > 123
 ls
-ls -la | cat -e
-ls -la | cat -e | qweqweqwe
-
-
-
-
-
-exiy
-exit
-ls 
-pwd
-ls -la | cat -e | qweqweqwe
-
-
-
-
-
-exit
-hash
-exit
-hash
-hash
-hash
-exit
-
-
-sdadasd
-./lib
-./libft
-./libft/
-./libft/inc
-exit
-type
-type ls aaaa
-exit
-type qweqwewq
-exit
-type qweqwewq
-type ls qweqwe pwd cd
-exit
-env
-exit
-env
-env
-setenv hahah=pppp
-env
-exit
-env
-setenv hahah=pppp
-env
-unsetenv hahah
-env
-exit
-env
-setenv haha=pppp
-env
-unsetenv haha
-env
-exit
-env
-setenv 123=234
-env
-setenv 123 555
-env
-unsetenv 123
-env
-exit
-
-hash
-hash
-env
-hash
-hash
-env
-open 
-ls
-
-
-cd douc
-cd docum
-exit
-ls
-hash
-exit
-ls
-pwd
-hash
-ls
-set
-unset
-exit
-set
-exit
-set
-clear
-ls
-set
-exit
-env
-export
-exit
-export
-exit
-qwe
-ls
-pwd
-cd
-cd
-cd
-cd
-cd
-cd
-cd
-cd
-exot
-exit
-cd
-exit
-cd
-cd
-cd
-cd
-cd
-cd
-cd
-cd
-ls
-pwd
-ls
-cd
-ls
-cd
-cd
-cd
-cd
-pwd
-ls
-exit
-cd
-cd
-cd
-exit
-cd
-exit
+rm 123
 ls
 exit
 exit
-
+123 > 123
+ls
+cat 123
+rm 123
+ls
+ls -la > 123
+cat 123
+ls
+rm 123
+ls
+echo 123 > 123
 ls
 exit
-exit
+echo ls -la > 123
 ls
 exit
+ls -la
+echo ls -la > 123
+ls
+echo ls -la > 123
+exit
+ls -la > 123
+ls
+cat 123
+rm 123
+ls
+echo ahhah > h
 ls
 exit
+echo hahah > h
 ls
-exit
+cat h
 ls
-pwd
-exit
+rm h
 ls
-pwd
-ls
-exit
-ls
-pwd
-exit
-ls
-pwd
-ls -la | cat -e
-exit
-ls
-pwd
-exity
-exit
-ls
-pwd
-env
-hash
-exit
-ls 
-pwd
-env
-has
-hash
-
-
-
-
-
-
-
-
-adsdas
-
-afasf
-
-ls
-pwd
-asdasd
-asdad
-
-
-sadasd
-
-ls
-pwd
-set
-setenv
-env
-setenv hhh=jjj
-env
-clear
-ls
-env
-setenv GGG=aaa
-env
-unset GGG
-unsetenv GGG
-env
-exit
-ls
-unsetenv LESS
-env
-setenv LESS=set
-env
-unsetenv LANG PATH
-env
 exit

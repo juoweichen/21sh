@@ -36,6 +36,11 @@ int		run_command(t_exec *exec, char *cmd_name, char **cmd_line)
 	extern char	**environ;
 	char		*full_path;
 
+	if (ft_strequ(cmd_name, "echo") == 1)
+	{
+		echo_builtin(exec, cmd_line);
+		return (1);
+	}
 	if (find_fullpath(cmd_line, environ) == 1)
 		return (1);
 	if ((full_path = dict_get(exec->com_dict, cmd_name)) != NULL)

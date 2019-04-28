@@ -20,7 +20,7 @@ void	echo_builtin(t_exec *exec, char **arg)
 	exec = NULL;
 	i = 1;
 	n_flag = 0;
-	if (arg[i] && ft_strequ(arg[i], "-n"))
+	if (arg[i] && ft_strequ(arg[i], "-n") == 1)
 	{
 		n_flag = 1;
 		i++;

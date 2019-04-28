@@ -20,6 +20,7 @@ t_astnode	*io_file_all(t_token *init_token, t_token **curtoken, char *type)
 	char		*operator;
 
 	operator = NULL;
+	*curtoken = init_token;
 	if (*curtoken == NULL)
 		return (NULL);
 	if (!is_right_operator(curtoken, type, &operator))
@@ -29,7 +30,6 @@ t_astnode	*io_file_all(t_token *init_token, t_token **curtoken, char *type)
 	node = build_node(NODE_IO_FILE);
 	node->data = ft_strdup(operator);
 	node->right = r_child_node;
-	*curtoken = init_token;
 	return (node);
 }
 

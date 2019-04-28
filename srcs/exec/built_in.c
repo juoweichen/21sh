@@ -29,9 +29,7 @@ int		is_builtin(char *com_name)
 
 int		check_built_in(t_exec *exec, t_exec_sc *exec_sc)
 {
-	if (ft_strequ(exec_sc->argv[0], "echo") == 1)
-		echo_builtin(exec, exec_sc->argv);
-	else if (ft_strequ(exec_sc->argv[0], "cd") == 1)
+	if (ft_strequ(exec_sc->argv[0], "cd") == 1)
 		cd_builtin(exec, exec_sc->argv);
 	else if (ft_strequ(exec_sc->argv[0], "env") == 1)
 		env_builtin(exec, exec_sc->argv);

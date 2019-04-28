@@ -56,7 +56,7 @@
 # define NEWLINE 10
 # define PROMPT_LEN 5
 
-# define ACTRL_NUM 9
+# define ACTRL_NUM 8
 # define KCTRL_NUM 11
 # define HISTORY_BUFFER 500
 
