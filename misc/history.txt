@@ -49,3 +49,27 @@ ls
 rm h
 ls
 exit
+sd
+asd
+cat asd
+echo asdas
+cat
+cd
+cd
+ls
+cd a
+exit
+ls
+cd
+
+
+
+
+
+
+
+
+
+exit
+ls
+

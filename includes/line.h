@@ -21,7 +21,7 @@
 # include "../libft/includes/libft.h"
 # include "../includes/env.h"
 
-# define PROMPT "42sh>"
+# define PROMPT "42sh> "
 # define QUOTE_PROMPT ">>>>>"
 
 # define K_UP 4283163
@@ -54,7 +54,7 @@
 # define HOME_B 4741915
 # define END_B 4610843
 # define NEWLINE 10
-# define PROMPT_LEN 5
+# define PROMPT_LEN 6
 
 # define ACTRL_NUM 8
 # define KCTRL_NUM 11

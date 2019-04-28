@@ -26,7 +26,7 @@ int					is_quote(char c)
 
 int					is_operator(char c)
 {
-	if (ft_strchr(";$|&<>", c) != NULL)
+	if (ft_strchr(";|&<>", c) != NULL)
 		return (TRUE);
 	return (FALSE);
 }
