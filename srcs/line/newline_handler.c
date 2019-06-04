@@ -20,7 +20,7 @@ char		*newline_handler(t_edit *edit)
 		add_to_array(edit);
 		edit->killzone++;
 		edit->cur_col = 0;
-		line_edit_body(edit);
+		quote_body(edit);
 	}
 	update_history(edit);
 	return (edit->return_str);

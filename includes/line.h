@@ -210,5 +210,8 @@ void				send_eof(t_edit *edit);
 **	auto_complete.c
 */
 void				auto_complete(t_edit *edit);
-
+/*
+**	quote_body.c
+*/
+char				*quote_body(t_edit *edit);
 #endif
