@@ -1,340 +1,70 @@
-
-
-
-
-
-
-echo 123 > 123
-echo 123 > 123
-echo 123 > 123
-ls -la > 123
 ls
-rm 123
-ls
-exit
-exit
-123 > 123
-ls
-cat 123
-rm 123
-ls
-ls -la > 123
-cat 123
-ls
-rm 123
-ls
-echo 123 > 123
-ls
-exit
-echo ls -la > 123
-ls
-exit
-ls -la
-echo ls -la > 123
-ls
-echo ls -la > 123
-exit
-ls -la > 123
-ls
-cat 123
-rm 123
-ls
-echo ahhah > h
-ls
-exit
-echo hahah > h
-ls
-cat h
-ls
-rm h
-ls
-exit
-sd
-asd
-cat asd
-echo asdas
-cat
-cd
-cd
-ls
-cd a
-exit
-ls
-cd
-
-
-
-
-
-
-
-
-
-exit
-ls
-
-ls
-echo ls -la > 123
-ls
-cat 123
-ls
-rm ls -la
-rm 123
+wpd
+pwd
+cd sr
+cd srcs
 ls
 exit
 ls
-cd document
+exit
+env
 ls
+cd lib
+cd libft
+ls
+setenv GG=gg
+ls
+env
+unsetenv GG
+env
+setenv ff ff
+env
+unsetenv ff
+ls
+env
+/bin/ls
+emacs authur
+ls
+vim author
+ls
+rm authur
+cat author
+
+weqrwerw
+ls -R /
+ls
+ls -la 
+ls -la >> ttt
+ls
+cat ttt
+rm ttt
+ls
+ls -la | cat -e
+ls
+ls -la > ttt
+ls
+cat ttt
+ls
+ls -la > ttt
+cat ttt
+ls -la >> ttt
+cat ttt
+rm ttt
+ls
+"asda"
+"asda"
+"asda"
+"asda"
+"asda"
+"asda"
+"asda"
+"qwe"
+"qwe"
 exit
-
-
-
-
-
-
-kmkmkmkmkm
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-kmkmkmkmkmkmkm'"'
-asdf
-
-gjghj
-
-qweqwe
-
-qweqweqwe
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-l;k;lk;
-
-
-
-sad
-
-sadas
-
-asdasdasd
-
-asdas
-
-asdasd
-
-asd
-asd
-asd
-asd
-asd
-asd
-asd
-asd
-
-asd
-
-dasda
-asda
-asda
-asdas
-
-
-
-
-
-
-asdasd
-
-
-
-
-asda
-asdas
-
-
-
-
-asdasd
-asd
-d
-a
-
-asd
-
-asd
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-dasd
-sadasdas
-
-
-sda
-
-asd
-d
-d
-
-das
-as
-
-
-
-
-
-
-as
-
-
-d
-d
-
-das
-
-das
-a
-
-
-
-
-
-
-
-
-
-asd
-dasd
-
-das
-a
-
-asd
-
-
-
-
-
-
-ad;asdas
-d
-
-asd
-
-exit
-asdasdas
-s
-a
-as
-
-
-
-
-
-
-
-
-
-zxczx
-asdasd
-sdxzcz
-
-
-
-
-
-
-
-
-sadasd
-
-
-
-
-
-
-
-wadasdas
-
-
-
-
-
-
-
-
-exit
-cd /
-asdas
-asd
-da
-
-asd
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ls
+"qweqweqweqwqwe"
+"qweqweqweqwqwe"
+"1231123123123123"
+"1231123123123123"
+ls
 exit

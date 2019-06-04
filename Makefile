@@ -6,12 +6,12 @@
 #    By: juochen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 14:33:37 by juochen           #+#    #+#              #
-#    Updated: 2018/04/19 21:47:31 by juochen          ###   ########.fr        #
+#    Updated: 2019/06/03 22:26:36 by juochen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # project bin file
-NAME = 42sh
+NAME = 21sh
 
 # debugger bin file
 D_NAME = dbgr

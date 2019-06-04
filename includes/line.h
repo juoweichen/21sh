@@ -6,7 +6,7 @@
 /*   By: rsathiad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 23:58:19 by rsathiad          #+#    #+#             */
-/*   Updated: 2019/03/22 20:49:02 by rsathiad         ###   ########.fr       */
+/*   Updated: 2019/06/03 22:27:52 by juochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../libft/includes/libft.h"
 # include "../includes/env.h"
 
-# define PROMPT "42sh> "
+# define PROMPT "21sh> "
 # define QUOTE_PROMPT ">>>>>"
 
 # define K_UP 4283163
