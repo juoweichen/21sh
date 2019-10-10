@@ -16,27 +16,33 @@ Of course we didn't been ask to make a fully functional shell, that probably gon
 
 ### How to start
 Build the execuatble call '21sh' by makefile
-'''
+```
 make
-'''
+```
 After build, run the shell
-'''
+```
 ./21sh
-'''
+```
 Input the command line just like some other shell
-'''
+```
 // For instance
 21sh> ls -la
-'''
+```
 
 ### Build-in command
-You must implement a series of builtins: echo, cd, setenv, unsetenv, env, exit.
-You must manage expansions $ and  ̃
-
+- echo: 
+- cd: 
+- setenv:  
+- unsetenv: 
+- env: 
+- exit: 
+Expansion handling: $,  ̃
 
 ## Prior knowledge in Linux
+Shell works like a interface for human to command with Linux to do various kinds of tasks. In order to design a shell, we first have to understand to basic of Linux.
 
 ### File structure
+
 
 ### Command execution path
 

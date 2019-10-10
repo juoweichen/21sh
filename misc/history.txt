@@ -1,70 +1,45 @@
+""
+""
+""
+""
+""
+""
 ls
-wpd
+ls
+exit
+weqw
 pwd
-cd sr
-cd srcs
 ls
-exit
-ls
-exit
-env
-ls
-cd lib
-cd libft
-ls
-setenv GG=gg
-ls
-env
-unsetenv GG
-env
-setenv ff ff
-env
-unsetenv ff
-ls
-env
-/bin/ls
-emacs authur
-ls
-vim author
-ls
-rm authur
-cat author
+""
+""
+""
+""
+""
+""
+""
+""
+""
 
-weqrwerw
-ls -R /
-ls
-ls -la 
-ls -la >> ttt
-ls
-cat ttt
-rm ttt
-ls
-ls -la | cat -e
-ls
-ls -la > ttt
-ls
-cat ttt
-ls
-ls -la > ttt
-cat ttt
-ls -la >> ttt
-cat ttt
-rm ttt
-ls
-"asda"
-"asda"
-"asda"
-"asda"
-"asda"
-"asda"
-"asda"
-"qwe"
-"qwe"
+
+
+
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+"qweqweqweqweqweqwewqeqweqwe"
+
+
+
+
+
 exit
+123
+pwd
 ls
-"qweqweqweqwqwe"
-"qweqweqweqwqwe"
-"1231123123123123"
-"1231123123123123"
+cd ..
 ls
 exit
