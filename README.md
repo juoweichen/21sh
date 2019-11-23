@@ -42,7 +42,7 @@ Expansion handling: $,  ̃
 Shell works like a interface for human to command with Linux to do various kinds of tasks. In order to design a shell, we first have to understand to basic of Linux.
 
 ### File structure
-![File structure](/nfs/2018/j/juochen/Documents/21sh/document/img/linux-filesystem.png)
+![File structure](https://github.com/pootitan/21sh/tree/master/document/img/linux-filesystem.png)
 
 ### Command execution path
 
