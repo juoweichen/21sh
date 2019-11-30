@@ -37,6 +37,7 @@ t_ctrl	g_actrl[] =
 	{CTRL_U, copy_next_word},
 	{CTRL_D, send_eof},
 	{1, copy_line},
+	{K_TAB, auto_complete}
 };
 
 void	process_input(long num, int len, t_edit *edit)
@@ -52,7 +53,7 @@ void	process_input(long num, int len, t_edit *edit)
 				if (num == g_actrl[i].value)
 					g_actrl[i].f(edit);
 		}
-		else if (num != 127 && num != '\n')
+		else if (num != K_BS && num != '\n')
 			add_to_killzone(num, edit);
 		else if (num != '\n')
 			arrow_backspace(edit);

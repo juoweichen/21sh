@@ -18,8 +18,13 @@
 # include "stdlib.h"
 # include "stdio.h"
 # include "curses.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <errno.h>
 # include "../libft/includes/libft.h"
-# include "../includes/env.h"
+# include "env.h"
+# include "prefix_tree.h"
+# include "radix_tree.h"
 
 # define PROMPT "21sh> "
 # define QUOTE_PROMPT ">>>>>"
@@ -42,6 +47,7 @@
 # define CTRL_I 6
 # define CTRL_W 23
 # define CTRL_L 12
+# define CTRL_C 3
 # define CTRL_D 4
 # define ALT_F 37574
 # define ALT_G 43458
@@ -69,7 +75,6 @@ typedef	struct		s_buffr
 
 typedef struct		s_edit
 {
-	struct termios	*original;
 	unsigned int	linemax;
 	unsigned int	cur_col;
 	unsigned int	screenrow;
@@ -79,14 +84,17 @@ typedef struct		s_edit
 	unsigned int	buffer_change;
 	int				hcount;
 	int				hmax;
+	char            *history_path;
 	char			**history;
 	char			*term;
 	char			*return_str;
 	char			*clipboard;
 	t_buffer		**array;
-	int				is_eof;
+	int				gas;
 	t_dict			*env_dict;
 	t_dict			*com_dict;
+	t_trie			*path_programs;
+	t_trie			*dir_files;
 }					t_edit;
 
 typedef	struct		s_tracker
@@ -109,7 +117,8 @@ struct termios		g_original;
 */
 char				*ft_readline(t_sh *sh);
 void				init_terminal_data (t_edit *line);
-t_edit				*init_edit();
+void				init_edit(t_edit *edit, t_sh *sh);
+char				*line_edit_body(t_edit *edit);
 /*
 ** term_arrow.c
 */
@@ -121,7 +130,7 @@ void				arrow_right(t_edit *edit);
 void				arrow_backspace(t_edit *edit);
 
 /*
-** display_util.c void clear_screen()
+** display_util.c 
 */
 void				align_cursor(t_edit *edit);
 void				enable_raw_mode(void);
@@ -129,6 +138,7 @@ void				disable_raw_mode(void);
 void				print_display(t_edit *edit);
 void				display_lines(t_edit *edit);
 void				edit_multi_lines(t_edit *edit);
+void 				clear_line(void);
 /*
 ** cursor.c
 */
@@ -147,11 +157,6 @@ void				refresh_line_after_prompt(t_edit *edit);
 */
 void				get_window_size(t_edit *edit);
 /*
-** stdin_handler.c
-*/
-void				print_the_buffer(t_edit *edit);
-char				*line_edit_body(t_edit *edit);
-/*
 ** quotes.c
 */
 int					quotes_are_closed(char *str);
@@ -162,7 +167,6 @@ char				*newline_handler(t_edit *edit);
 void				replace_old_array(char **new, char **old);
 void				add_to_array(t_edit *edit);
 char				*reconstruct_string(t_edit *edit);
-int					multi_line_check(t_edit *edit);
 void				perror_exit(char *str);
 /*
 ** process_input.c
@@ -210,8 +214,4 @@ void				send_eof(t_edit *edit);
 **	auto_complete.c
 */
 void				auto_complete(t_edit *edit);
-/*
-**	quote_body.c
-*/
-char				*quote_body(t_edit *edit);
 #endif

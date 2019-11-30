@@ -16,6 +16,22 @@
 # include "../libft/includes/libft.h"
 # include "lexer.h"
 
+/*
+**	NODE_COMMAND = 				1
+**	NODE_SIMPLE_COMMAND = 		2
+**	NODE_CMD_NAME = 			4
+**	NODE_CMD_SUFFIX = 			8
+**	NODE_CMD_WORD = 			16
+**	NODE_PIPE_SEQUENCE = 		32
+**	NODE_IO_REDIRECT = 			64
+**	NODE_IO_FILE = 				128
+**	NODE_FILENAME = 			256
+**	NODE_IO_HERE = 				512
+**	NODE_HERE_END = 			1024
+**	NODE_COMPLETE_COMMAND = 	2048
+**	NODE_LIST = 				4096
+*/
+
 typedef enum {
 	NODE_COMMAND = (1 << 0),
 	NODE_SIMPLE_COMMAND = (1 << 1),

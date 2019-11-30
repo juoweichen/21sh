@@ -6,7 +6,7 @@
 /*   By: juochen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 13:23:56 by juochen           #+#    #+#             */
-/*   Updated: 2019/02/09 13:23:57 by juochen          ###   ########.fr       */
+/*   Updated: 2019/11/23 00:20:07 by mcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,8 @@
 # include "string.h"
 # include "line.h"
 # include "env.h"
+# include "print_tree.h"
+# include "prefix_tree.h"
+# include "radix_tree.h"
 
 #endif

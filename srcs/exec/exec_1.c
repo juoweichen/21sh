@@ -43,7 +43,7 @@ void	execute_complete_command(t_astnode *astree, t_exec *exec)
 	else if (astree->type == NODE_LIST)
 		execute_list(astree, exec);
 	else
-		execute_simple_command(astree, exec, -1, -1);
+		execute_simple_cmd(astree, exec, -1, -1);
 }
 
 void	execute_astree(t_astnode *astree, t_sh *sh)

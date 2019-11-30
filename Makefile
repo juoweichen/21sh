@@ -6,7 +6,7 @@
 #    By: juochen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 14:33:37 by juochen           #+#    #+#              #
-#    Updated: 2019/06/03 22:26:36 by juochen          ###   ########.fr        #
+#    Updated: 2019/11/23 21:49:32 by mcouto           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,9 @@ SRCS +=	$(wildcard $(SRC_DIR)/line/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/signals/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/string/*.c)
 SRCS +=	$(wildcard $(SRC_DIR)/env/*.c)
+SRCS += $(wildcard $(SRC_DIR)/print_tree/*.c)
+SRCS += $(wildcard $(SRC_DIR)/trie/*.c)
+SRCS += $(wildcard $(SRC_DIR)/radix_tree/*.c)
 SRCS += $(wildcard $(SRC_DIR)/*.c)
 
 .PHONY: all clean fclean re qre

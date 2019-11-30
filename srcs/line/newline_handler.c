@@ -15,12 +15,14 @@
 char		*newline_handler(t_edit *edit)
 {
 	edit->killzone = edit->linemax - 1;
-	while (multi_line_check(edit) != 0)
+	edit->return_str = reconstruct_string(edit);
+	while (quotes_are_closed(edit->return_str) != 0)
 	{
-		add_to_array(edit);
 		edit->killzone++;
 		edit->cur_col = 0;
-		quote_body(edit);
+		move_cursor_newline(edit);
+		add_to_array(edit);
+		line_edit_body(edit);
 	}
 	update_history(edit);
 	return (edit->return_str);
@@ -31,20 +33,19 @@ void		add_to_array(t_edit *edit)
 	t_buffer		**new;
 	unsigned int	index;
 
-	index = 0;
 	edit->linemax++;
 	new = (t_buffer**)ft_memalloc(sizeof(t_buffer *) * (edit->linemax + 1));
-	while (index < edit->linemax)
-		new[index++] = (t_buffer*)ft_memalloc(sizeof(t_buffer));
-	new[index] = NULL;
 	index = 0;
-	while ((new[index] != NULL) && (edit->array[index] != NULL))
+	while (edit->array[index] != NULL)
 	{
+		new[index] = (t_buffer*)ft_memalloc(sizeof(t_buffer));
 		new[index]->line = ft_strdup(edit->array[index]->line);
 		new[index]->buffpos = edit->array[index]->buffpos;
 		new[index]->printlen = edit->array[index]->printlen;
 		index++;
 	}
+	new[index - 1]->line = ft_strjoin_free_s1(new[index - 1]->line, "\n");	// add newline to multiple line
+	new[index] = (t_buffer*)ft_memalloc(sizeof(t_buffer));
 	new[index]->line = ft_strnew(1024);
 	new[index]->buffpos = 0;
 	new[index]->printlen = 0;
@@ -74,14 +75,3 @@ char		*reconstruct_string(t_edit *edit)
 	return (ret);
 }
 
-int			multi_line_check(t_edit *edit)
-{
-	char	*tmp;
-
-	tmp = reconstruct_string(edit);
-	edit->quote = quotes_are_closed(tmp);
-	free(tmp);
-	if (edit->quote == 0)
-		return (0);
-	return (edit->quote);
-}

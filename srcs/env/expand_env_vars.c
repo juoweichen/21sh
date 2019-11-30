@@ -61,7 +61,7 @@ static void		strip_quotes(char *str)
 	str[i - 2] = '\0';
 }
 
-void			expand_enviornment_variables(t_token *token, t_sh *sh)
+void			expand_environment_variables(t_token *token, t_sh *sh)
 {
 	t_token		*cur;
 

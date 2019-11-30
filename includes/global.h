@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_input.c                                    :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsathiad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: csinglet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/20 02:04:52 by rsathiad          #+#    #+#             */
-/*   Updated: 2019/03/22 20:39:02 by rsathiad         ###   ########.fr       */
+/*   Created: 2019/02/04 19:33:27 by csinglet          #+#    #+#             */
+/*   Updated: 2019/02/04 19:33:28 by csinglet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/line.h"
+#ifndef GLOBAL_H
+# define GLOBAL_H
 
-void	send_eof(t_edit *edit)
-{
-	if ((edit->array[0]->line)[0] == '\0')
-		edit->gas = FALSE;
-}
+#include "line.h"
+
+t_buffer 				***g_array;
+unsigned int			*g_linemax;
+unsigned int			*g_killzone;
+unsigned int			*g_cur_col;
+unsigned int			g_gasgas;
+
+#endif

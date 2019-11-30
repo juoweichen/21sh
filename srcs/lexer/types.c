@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/sh.h"
+#include "../../includes/lexer.h"
 
 /*
 **	get_shift()
@@ -81,7 +81,6 @@ t_token				*get_operator_token(char *input)
 		return (new_token(ft_strndup(input, i + 2), SL_ARROW_AND));
 	return (new_token(ft_strndup(input, i + 1), shift));
 }
-
 /*
 **	get_quote_token()
 **		- Takes in a string, input

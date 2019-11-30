@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_input.c                                    :+:      :+:    :+:   */
+/*   print_trie_node.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsathiad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcouto <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/20 02:04:52 by rsathiad          #+#    #+#             */
-/*   Updated: 2019/03/22 20:39:02 by rsathiad         ###   ########.fr       */
+/*   Created: 2019/11/20 17:41:06 by mcouto            #+#    #+#             */
+/*   Updated: 2019/11/20 17:41:09 by mcouto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/line.h"
+#include "../../includes/prefix_tree.h"
 
-void	send_eof(t_edit *edit)
+void	print_chain_node(t_trie *root, t_trie *node)
 {
-	if ((edit->array[0]->line)[0] == '\0')
-		edit->gas = FALSE;
+	int i;
+
+	i = 0;
+	while (i < ALPHABET)
+	{
+		if (root == node)
+		{
+			ft_printf("%c", ((char)i + START_ALPHA));
+			return ;
+		}
+		
+	}
 }
+

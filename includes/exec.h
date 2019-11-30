@@ -45,7 +45,7 @@ typedef struct	s_exec_simple_command
 }				t_exec_sc;
 
 void			execute_astree(t_astnode *astree, t_sh *sh);
-void			execute_simple_command(t_astnode *astree, t_exec *exec,
+void			execute_simple_cmd(t_astnode *astree, t_exec *exec,
 	int piperead, int pipewrite);
 int				run_command(t_exec *exec, char *cmd_name, char **cmd_line);
 /*
@@ -65,12 +65,14 @@ void			exit_builtin(t_exec *exec, char **arg);
 void			hash_builtin(t_exec *exec, char **arg);
 void			type_builtin(t_exec *exec, char **arg);
 void			export_builtin(t_exec *exec, char **arg);
+void			ms_random_8(void);
 /*
 **	redirect.c
 */
 void			redirect_lessand(t_exec_sc *exec_sc);
 void			redirect_greatand(t_exec_sc *exec_sc);
 void			redirect_dgreat(t_exec_sc *exec_sc);
+void			redirect_dless(t_exec_sc *exec_sc);
 void			redirect_less(t_exec_sc *exec_sc);
 void			redirect_great(t_exec_sc *exec_sc);
 /*

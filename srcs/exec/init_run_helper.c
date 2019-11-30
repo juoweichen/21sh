@@ -39,7 +39,7 @@ void	init_run_count_argv(t_astnode *astree, t_exec_sc *exec_sc)
 	astptr = astree;
 	while (astptr)
 	{
-		if (astptr->type == NODE_IO_FILE)
+		if (astptr->type == NODE_IO_FILE || astptr->type == NODE_IO_HERE)
 		{
 			exec_sc->redirect_op = ft_strdup(astptr->data);
 			exec_sc->redirect_des = ft_strdup(astptr->right->data);

@@ -36,8 +36,9 @@ int		main(void)
 			exit(0);
 		ft_printf("\n");
 		token = tokenize(line);
-		expand_enviornment_variables(token, &sh);
+		expand_environment_variables(token, &sh);
 		build_astree(token, &astree);
+		printBinaryTree(astree);
 		execute_astree(astree, &sh);
 		free(line);
 		free_token_list(token);

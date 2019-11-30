@@ -70,3 +70,16 @@ void	redirect_great(t_exec_sc *exec_sc)
 	}
 	dup2(fd, STDOUT_FILENO);
 }
+
+void	redirect_dless(t_exec_sc *exec_sc)
+{
+	int fd[2];
+
+	exec_sc = NULL;
+	if (pipe(fd) == -1)
+		return ;
+	write(fd[1], exec_sc->redirect_des, ft_strlen(exec_sc->redirect_des));
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+}

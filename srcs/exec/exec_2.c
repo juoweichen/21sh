@@ -16,7 +16,7 @@
 void	execute_command(t_astnode *astree, t_exec *exec,\
 	int piperead, int pipewrite)
 {
-	execute_simple_command(astree, exec, piperead, pipewrite);
+	execute_simple_cmd(astree, exec, piperead, pipewrite);
 }
 
 void	execute_pipe_sequence_pipe_and_fork(t_astnode *astree, t_exec *exec,\

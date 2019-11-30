@@ -36,6 +36,6 @@ void			command_init(t_sh *sh);
 void			intern_variable_init(t_sh *sh);
 void			quick_sort_str_dlist(t_dlist *dlist);
 void			quick_sort_str_list(t_list **list);
-void			expand_enviornment_variables(t_token *token, t_sh *sh);
+void			expand_environment_variables(t_token *token, t_sh *sh);
 
 #endif

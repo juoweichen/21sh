@@ -15,20 +15,16 @@
 void	free_edit(t_edit *edit)
 {
 	int		i;
-	char	**array;
 
 	i = 0;
-	disable_raw_mode();
 	free_edit_array(edit->array);
 	free(edit->clipboard);
-	array = edit->history;
 	while (i < HISTORY_BUFFER)
 	{
-		free(array[i]);
+		free(edit->history[i]);
 		i++;
 	}
-	free(array);
-	free(edit);
+	free(edit->history);
 }
 
 void	free_edit_array(t_buffer **array)

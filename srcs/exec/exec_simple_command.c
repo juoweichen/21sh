@@ -23,6 +23,8 @@ void	handle_redirect(t_exec_sc *exec_sc)
 		redirect_less(exec_sc);
 	else if (ft_strequ(exec_sc->redirect_op, ">>") == 1)
 		redirect_dgreat(exec_sc);
+	else if (ft_strequ(exec_sc->redirect_op, "<<") == 1)
+		redirect_dless(exec_sc);
 	else if (ft_strequ(exec_sc->redirect_op, ">&") == 1)
 		redirect_greatand(exec_sc);
 	else if (ft_strequ(exec_sc->redirect_op, "<&") == 1)
@@ -71,7 +73,7 @@ void	init_run(t_astnode *astree, t_exec_sc *exec_sc,
 	exec_sc->pipewrite = pipewrite;
 }
 
-void	execute_simple_command(t_astnode *astree, t_exec *exec,
+void	execute_simple_cmd(t_astnode *astree, t_exec *exec,
 	int piperead, int pipewrite)
 {
 	t_exec_sc exec_sc;
